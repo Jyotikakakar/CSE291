@@ -1,0 +1,19 @@
+Speaker A: Morning sync. Let's go around. Speaker B, you're up.
+
+Speaker B: Working on the payment integration. Hit a blocker with webhook validation.
+
+Speaker A: That's a risk for our timeline. Can you schedule a vendor call today?
+
+Speaker B: Yes, doing that right after this meeting.
+
+Speaker C: I finished the authentication module. Ready for review.
+
+Speaker A: Great. I'll review it this afternoon. Speaker D?
+
+Speaker D: Migrating to the new database schema. Should be done tomorrow, but I want to test thoroughly in staging first.
+
+Speaker A: Smart. Don't rush it. Have Speaker C review your migration script.
+
+Speaker D: Will do.
+
+Speaker A: Keep pushing team. Let's ship this feature by Friday.

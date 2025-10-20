@@ -1,0 +1,25 @@
+Speaker A: Good morning everyone. Let's start our Q4 planning meeting.
+
+Speaker B: Thanks. I think we should prioritize the mobile app development. We've had consistent user requests.
+
+Speaker C: I agree. We should also focus on enterprise features like SSO.
+
+Speaker A: Great points. Let's make mobile app our top priority. Speaker B, can you lead this project?
+
+Speaker B: Yes, I can do that. I'll have a detailed spec ready by next Friday.
+
+Speaker A: Perfect. Speaker C, you'll own the SSO implementation. Target completion is November 30th.
+
+Speaker C: Got it. I'll need Speaker D's help on the backend authentication.
+
+Speaker D: Happy to help. One concern - our current auth service is outdated. That's a risk.
+
+Speaker A: Good catch. Speaker D, please audit the auth service this week and report back.
+
+Speaker D: Will do.
+
+Speaker A: Alright, to summarize: Mobile app is priority one with Speaker B leading, SSO is priority two with Speaker C leading, and Speaker D will audit our auth service. Any questions?
+
+Speaker B: When do we want the mobile app beta ready?
+
+Speaker A: Let's target end of December for beta launch.

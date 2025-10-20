@@ -1,0 +1,43 @@
+Speaker A: Welcome to our roadmap planning. Let's review customer feedback.
+
+Speaker B: We surveyed 45 enterprise customers. Top requests: SSO, analytics, mobile support.
+
+Speaker C: 78% of enterprise customers want SSO. It's blocking deals.
+
+Speaker A: Clear priority. SSO first. What's the effort?
+
+Speaker D: 6 weeks with two engineers for SAML and OAuth.
+
+Speaker A: Approved. Speaker B, you're product lead. Speaker D, technical lead.
+
+Speaker B: I'll have the spec ready next Friday.
+
+Speaker D: I'll need Speaker E and Speaker F on this.
+
+Speaker A: Make it happen. What about analytics?
+
+Speaker C: Complex feature. I recommend phased approach - basic reporting in Q4, advanced in Q1.
+
+Speaker B: That makes sense. Ship basic first, learn, then iterate.
+
+Speaker A: Good. Speaker C, present three options at next week's meeting.
+
+Speaker C: Will do.
+
+Speaker A: Mobile support?
+
+Speaker D: Native app is expensive. Let's improve mobile web in Q4, defer native to Q1.
+
+Speaker A: Agreed. Speaker F, estimate effort for mobile web improvements.
+
+Speaker F: About 3 weeks. I can handle it.
+
+Speaker A: Perfect. So Q4 priorities: SSO, basic analytics, mobile web. Any risks?
+
+Speaker C: Team might be stretched too thin with only 4 engineers.
+
+Speaker D: If SSO hits blockers, other projects slip.
+
+Speaker A: Valid. Let's add 2-week buffer for SSO. Speaker B, create detailed project plan by Monday.
+
+Speaker B: On it.

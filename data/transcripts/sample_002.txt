@@ -1,0 +1,27 @@
+Speaker A: Let's do our sprint retrospective. What went well?
+
+Speaker B: We completed all our story points. The new CI pipeline helped a lot.
+
+Speaker C: Code quality improved. We caught several bugs before production.
+
+Speaker A: Excellent. What could be improved?
+
+Speaker B: Code reviews are taking too long. Some PRs sat for 3 days.
+
+Speaker C: We should set a 24-hour review target.
+
+Speaker A: Good idea. Speaker C, document this in our team handbook by end of week.
+
+Speaker C: Will do.
+
+Speaker A: Any blockers for next sprint?
+
+Speaker B: We need API keys from the vendor. Speaker A, can you follow up?
+
+Speaker A: Yes, I'll email them today.
+
+Speaker C: Also, we need to upgrade our database. It's a risk for performance.
+
+Speaker A: Good point. Speaker C, create a proposal for the database upgrade by Monday.
+
+Speaker C: On it.
