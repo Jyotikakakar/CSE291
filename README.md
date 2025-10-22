@@ -12,7 +12,7 @@ A Python application that uses Ollama (local LLM) to analyze meeting transcripts
 
 ```bash
 # Clone and navigate to the project
-git clone <repository-url>
+git clone https://github.com/Jyotikakakar/CSE291.git
 cd CSE291
 
 # Start the application (this will automatically download the LLM model)
