@@ -1,7 +1,7 @@
 import os
 import json
 import time
-import requests
+import google.generativeai as genai
 from typing import Dict, Any, List
 from datetime import datetime
 
@@ -9,14 +9,18 @@ from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
 
-OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:8b")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
 
 class MeetingAgent:
     def __init__(self):
-        self.host = OLLAMA_HOST
-        self.model = OLLAMA_MODEL
+        if not GEMINI_API_KEY:
+            raise ValueError("GEMINI_API_KEY environment variable is required")
+        
+        genai.configure(api_key=GEMINI_API_KEY)
+        self.model = genai.GenerativeModel(GEMINI_MODEL)
+        
         self.metrics = {
             "total_requests": 0,
             "total_latency_ms": 0,
@@ -27,37 +31,26 @@ class MeetingAgent:
         self.calendar_events = []
         self.tasks = []
         
-        self._check_ollama()
+        self._check_gemini()
     
-    def _check_ollama(self):
+    def _check_gemini(self):
         try:
-            response = requests.get(f"{self.host}/api/tags")
-            if response.status_code == 200:
-                models = response.json().get('models', [])
-                model_names = [m['name'] for m in models]
-                
-                if not any(self.model in name for name in model_names):
-                    print(f"Model {self.model} not found")
-                    print(f"   Available models: {', '.join(model_names)}")
-                    print(f"\n   To install: ollama pull {self.model}")
-        except requests.exceptions.ConnectionError:
-            print("Ollama is not running!")
+            # Test the Gemini API with a simple request
+            response = self.model.generate_content("Hello")
+            if response.text:
+                print(f"✓ Gemini {GEMINI_MODEL} is working")
+            else:
+                raise Exception("No response from Gemini")
+        except Exception as e:
+            print(f"Error connecting to Gemini: {str(e)}")
             raise
     
-    def _call_ollama(self, prompt: str) -> str:
-        url = f"{self.host}/api/generate"
-        
-        payload = {
-            "model": self.model,
-            "prompt": prompt,
-            "stream": False,
-            "format": "json"
-        }
-        
-        response = requests.post(url, json=payload)
-        response.raise_for_status()
-        
-        return response.json()['response']
+    def _call_gemini(self, prompt: str) -> str:
+        try:
+            response = self.model.generate_content(prompt)
+            return response.text
+        except Exception as e:
+            raise Exception(f"Gemini API error: {str(e)}")
     
     # ==================== CALENDAR TOOL ====================
     def add_calendar_event(self, title: str, date: str, time: str = None, 
@@ -185,7 +178,7 @@ Example format:
 }}"""
 
         try:
-            response_text = self._call_ollama(prompt)
+            response_text = self._call_gemini(prompt)
             
             if "```json" in response_text:
                 json_start = response_text.find("```json") + 7
@@ -271,7 +264,7 @@ if __name__ == "__main__":
     Alice: Let's address that. David, audit the auth service this week.
     """
     
-    print("Testing Ollama agent")
+    print("Testing Gemini agent")
     result = agent.summarize(sample_transcript)
     
     if result["success"]:

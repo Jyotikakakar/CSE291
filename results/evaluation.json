@@ -2,98 +2,100 @@
   {
     "id": "sample_001",
     "success": true,
-    "latency_ms": 13955.700874328613,
-    "decisions_count": 2,
+    "latency_ms": 2637.3133659362793,
+    "decisions_count": 3,
     "action_items_count": 3,
     "risks_count": 1,
     "has_tldr": true,
     "summary": {
-      "tldr": "The team discussed Q4 priorities and decided to focus on mobile app development, enterprise features, and auditing the auth service.",
+      "tldr": "The meeting focused on Q4 planning, prioritizing mobile app development and SSO implementation. Speaker B will lead the mobile app project, while Speaker C will lead the SSO implementation. Speaker D will audit the authentication service due to identified risks.",
       "decisions": [
         {
-          "decision": "Mobile app is priority one",
+          "decision": "Prioritize mobile app development",
           "owner": "Speaker B",
-          "context": "User requests and demand"
+          "context": "Consistent user requests"
         },
         {
-          "decision": "SSO (Single Sign-On) is priority two",
+          "decision": "Implement SSO features",
           "owner": "Speaker C",
-          "context": "Enterprise feature development"
+          "context": "Need for enterprise features"
+        },
+        {
+          "decision": "Mobile app beta launch target",
+          "owner": null,
+          "context": "Target end of December"
         }
       ],
       "action_items": [
         {
-          "task": "Create detailed spec for mobile app",
+          "task": "Create detailed mobile app spec",
           "owner": "Speaker B",
           "due_date": "Next Friday"
         },
         {
-          "task": "Audit the auth service",
-          "owner": "Speaker D",
-          "due_date": null
-        },
-        {
-          "task": "Implement SSO (Single Sign-On)",
+          "task": "Implement SSO",
           "owner": "Speaker C",
           "due_date": "November 30th"
+        },
+        {
+          "task": "Audit auth service",
+          "owner": "Speaker D",
+          "due_date": "This week"
         }
       ],
       "risks": [
-        "Current auth service is outdated"
+        "Outdated authentication service"
       ],
       "key_points": [
-        "Mobile app development",
-        "Enterprise features (SSO)",
-        "Auditing the auth service"
+        "Q4 planning",
+        "Mobile app development prioritization",
+        "SSO implementation",
+        "Authentication service audit"
       ]
     }
   },
   {
     "id": "sample_002",
     "success": true,
-    "latency_ms": 11195.720911026001,
-    "decisions_count": 2,
+    "latency_ms": 2573.988676071167,
+    "decisions_count": 1,
     "action_items_count": 3,
     "risks_count": 2,
     "has_tldr": true,
     "summary": {
-      "tldr": "Team reviewed sprint performance, identified areas for improvement and set goals for the next sprint.",
+      "tldr": "The sprint retrospective highlighted successes like completing story points and improved code quality. Areas for improvement included faster code reviews, vendor API key acquisition, and a database upgrade to mitigate performance risks.",
       "decisions": [
         {
-          "decision": "Set a 24-hour code review target",
+          "decision": "Set a 24-hour code review target.",
           "owner": null,
-          "context": "To improve efficiency"
-        },
-        {
-          "decision": "Document new CI pipeline process in team handbook",
-          "owner": "Speaker C",
-          "context": "For future reference"
+          "context": "Code reviews are taking too long."
         }
       ],
       "action_items": [
         {
-          "task": "Follow up with vendor for API keys",
-          "owner": "Speaker A",
-          "due_date": null
-        },
-        {
-          "task": "Create proposal for database upgrade",
-          "owner": "Speaker C",
-          "due_date": "Monday"
-        },
-        {
-          "task": "Document new CI pipeline process in team handbook",
+          "task": "Document the 24-hour code review target in the team handbook.",
           "owner": "Speaker C",
           "due_date": "End of week"
+        },
+        {
+          "task": "Follow up with the vendor for API keys.",
+          "owner": "Speaker A",
+          "due_date": "Today"
+        },
+        {
+          "task": "Create a proposal for the database upgrade.",
+          "owner": "Speaker C",
+          "due_date": "Monday"
         }
       ],
       "risks": [
-        "Need API keys from vendor",
-        "Upgrade database for performance"
+        "Need API keys from the vendor",
+        "Database upgrade needed to avoid performance risks"
       ],
       "key_points": [
-        "Completed all story points with help of new CI pipeline",
-        "Code quality improved, caught several bugs before production",
+        "Completed all story points",
+        "New CI pipeline helped",
+        "Code quality improved",
         "Code reviews are taking too long"
       ]
     }
@@ -101,137 +103,167 @@
   {
     "id": "sample_003",
     "success": true,
-    "latency_ms": 9012.778997421265,
-    "decisions_count": 2,
-    "action_items_count": 2,
+    "latency_ms": 2568.185329437256,
+    "decisions_count": 0,
+    "action_items_count": 4,
     "risks_count": 1,
     "has_tldr": true,
     "summary": {
-      "tldr": "The team discussed the payment integration, authentication module, and database migration. They identified a risk with webhook validation and set a goal to ship the feature by Friday.",
-      "decisions": [
-        {
-          "decision": "Schedule vendor call today",
-          "owner": "Speaker B",
-          "context": "Webhook validation blocker"
-        },
-        {
-          "decision": "Review Speaker C's authentication module this afternoon",
-          "owner": "Speaker A",
-          "context": "Quality assurance"
-        }
-      ],
+      "tldr": "The team discussed progress on payment integration, authentication, and database migration. A blocker with webhook validation was identified, and the team is aiming to ship the feature by Friday.",
+      "decisions": [],
       "action_items": [
         {
-          "task": "Vendor call",
+          "task": "Schedule a vendor call",
           "owner": "Speaker B",
-          "due_date": null
+          "due_date": "today"
         },
         {
-          "task": "Have Speaker D's migration script reviewed by Speaker C",
+          "task": "Review authentication module",
+          "owner": "Speaker A",
+          "due_date": "this afternoon"
+        },
+        {
+          "task": "Test database migration thoroughly in staging",
           "owner": "Speaker D",
+          "due_date": "tomorrow"
+        },
+        {
+          "task": "Speaker C review migration script",
+          "owner": "Speaker C",
           "due_date": null
         }
       ],
       "risks": [
-        "Webhook validation blocker"
+        "Blocker with webhook validation is a risk to timeline"
       ],
       "key_points": [
-        "Payment integration issues",
-        "Database migration progress"
+        "Payment integration in progress, blocked by webhook validation",
+        "Authentication module completed and ready for review",
+        "Database migration in progress, to be tested in staging",
+        "Target shipping date is Friday"
       ]
     }
   },
   {
     "id": "sample_004",
     "success": true,
-    "latency_ms": 12468.664646148682,
-    "decisions_count": 3,
-    "action_items_count": 2,
+    "latency_ms": 11706.611156463623,
+    "decisions_count": 5,
+    "action_items_count": 4,
     "risks_count": 2,
     "has_tldr": true,
     "summary": {
-      "tldr": "The team discussed and prioritized Q4 roadmap features, including SSO, analytics, and mobile support.",
+      "tldr": "The meeting focused on Q4 roadmap planning, prioritizing SSO, basic analytics, and mobile web improvements based on customer feedback. SSO implementation is the top priority, with potential risks of team bandwidth and unexpected blockers addressed with a buffer period.",
       "decisions": [
         {
-          "decision": "Prioritize SSO",
-          "owner": "Speaker A",
-          "context": "High demand from enterprise customers"
+          "decision": "Prioritize SSO implementation",
+          "owner": null,
+          "context": "78% of enterprise customers want SSO, and it's blocking deals"
         },
         {
-          "decision": "Ship basic analytics in Q4, advanced in Q1",
-          "owner": "Speaker C",
-          "context": "Phased approach to mitigate complexity"
+          "decision": "Implement SAML and OAuth for SSO",
+          "owner": null,
+          "context": "Technical approach for SSO implementation"
         },
         {
-          "decision": "Improve mobile web in Q4, defer native app to Q1",
-          "owner": "Speaker F",
-          "context": "Cost considerations"
+          "decision": "Implement basic analytics in Q4, advanced analytics in Q1",
+          "owner": null,
+          "context": "Phased approach for analytics due to complexity"
+        },
+        {
+          "decision": "Improve mobile web in Q4, defer native app development to Q1",
+          "owner": null,
+          "context": "Native app development is expensive, mobile web is a quicker alternative"
+        },
+        {
+          "decision": "Add 2-week buffer for SSO implementation",
+          "owner": null,
+          "context": "Mitigate the risk of SSO blockers impacting other projects"
         }
       ],
       "action_items": [
         {
-          "task": "Create detailed project plan by Monday",
+          "task": "Create SSO specification",
           "owner": "Speaker B",
-          "due_date": "Monday"
+          "due_date": "next Friday"
         },
         {
-          "task": "Have spec ready next Friday",
+          "task": "Present three options for basic analytics",
+          "owner": "Speaker C",
+          "due_date": "next week's meeting"
+        },
+        {
+          "task": "Estimate effort for mobile web improvements",
+          "owner": "Speaker F",
+          "due_date": null
+        },
+        {
+          "task": "Create detailed project plan",
           "owner": "Speaker B",
-          "due_date": "Friday"
+          "due_date": "Monday"
         }
       ],
       "risks": [
-        "Team might be stretched too thin with only 4 engineers",
-        "If SSO hits blockers, other projects slip"
+        "Team might be stretched too thin with only 4 engineers.",
+        "If SSO hits blockers, other projects slip."
       ],
       "key_points": [
-        "Customer feedback and priorities",
-        "Q4 planning and resource allocation",
-        "Complexity of analytics feature"
+        "Customer feedback on SSO, analytics, and mobile support",
+        "Q4 priorities: SSO, basic analytics, mobile web improvements",
+        "Resource allocation and team capacity",
+        "Potential blockers and risk mitigation"
       ]
     }
   },
   {
     "id": "sample_005",
     "success": true,
-    "latency_ms": 10435.951709747314,
+    "latency_ms": 3591.778516769409,
     "decisions_count": 2,
-    "action_items_count": 2,
-    "risks_count": 1,
+    "action_items_count": 3,
+    "risks_count": 2,
     "has_tldr": true,
     "summary": {
-      "tldr": "Design review meeting for new navigation system with improved hierarchy, mobile responsiveness, and faster load times. Team decides to move forward with implementation.",
+      "tldr": "The team reviewed and approved a new navigation system design featuring a sidebar. Implementation will proceed with a phased rollout and comprehensive testing. Completion is targeted for November 15th.",
       "decisions": [
         {
-          "decision": "Move forward with sidebar-based navigation system",
+          "decision": "Move forward with the new navigation system design.",
           "owner": null,
-          "context": "Based on user research and testing results"
+          "context": "The sidebar navigation design, after considering alternatives, was chosen for its superior performance in user research and accessibility."
         },
         {
-          "decision": "Implement phased rollout to mitigate risk",
-          "owner": null,
-          "context": "To minimize breaking existing functionality"
+          "decision": "Speaker D owns implementation of the new navigation system.",
+          "owner": "Speaker D",
+          "context": "Speaker D will lead the front-end work and refactoring of routing required for implementation."
         }
       ],
       "action_items": [
         {
-          "task": "Work on user testing plan",
+          "task": "Implement the new navigation system.",
+          "owner": "Speaker D",
+          "due_date": "November 15th"
+        },
+        {
+          "task": "Develop a user testing plan for the new navigation system.",
           "owner": "Speaker C",
           "due_date": "Thursday"
         },
         {
-          "task": "Own implementation of navigation system",
-          "owner": "Speaker D",
-          "due_date": "November 15th"
+          "task": "Work with Speaker B on the user testing plan.",
+          "owner": "Speaker C",
+          "due_date": null
         }
       ],
       "risks": [
-        "Breaking existing functionality"
+        "Breaking existing functionality during implementation.",
+        "Mobile sidebar potentially problematic on small screens."
       ],
       "key_points": [
-        "Clearer hierarchy in navigation",
-        "Better mobile responsiveness with hamburger menu on small screens",
-        "Faster load times"
+        "New navigation system design features clearer hierarchy, better mobile responsiveness, and faster load times.",
+        "User research supports the use of a sidebar navigation.",
+        "Alternatives considered included top navigation and a hybrid approach.",
+        "Implementation requires front-end work and routing refactoring.",
+        "Phased rollout and comprehensive testing will mitigate risks."
       ]
     }
   }

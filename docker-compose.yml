@@ -1,48 +1,14 @@
 version: '3.8'
 
 services:
-  # Ollama service for LLM inference
-  ollama:
-    image: ollama/ollama:latest
-    container_name: meeting-ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    environment:
-      - OLLAMA_HOST=0.0.0.0
-    restart: unless-stopped
-    # Keep the service running
-    command: serve
-
-  # Meeting summarizer application
+  # Meeting summarizer application with Gemini
   app:
     build: .
     container_name: meeting-summarizer
-    depends_on:
-      - ollama
     volumes:
       - ./data:/app/data
       - ./results:/app/results
     environment:
-      - OLLAMA_HOST=http://ollama:11434
-      - OLLAMA_MODEL=llama3.1:8b
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     restart: "no"
-    # Override the default command to wait for Ollama and pull model
-    command: >
-      sh -c "
-        echo 'Waiting for Ollama to be ready...' &&
-        until curl -f http://ollama:11434/api/tags >/dev/null 2>&1; do
-          echo 'Ollama not ready, waiting...'
-          sleep 5
-        done &&
-        echo 'Ollama is ready!' &&
-        echo 'Pulling model...' &&
-        curl -X POST http://ollama:11434/api/pull -d '{\"name\":\"llama3.1:8b\"}' &&
-        echo 'Model pulled successfully!' &&
-        echo 'Starting application...' &&
-        python run.py
-      "
-
-volumes:
-  ollama_data:
+    command: python run.py
