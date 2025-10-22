@@ -2,237 +2,76 @@
   {
     "id": "sample_001",
     "success": true,
-    "latency_ms": 13955.700874328613,
-    "decisions_count": 2,
+    "latency_ms": 3252.5100708007812,
+    "decisions_count": 3,
     "action_items_count": 3,
     "risks_count": 1,
     "has_tldr": true,
     "summary": {
-      "tldr": "The team discussed Q4 priorities and decided to focus on mobile app development, enterprise features, and auditing the auth service.",
+      "tldr": "The meeting focused on Q4 planning, prioritizing mobile app development and SSO implementation. Speaker B will lead the mobile app project, while Speaker C will manage SSO. Speaker D will audit the existing authentication service due to concerns about it being outdated.",
       "decisions": [
         {
-          "decision": "Mobile app is priority one",
+          "decision": "Prioritize mobile app development",
           "owner": "Speaker B",
-          "context": "User requests and demand"
+          "context": "Consistent user requests"
         },
         {
-          "decision": "SSO (Single Sign-On) is priority two",
+          "decision": "Implement SSO",
           "owner": "Speaker C",
-          "context": "Enterprise feature development"
+          "context": "Focus on enterprise features"
+        },
+        {
+          "decision": "Mobile app beta launch targeted for end of December",
+          "owner": null,
+          "context": null
         }
       ],
       "action_items": [
         {
-          "task": "Create detailed spec for mobile app",
+          "task": "Create detailed mobile app spec",
           "owner": "Speaker B",
           "due_date": "Next Friday"
         },
         {
-          "task": "Audit the auth service",
-          "owner": "Speaker D",
-          "due_date": null
-        },
-        {
-          "task": "Implement SSO (Single Sign-On)",
+          "task": "SSO implementation",
           "owner": "Speaker C",
           "due_date": "November 30th"
+        },
+        {
+          "task": "Audit the auth service",
+          "owner": "Speaker D",
+          "due_date": "This week"
         }
       ],
       "risks": [
-        "Current auth service is outdated"
+        "Outdated authentication service"
       ],
       "key_points": [
-        "Mobile app development",
-        "Enterprise features (SSO)",
-        "Auditing the auth service"
+        "Q4 planning",
+        "Prioritize mobile app development",
+        "Focus on enterprise features (SSO)",
+        "Authentication service audit"
       ]
     }
   },
   {
     "id": "sample_002",
-    "success": true,
-    "latency_ms": 11195.720911026001,
-    "decisions_count": 2,
-    "action_items_count": 3,
-    "risks_count": 2,
-    "has_tldr": true,
-    "summary": {
-      "tldr": "Team reviewed sprint performance, identified areas for improvement and set goals for the next sprint.",
-      "decisions": [
-        {
-          "decision": "Set a 24-hour code review target",
-          "owner": null,
-          "context": "To improve efficiency"
-        },
-        {
-          "decision": "Document new CI pipeline process in team handbook",
-          "owner": "Speaker C",
-          "context": "For future reference"
-        }
-      ],
-      "action_items": [
-        {
-          "task": "Follow up with vendor for API keys",
-          "owner": "Speaker A",
-          "due_date": null
-        },
-        {
-          "task": "Create proposal for database upgrade",
-          "owner": "Speaker C",
-          "due_date": "Monday"
-        },
-        {
-          "task": "Document new CI pipeline process in team handbook",
-          "owner": "Speaker C",
-          "due_date": "End of week"
-        }
-      ],
-      "risks": [
-        "Need API keys from vendor",
-        "Upgrade database for performance"
-      ],
-      "key_points": [
-        "Completed all story points with help of new CI pipeline",
-        "Code quality improved, caught several bugs before production",
-        "Code reviews are taking too long"
-      ]
-    }
+    "success": false,
+    "error": "Gemini API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit.\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10\nPlease retry in 14.772035911s. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 10\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 14\n}\n]"
   },
   {
     "id": "sample_003",
-    "success": true,
-    "latency_ms": 9012.778997421265,
-    "decisions_count": 2,
-    "action_items_count": 2,
-    "risks_count": 1,
-    "has_tldr": true,
-    "summary": {
-      "tldr": "The team discussed the payment integration, authentication module, and database migration. They identified a risk with webhook validation and set a goal to ship the feature by Friday.",
-      "decisions": [
-        {
-          "decision": "Schedule vendor call today",
-          "owner": "Speaker B",
-          "context": "Webhook validation blocker"
-        },
-        {
-          "decision": "Review Speaker C's authentication module this afternoon",
-          "owner": "Speaker A",
-          "context": "Quality assurance"
-        }
-      ],
-      "action_items": [
-        {
-          "task": "Vendor call",
-          "owner": "Speaker B",
-          "due_date": null
-        },
-        {
-          "task": "Have Speaker D's migration script reviewed by Speaker C",
-          "owner": "Speaker D",
-          "due_date": null
-        }
-      ],
-      "risks": [
-        "Webhook validation blocker"
-      ],
-      "key_points": [
-        "Payment integration issues",
-        "Database migration progress"
-      ]
-    }
+    "success": false,
+    "error": "Gemini API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit.\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10\nPlease retry in 14.69276047s. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 10\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 14\n}\n]"
   },
   {
     "id": "sample_004",
-    "success": true,
-    "latency_ms": 12468.664646148682,
-    "decisions_count": 3,
-    "action_items_count": 2,
-    "risks_count": 2,
-    "has_tldr": true,
-    "summary": {
-      "tldr": "The team discussed and prioritized Q4 roadmap features, including SSO, analytics, and mobile support.",
-      "decisions": [
-        {
-          "decision": "Prioritize SSO",
-          "owner": "Speaker A",
-          "context": "High demand from enterprise customers"
-        },
-        {
-          "decision": "Ship basic analytics in Q4, advanced in Q1",
-          "owner": "Speaker C",
-          "context": "Phased approach to mitigate complexity"
-        },
-        {
-          "decision": "Improve mobile web in Q4, defer native app to Q1",
-          "owner": "Speaker F",
-          "context": "Cost considerations"
-        }
-      ],
-      "action_items": [
-        {
-          "task": "Create detailed project plan by Monday",
-          "owner": "Speaker B",
-          "due_date": "Monday"
-        },
-        {
-          "task": "Have spec ready next Friday",
-          "owner": "Speaker B",
-          "due_date": "Friday"
-        }
-      ],
-      "risks": [
-        "Team might be stretched too thin with only 4 engineers",
-        "If SSO hits blockers, other projects slip"
-      ],
-      "key_points": [
-        "Customer feedback and priorities",
-        "Q4 planning and resource allocation",
-        "Complexity of analytics feature"
-      ]
-    }
+    "success": false,
+    "error": "Gemini API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit.\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10\nPlease retry in 14.605418779s. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 10\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 14\n}\n]"
   },
   {
     "id": "sample_005",
-    "success": true,
-    "latency_ms": 10435.951709747314,
-    "decisions_count": 2,
-    "action_items_count": 2,
-    "risks_count": 1,
-    "has_tldr": true,
-    "summary": {
-      "tldr": "Design review meeting for new navigation system with improved hierarchy, mobile responsiveness, and faster load times. Team decides to move forward with implementation.",
-      "decisions": [
-        {
-          "decision": "Move forward with sidebar-based navigation system",
-          "owner": null,
-          "context": "Based on user research and testing results"
-        },
-        {
-          "decision": "Implement phased rollout to mitigate risk",
-          "owner": null,
-          "context": "To minimize breaking existing functionality"
-        }
-      ],
-      "action_items": [
-        {
-          "task": "Work on user testing plan",
-          "owner": "Speaker C",
-          "due_date": "Thursday"
-        },
-        {
-          "task": "Own implementation of navigation system",
-          "owner": "Speaker D",
-          "due_date": "November 15th"
-        }
-      ],
-      "risks": [
-        "Breaking existing functionality"
-      ],
-      "key_points": [
-        "Clearer hierarchy in navigation",
-        "Better mobile responsiveness with hamburger menu on small screens",
-        "Faster load times"
-      ]
-    }
+    "success": false,
+    "error": "Gemini API error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit.\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10\nPlease retry in 14.518716481s. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n  quota_value: 10\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 14\n}\n]"
   }
 ]

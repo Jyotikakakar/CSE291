@@ -6,42 +6,42 @@ import subprocess
 
 def check_env():
     if not os.path.exists(".env"):
-        print("Creating .env file with Ollama defaults")
+        print("Creating .env file with Gemini defaults")
         with open(".env", 'w') as f:
-            f.write("# Ollama Configuration\n")
-            f.write("OLLAMA_HOST=http://localhost:11434\n")
-            f.write("OLLAMA_MODEL=llama3.1:8b\n")
+            f.write("# Gemini Configuration\n")
+            f.write("GEMINI_API_KEY=your_api_key_here\n")
+            f.write("GEMINI_MODEL=gemini-2.0-flash-exp\n")
         print("Created .env file")
+        print("Please add your Gemini API key to the .env file")
+        return False
     
-    import requests
     from dotenv import load_dotenv
     load_dotenv()
     
-    host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
-    model = os.getenv("OLLAMA_MODEL", "llama3.1:8b")
+    api_key = os.getenv("GEMINI_API_KEY")
+    model = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
+    
+    if not api_key or api_key == "your_api_key_here":
+        print("GEMINI_API_KEY not found in .env file!")
+        print("Please add your Gemini API key to the .env file")
+        return False
     
     try:
-        response = requests.get(f"{host}/api/tags", timeout=2)
-        if response.status_code == 200:
-            models = response.json().get('models', [])
-            model_names = [m['name'] for m in models]
-            
-            print("✓ Ollama is running")
-            
-            if not any(model in name for name in model_names):
-                print(f"\nModel '{model}' not found!")
-                print(f"   Available models: {', '.join(model_names) if model_names else 'None'}")
-                print(f"\n   To install the model:")
-                print(f"   $ ollama pull {model}")
-                return False
-            
-            print(f"Model '{model}' is available")
+        import google.generativeai as genai
+        genai.configure(api_key=api_key)
+        model_instance = genai.GenerativeModel(model)
+        
+        # Test the API
+        response = model_instance.generate_content("Hello")
+        if response.text:
+            print("✓ Gemini API is working")
+            print(f"Model: {model}")
             return True
-    except requests.exceptions.ConnectionError:
-        print("\nOllama is not running!")
-        return False
+        else:
+            print("No response from Gemini API")
+            return False
     except Exception as e:
-        print(f"\nError checking Ollama: {str(e)}")
+        print(f"Error testing Gemini API: {str(e)}")
         return False
     
     return True
@@ -73,7 +73,7 @@ def main():
     print("Dependencies OK")
     print()
     
-    print("2: Checking Ollama configuration")
+    print("2: Checking Gemini configuration")
     if not check_env():
         return
     print()

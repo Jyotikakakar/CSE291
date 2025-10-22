@@ -1,12 +1,17 @@
 # Meeting Summarizer Agent
 
-A Python application that uses Ollama (local LLM) to analyze meeting transcripts and extract key information like decisions, action items, and risks.
+A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks.
 
 ## Quick Start with Docker (Recommended)
 
 ### Prerequisites
 - Docker and Docker Compose installed
-- At least 8GB RAM available for the LLM model
+- Google Gemini API key
+
+### Get Your API Key
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Create a new API key
+3. Copy the API key for the next step
 
 ### Run with Docker Compose
 
@@ -15,45 +20,39 @@ A Python application that uses Ollama (local LLM) to analyze meeting transcripts
 git clone https://github.com/Jyotikakakar/CSE291.git
 cd CSE291
 
-# Start the application (this will automatically download the LLM model)
+# Set your Gemini API key
+export GEMINI_API_KEY="your-api-key-here"
+
+# Start the application
 docker-compose up
 
 # The application will:
-# 1. Start Ollama service
-# 2. Download the llama3.1:8b model (~4.7GB)
+# 1. Connect to Gemini API
+# 2. Load meeting transcripts
 # 3. Run the meeting summarizer evaluation
 ```
 
 ### Manual Setup (Alternative)
 
-### Step 1: Install Ollama
-```bash
-curl -L https://ollama.com/download/Ollama-darwin.zip -o Ollama.zip
-unzip Ollama.zip
-mv Ollama.app /Applications/
-rm Ollama.zip
+### Step 1: Get Gemini API Key
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Create a new API key
+3. Copy the API key
 
-echo 'export PATH="/Applications/Ollama.app/Contents/Resources:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-### Step 2: Start Ollama & Pull Model
-
-```bash
-# Start Ollama (keeps running in background)
-ollama serve &
-
-# Pull the AI model (4.7GB download, one-time)
-ollama pull llama3.1:8b
-
-# Test it works
-ollama run llama3.1:8b "Hello!"
-```
-
-### Step 3: Install Python Dependencies
+### Step 2: Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
+```
+
+### Step 3: Set Environment Variable
+
+```bash
+# Set your API key
+export GEMINI_API_KEY="your-api-key-here"
+
+# Or create a .env file
+echo "GEMINI_API_KEY=your-api-key-here" > .env
 ```
 
 ### Step 4: Run Everything!
@@ -86,15 +85,25 @@ docker-compose down -v
 
 ## Configuration
 
-Copy `.env.example` to `.env` and modify as needed:
+### Environment Variables
+- `GEMINI_API_KEY`: Your Google Gemini API key (required)
 
+### Setting up API Key
+
+**Option 1: Environment Variable**
 ```bash
-cp .env.example .env
+export GEMINI_API_KEY="your-api-key-here"
 ```
 
-Environment variables:
-- `OLLAMA_HOST`: Ollama service URL (default: http://localhost:11434)
-- `OLLAMA_MODEL`: LLM model to use (default: llama3.1:8b)
+**Option 2: .env File**
+```bash
+echo "GEMINI_API_KEY=your-api-key-here" > .env
+```
+
+**Option 3: Docker Compose**
+```bash
+GEMINI_API_KEY="your-api-key-here" docker-compose up
+```
 
 ## Results
 
