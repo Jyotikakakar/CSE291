@@ -1,6 +1,18 @@
 # Meeting Summarizer Agent
 
-A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks. This is a Phase 1 implementation focused on meeting summarization.
+A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks. 
+
+**Phase 1**: Baseline agent with user and session management, deployed on EC2 with Docker for evaluation.
+
+## Features
+
+- ✅ Meeting transcript summarization using Gemini AI
+- ✅ Extracts decisions, action items, risks, and key points
+- ✅ Multi-user support with isolated containers
+- ✅ Session management within user contexts
+- ✅ REST API for programmatic access
+- ✅ EC2 deployment ready
+- ✅ Evaluation framework with visualization
 
 ## Quick Start with Docker (Recommended)
 
@@ -112,4 +124,60 @@ The application generates:
 - `results/latency_cdf.png`: Latency distribution chart
 - `results/extraction_counts.png`: Items extracted per meeting
 - `results/success_rate.png`: Success vs failure rate
+
+## EC2 Deployment
+
+For deploying on AWS EC2 with Docker and multi-user support, see:
+
+**📖 [DEPLOYMENT.md](DEPLOYMENT.md)** - Complete manual deployment guide
+
+Quick overview:
+- Deploy on EC2 with Docker (no IAM roles needed)
+- Each user gets isolated container (ports 5001-5004)
+- Multiple sessions per user in same container
+- REST API for evaluation
+- Manual steps provided (no scripts required)
+
+### Local API Testing
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Test API connection (replace with your EC2 IP)
+python3 client.py http://your-ec2-ip:5001
+
+# Run multi-user evaluation
+python3 evaluate_api.py http://your-ec2-ip:500
+```
+
+### API Endpoints
+
+- `GET /health` - Health check
+- `POST /api/session/create` - Create new session
+- `GET /api/session/<id>` - Get session details
+- `POST /api/summarize` - Summarize transcript
+- `GET /api/session/<id>/history` - Get session history
+- `GET /api/sessions` - List all sessions
+- `GET /api/metrics` - Get agent metrics
+
+## Project Structure
+
+```
+CSE291/
+├── agent.py              # Core meeting summarizer agent
+├── api.py                # Flask REST API with user/session mgmt
+├── client.py             # API client for testing
+├── evaluate.py           # Local evaluation script
+├── evaluate_api.py       # Multi-user API evaluation
+├── load_data.py          # Data loading utilities
+├── run.py                # Local execution script
+├── Dockerfile            # Container configuration
+├── docker-compose.yml    # Local Docker setup
+├── manage_containers.sh  # Container management helper
+├── requirements.txt      # Python dependencies
+├── DEPLOYMENT.md         # EC2 deployment guide
+├── data/                 # Meeting transcripts
+└── results/              # Evaluation results
+```
 
