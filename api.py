@@ -4,6 +4,7 @@ Simple Flask API for Meeting Summarizer with Google Calendar and Tasks Integrati
 Single endpoint: /analyze - Takes transcript, creates summary, tasks, and calendar events
 """
 import os
+import uuid
 from datetime import datetime
 from flask import Flask, request, jsonify
 from agent import MeetingAgent
@@ -13,6 +14,10 @@ app = Flask(__name__)
 # Initialize agent
 agent = None
 
+# Session storage - in-memory for now
+# Structure: {session_id: {metadata: {}, requests: [], created_at: timestamp, user_id: str}}
+sessions = {}
+
 def get_agent():
     """Get or create the MeetingAgent instance"""
     global agent
@@ -20,13 +25,109 @@ def get_agent():
         agent = MeetingAgent()
     return agent
 
+def get_user_id():
+    """Get user ID from environment variable"""
+    return os.getenv('USER_ID', 'default_user')
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
     return jsonify({
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
-        "service": "Meeting Summarizer with Google Integration"
+        "service": "Meeting Summarizer with Google Integration",
+        "user_id": get_user_id()
+    })
+
+@app.route('/api/session/create', methods=['POST'])
+def create_session():
+    """Create a new session"""
+    data = request.json or {}
+    metadata = data.get('metadata', {})
+    
+    session_id = str(uuid.uuid4())
+    sessions[session_id] = {
+        'metadata': metadata,
+        'requests': [],
+        'created_at': datetime.now().isoformat(),
+        'user_id': get_user_id()
+    }
+    
+    return jsonify({
+        'session_id': session_id,
+        'created_at': sessions[session_id]['created_at'],
+        'user_id': get_user_id()
+    })
+
+@app.route('/api/session/<session_id>', methods=['GET'])
+def get_session(session_id):
+    """Get session details"""
+    if session_id not in sessions:
+        return jsonify({
+            "success": False,
+            "error": "Session not found"
+        }), 404
+    
+    session = sessions[session_id]
+    return jsonify({
+        'session_id': session_id,
+        'metadata': session['metadata'],
+        'created_at': session['created_at'],
+        'total_requests': len(session['requests']),
+        'user_id': session['user_id']
+    })
+
+@app.route('/api/session/<session_id>/history', methods=['GET'])
+def get_session_history(session_id):
+    """Get session request history"""
+    if session_id not in sessions:
+        return jsonify({
+            "success": False,
+            "error": "Session not found"
+        }), 404
+    
+    session = sessions[session_id]
+    return jsonify({
+        'session_id': session_id,
+        'total_requests': len(session['requests']),
+        'requests': session['requests']
+    })
+
+@app.route('/api/sessions', methods=['GET'])
+def list_sessions():
+    """List all sessions for this user"""
+    user_id = get_user_id()
+    user_sessions = [
+        {
+            'session_id': sid,
+            'metadata': data['metadata'],
+            'created_at': data['created_at'],
+            'total_requests': len(data['requests'])
+        }
+        for sid, data in sessions.items()
+        if data['user_id'] == user_id
+    ]
+    
+    return jsonify({
+        'user_id': user_id,
+        'total_sessions': len(user_sessions),
+        'sessions': user_sessions
+    })
+
+@app.route('/api/metrics', methods=['GET'])
+def get_metrics():
+    """Get agent metrics"""
+    agent = get_agent()
+    metrics = agent.get_metrics()
+    
+    user_id = get_user_id()
+    user_session_count = sum(1 for s in sessions.values() if s['user_id'] == user_id)
+    
+    return jsonify({
+        'user_id': user_id,
+        'total_requests': metrics['total_requests'],
+        'avg_latency_ms': metrics['avg_latency_ms'],
+        'total_sessions': user_session_count
     })
 
 @app.route('/analyze', methods=['POST'])
@@ -37,6 +138,7 @@ def analyze_meeting():
     Request body:
     {
         "transcript": "Meeting transcript text...",
+        "session_id": "uuid",  // Optional - for session tracking
         "meeting_info": {  // Optional
             "title": "Follow-up Meeting",
             "date": "2025-10-30",
@@ -48,6 +150,7 @@ def analyze_meeting():
     Returns:
     {
         "success": true,
+        "session_id": "uuid",
         "summary": { ... },
         "tasks_created": [ ... ],
         "calendar_event": { ... },
@@ -64,7 +167,15 @@ def analyze_meeting():
         }), 400
     
     transcript = data['transcript']
+    session_id = data.get('session_id')
     meeting_info = data.get('meeting_info', {})
+    
+    # Validate session if provided
+    if session_id and session_id not in sessions:
+        return jsonify({
+            "success": False,
+            "error": "Invalid session_id"
+        }), 400
     
     try:
         agent = get_agent()
@@ -90,6 +201,7 @@ def analyze_meeting():
         # Prepare response
         response = {
             "success": True,
+            "session_id": session_id,
             "summary": summary,
             "latency_ms": summary_result.get('latency_ms', 0),
             "tasks_created": [],
@@ -193,25 +305,62 @@ def analyze_meeting():
         print(f"Errors: {len(response['errors'])}")
         print(f"{'='*60}\n")
         
+        # Log request to session history if session_id provided
+        if session_id:
+            request_record = {
+                'timestamp': datetime.now().isoformat(),
+                'transcript_length': len(transcript.split()),
+                'success': True,
+                'latency_ms': response['latency_ms'],
+                'decisions_count': len(summary.get('decisions', [])),
+                'action_items_count': len(summary.get('action_items', [])),
+                'risks_count': len(summary.get('risks', [])),
+                'tasks_created_count': len(response['tasks_created']),
+                'calendar_event_created': response['calendar_event'] is not None,
+                'errors_count': len(response['errors'])
+            }
+            sessions[session_id]['requests'].append(request_record)
+        
         return jsonify(response)
         
     except Exception as e:
         print(f"\n✗ Fatal error: {str(e)}")
+        
+        # Log error to session history if session_id provided
+        if session_id:
+            request_record = {
+                'timestamp': datetime.now().isoformat(),
+                'transcript_length': len(transcript.split()) if transcript else 0,
+                'success': False,
+                'error': str(e)
+            }
+            sessions[session_id]['requests'].append(request_record)
+        
         return jsonify({
             "success": False,
+            "session_id": session_id,
             "error": str(e)
         }), 500
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     debug = os.getenv('DEBUG', 'False').lower() == 'true'
+    user_id = get_user_id()
     
     print(f"\n{'='*60}")
-    print("MEETING SUMMARIZER API")
+    print("MEETING SUMMARIZER API WITH SESSION MANAGEMENT")
     print(f"{'='*60}")
     print(f"Port: {port}")
+    print(f"User ID: {user_id}")
     print(f"Debug: {debug}")
-    print(f"Endpoint: POST /analyze")
+    print(f"\nEndpoints:")
+    print(f"  GET  /health")
+    print(f"  POST /api/session/create")
+    print(f"  GET  /api/session/<session_id>")
+    print(f"  GET  /api/session/<session_id>/history")
+    print(f"  GET  /api/sessions")
+    print(f"  GET  /api/metrics")
+    print(f"  POST /analyze (with optional session_id)")
     print(f"{'='*60}\n")
     
     app.run(host='0.0.0.0', port=port, debug=debug)

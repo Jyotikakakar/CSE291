@@ -1,0 +1,72 @@
+# Session Management API - Curl Examples
+# Base URL: http://54.202.125.206:5001
+
+## 1. Health Check
+curl -X GET http://54.202.125.206:5001/health
+
+## 2. Create a Session
+curl -X POST http://54.202.125.206:5001/api/session/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "Q4 Planning Session",
+      "project": "Mobile App"
+    }
+  }'
+
+## 3. Analyze WITH Session
+# Replace SESSION_ID_HERE with actual session ID from step 2
+curl -X POST http://54.202.125.206:5001/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transcript": "Alice: Lets start the Q4 planning meeting. Bob: I think we should focus on the mobile app. Alice: Good idea. Bob, can you lead this? Bob: Yes, I will have a spec by Friday.",
+    "session_id": "SESSION_ID_HERE"
+  }'
+
+## 4. Analyze WITHOUT Session (still works)
+curl -X POST http://54.202.125.206:5001/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transcript": "Carol: We need to implement SSO. David: I can help with that."
+  }'
+
+## 5. Get Session Details
+curl -X GET http://54.202.125.206:5001/api/session/SESSION_ID_HERE
+
+## 6. Get Session History
+curl -X GET http://54.202.125.206:5001/api/session/SESSION_ID_HERE/history
+
+## 7. List All Sessions for User
+curl -X GET http://54.202.125.206:5001/api/sessions
+
+## 8. Get Aggregate Metrics
+curl -X GET http://54.202.125.206:5001/api/metrics
+
+## 9. Test Invalid Session ID (should return 400 error)
+curl -X POST http://54.202.125.206:5001/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transcript": "test",
+    "session_id": "invalid-session-id"
+  }'
+
+## 10. Analyze with Meeting Info (creates calendar event and tasks)
+curl -X POST http://54.202.125.206:5001/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transcript": "Alice: Lets schedule a follow-up meeting. Bob: How about next Friday at 2pm?",
+    "session_id": "SESSION_ID_HERE",
+    "meeting_info": {
+      "title": "Follow-up Meeting",
+      "date": "2025-10-30",
+      "time": "2:00 PM",
+      "attendees": ["alice@example.com", "bob@example.com"]
+    }
+  }'
+
+# Notes:
+# - Replace SESSION_ID_HERE with actual session ID
+# - All responses are in JSON format
+# - Add | python -m json.tool for pretty printing (if python available)
+# - Session IDs are UUIDs that persist within each user container
+
