@@ -8,6 +8,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./results:/app/results
+      - ./.env:/app/.env
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
     restart: "no"

@@ -10,7 +10,7 @@ def check_env():
         with open(".env", 'w') as f:
             f.write("# Gemini Configuration\n")
             f.write("GEMINI_API_KEY=your_api_key_here\n")
-            f.write("GEMINI_MODEL=gemini-2.0-flash-exp\n")
+            f.write("GEMINI_MODEL=your_model_here\n")
         print("Created .env file")
         print("Please add your Gemini API key to the .env file")
         return False
@@ -19,11 +19,16 @@ def check_env():
     load_dotenv()
     
     api_key = os.getenv("GEMINI_API_KEY")
-    model = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
+    model = os.getenv("GEMINI_MODEL")
     
     if not api_key or api_key == "your_api_key_here":
         print("GEMINI_API_KEY not found in .env file!")
         print("Please add your Gemini API key to the .env file")
+        return False
+    
+    if not model:
+        print("GEMINI_MODEL not found in .env file!")
+        print("Please add your Gemini model to the .env file")
         return False
     
     try:
