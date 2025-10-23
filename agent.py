@@ -3,7 +3,9 @@ import json
 import time
 import google.generativeai as genai
 from typing import Dict, Any, List
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil import parser as date_parser
+import re
 
 # Load API key
 from dotenv import load_dotenv
@@ -126,6 +128,62 @@ class MeetingAgent:
             except ValueError:
                 return "09:00:00"  # Default fallback
     
+    def _parse_date_for_tasks(self, date_str: str) -> str:
+        """Parse natural language dates and convert to RFC 3339 format for Google Tasks.
+        
+        Args:
+            date_str: Natural language date like "next Friday", "November 30th", "this week", "2025-11-30"
+            
+        Returns:
+            RFC 3339 formatted date string like "2025-11-30T00:00:00.000Z"
+        """
+        if not date_str:
+            return None
+        
+        date_str = date_str.strip()
+        now = datetime.now()
+        
+        # Handle relative dates
+        date_str_lower = date_str.lower()
+        
+        # "this week" - end of this week (Friday)
+        if "this week" in date_str_lower:
+            days_until_friday = (4 - now.weekday()) % 7
+            if days_until_friday == 0:
+                days_until_friday = 7
+            target_date = now + timedelta(days=days_until_friday)
+            return target_date.strftime("%Y-%m-%dT00:00:00.000Z")
+        
+        # "next week" - next Monday
+        if "next week" in date_str_lower:
+            days_until_monday = (7 - now.weekday()) % 7 + 7
+            target_date = now + timedelta(days=days_until_monday)
+            return target_date.strftime("%Y-%m-%dT00:00:00.000Z")
+        
+        # "next [day of week]"
+        if "next" in date_str_lower:
+            weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+            for i, day in enumerate(weekdays):
+                if day in date_str_lower:
+                    days_ahead = i - now.weekday()
+                    if days_ahead <= 0:  # Target day already happened this week
+                        days_ahead += 7
+                    target_date = now + timedelta(days=days_ahead)
+                    return target_date.strftime("%Y-%m-%dT00:00:00.000Z")
+        
+        # Try parsing with dateutil for dates like "November 30th", "Nov 30", "2025-11-30"
+        try:
+            parsed_date = date_parser.parse(date_str, default=now)
+            # If year wasn't specified and the date is in the past, assume next year
+            if parsed_date < now and date_str_lower.count('20') == 0:
+                parsed_date = parsed_date.replace(year=now.year + 1)
+            return parsed_date.strftime("%Y-%m-%dT00:00:00.000Z")
+        except (ValueError, TypeError):
+            pass
+        
+        # If all parsing fails, return None
+        return None
+    
     # ==================== CALENDAR TOOL ====================
     
     def add_calendar_event(self, title: str, date: str, time: str = None, 
@@ -242,12 +300,12 @@ class MeetingAgent:
                 'status': 'needsAction'
             }
             
-            # Add due date if provided
+            # Add due date if provided, parse natural language dates
             if due_date:
-                if due_date == "Friday" or due_date == "This week":
-                    task['due'] = '2024-01-15T00:00:00.000Z'
-                else:
-                    task['due'] = due_date
+                parsed_date = self._parse_date_for_tasks(due_date)
+                if parsed_date:
+                    task['due'] = parsed_date
+                # If parsing fails, we skip the due date rather than causing an error
             
             created_task = service.tasks().insert(tasklist=tasklist_id, body=task).execute()
             
