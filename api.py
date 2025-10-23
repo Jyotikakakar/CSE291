@@ -144,6 +144,159 @@ def get_metrics():
     agent = get_or_create_agent()
     return jsonify(agent.get_metrics())
 
+# ==================== CALENDAR ENDPOINTS ====================
+
+@app.route('/api/calendar/events', methods=['POST'])
+def create_calendar_event():
+    """Create a new calendar event"""
+    data = request.json
+    
+    if not data or 'title' not in data or 'date' not in data:
+        return jsonify({"error": "title and date fields are required"}), 400
+    
+    try:
+        agent = get_or_create_agent()
+        result = agent.add_calendar_event(
+            title=data['title'],
+            date=data['date'],
+            time=data.get('time'),
+            attendees=data.get('attendees', []),
+            description=data.get('description')
+        )
+        
+        if result.get('success'):
+            return jsonify(result), 201
+        else:
+            return jsonify(result), 500
+            
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/calendar/events', methods=['GET'])
+def list_calendar_events():
+    """Get calendar events"""
+    date = request.args.get('date')
+    attendee = request.args.get('attendee')
+    
+    try:
+        agent = get_or_create_agent()
+        result = agent.get_calendar_events(date=date, attendee=attendee)
+        return jsonify(result)
+        
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/calendar/events/<event_id>', methods=['DELETE'])
+def delete_calendar_event_endpoint(event_id):
+    """Delete a calendar event"""
+    try:
+        agent = get_or_create_agent()
+        result = agent.delete_calendar_event(event_id)
+        
+        if result.get('success'):
+            return jsonify(result)
+        else:
+            return jsonify(result), 500
+            
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+# ==================== TASK ENDPOINTS ====================
+
+@app.route('/api/tasks', methods=['POST'])
+def create_task_endpoint():
+    """Create a new task"""
+    data = request.json
+    
+    if not data or 'title' not in data:
+        return jsonify({"error": "title field is required"}), 400
+    
+    try:
+        agent = get_or_create_agent()
+        result = agent.create_task(
+            title=data['title'],
+            owner=data.get('owner'),
+            due_date=data.get('due_date'),
+            priority=data.get('priority', 'medium'),
+            description=data.get('description')
+        )
+        
+        if result.get('success'):
+            return jsonify(result), 201
+        else:
+            return jsonify(result), 500
+            
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/tasks', methods=['GET'])
+def list_tasks_endpoint():
+    """Get tasks"""
+    owner = request.args.get('owner')
+    status = request.args.get('status')
+    priority = request.args.get('priority')
+    
+    try:
+        agent = get_or_create_agent()
+        result = agent.get_tasks(owner=owner, status=status, priority=priority)
+        return jsonify(result)
+        
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/tasks/<task_id>', methods=['PATCH'])
+def update_task_endpoint(task_id):
+    """Update a task"""
+    data = request.json or {}
+    
+    try:
+        agent = get_or_create_agent()
+        result = agent.update_task(task_id, **data)
+        
+        if result.get('success'):
+            return jsonify(result)
+        else:
+            return jsonify(result), 500
+            
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+@app.route('/api/tasks/<task_id>/complete', methods=['POST'])
+def complete_task_endpoint(task_id):
+    """Mark a task as complete"""
+    try:
+        agent = get_or_create_agent()
+        result = agent.mark_task_complete(task_id)
+        
+        if result.get('success'):
+            return jsonify(result)
+        else:
+            return jsonify(result), 500
+            
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     debug = os.getenv('DEBUG', 'False').lower() == 'true'

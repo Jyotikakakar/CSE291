@@ -8,6 +8,8 @@ A Python application that uses Google's Gemini AI to analyze meeting transcripts
 
 - ✅ Meeting transcript summarization using Gemini AI
 - ✅ Extracts decisions, action items, risks, and key points
+- ✅ **Google Calendar integration** - Create and manage meeting events
+- ✅ **Google Tasks integration** - Create and track action items
 - ✅ Multi-user support with isolated containers
 - ✅ Session management within user contexts
 - ✅ REST API for programmatic access
@@ -19,6 +21,25 @@ A Python application that uses Google's Gemini AI to analyze meeting transcripts
 ### Prerequisites
 - Docker and Docker Compose installed
 - Google Gemini API key
+- (Optional) Google OAuth credentials for Calendar/Tasks integration
+
+### Quick Test
+
+Test the integration locally:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Set Gemini API key
+export GEMINI_API_KEY="your_key_here"
+
+# Run test suite
+python test_tools.py
+
+# Or test the agent directly
+python agent.py
+```
 
 ### Get Your API Key
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
@@ -99,6 +120,8 @@ docker-compose down -v
 
 ### Environment Variables
 - `GEMINI_API_KEY`: Your Google Gemini API key (required)
+- `GOOGLE_CREDENTIALS_PATH`: Path to Google OAuth credentials JSON (optional, for Calendar/Tasks)
+- `GOOGLE_TOKEN_PATH`: Path to store Google OAuth token (optional)
 
 ### Setting up API Key
 
@@ -153,13 +176,27 @@ python3 evaluate_api.py http://your-ec2-ip:500
 
 ### API Endpoints
 
+**Session Management:**
 - `GET /health` - Health check
 - `POST /api/session/create` - Create new session
 - `GET /api/session/<id>` - Get session details
-- `POST /api/summarize` - Summarize transcript
 - `GET /api/session/<id>/history` - Get session history
 - `GET /api/sessions` - List all sessions
+
+**Meeting Summarization:**
+- `POST /api/summarize` - Summarize transcript
 - `GET /api/metrics` - Get agent metrics
+
+**Google Calendar:**
+- `POST /api/calendar/events` - Create calendar event
+- `GET /api/calendar/events` - List calendar events
+- `DELETE /api/calendar/events/<id>` - Delete calendar event
+
+**Google Tasks:**
+- `POST /api/tasks` - Create new task
+- `GET /api/tasks` - List tasks
+- `PATCH /api/tasks/<id>` - Update task
+- `POST /api/tasks/<id>/complete` - Mark task complete
 
 ## Project Structure
 
