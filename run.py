@@ -54,7 +54,6 @@ def check_env():
 
 def check_dependencies():
     try:
-        import requests
         import datasets
         import matplotlib
         import numpy

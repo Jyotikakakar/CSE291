@@ -1,6 +1,6 @@
 # Meeting Summarizer Agent
 
-A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks.
+A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks. This is a Phase 1 implementation focused on meeting summarization.
 
 ## Quick Start with Docker (Recommended)
 

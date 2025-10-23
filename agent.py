@@ -27,10 +27,6 @@ class MeetingAgent:
             "total_tool_calls": 0
         }
         
-        # Initialize tool data storage
-        self.calendar_events = []
-        self.tasks = []
-        
         self._check_gemini()
     
     def _check_gemini(self):
@@ -51,95 +47,6 @@ class MeetingAgent:
             return response.text
         except Exception as e:
             raise Exception(f"Gemini API error: {str(e)}")
-    
-    # ==================== CALENDAR TOOL ====================
-    def add_calendar_event(self, title: str, date: str, time: str = None, 
-                          attendees: List[str] = None, description: str = None) -> Dict[str, Any]:
-        """Add an event to the calendar."""
-        event = {
-            "id": len(self.calendar_events) + 1,
-            "title": title,
-            "date": date,
-            "time": time,
-            "attendees": attendees or [],
-            "description": description,
-            "created_at": datetime.now().isoformat()
-        }
-        self.calendar_events.append(event)
-        self.metrics["total_tool_calls"] += 1
-        return {"success": True, "event": event}
-    
-    def get_calendar_events(self, date: str = None, attendee: str = None) -> Dict[str, Any]:
-        """Retrieve calendar events, optionally filtered by date or attendee."""
-        events = self.calendar_events
-        
-        if date:
-            events = [e for e in events if e["date"] == date]
-        if attendee:
-            events = [e for e in events if attendee in e.get("attendees", [])]
-        
-        self.metrics["total_tool_calls"] += 1
-        return {"success": True, "events": events, "count": len(events)}
-    
-    def delete_calendar_event(self, event_id: int) -> Dict[str, Any]:
-        """Delete a calendar event by ID."""
-        for i, event in enumerate(self.calendar_events):
-            if event["id"] == event_id:
-                deleted_event = self.calendar_events.pop(i)
-                self.metrics["total_tool_calls"] += 1
-                return {"success": True, "deleted_event": deleted_event}
-        
-        return {"success": False, "error": f"Event {event_id} not found"}
-    
-    # ==================== TASK TRACKER TOOL ====================
-    def create_task(self, title: str, owner: str = None, due_date: str = None,
-                   priority: str = "medium", description: str = None) -> Dict[str, Any]:
-        """Create a new task in the task tracker."""
-        task = {
-            "id": len(self.tasks) + 1,
-            "title": title,
-            "owner": owner,
-            "due_date": due_date,
-            "priority": priority,
-            "status": "pending",
-            "description": description,
-            "created_at": datetime.now().isoformat(),
-            "updated_at": datetime.now().isoformat()
-        }
-        self.tasks.append(task)
-        self.metrics["total_tool_calls"] += 1
-        return {"success": True, "task": task}
-    
-    def update_task(self, task_id: int, **kwargs) -> Dict[str, Any]:
-        """Update an existing task. Accepts any task field as keyword argument."""
-        for task in self.tasks:
-            if task["id"] == task_id:
-                for key, value in kwargs.items():
-                    if key in task:
-                        task[key] = value
-                task["updated_at"] = datetime.now().isoformat()
-                self.metrics["total_tool_calls"] += 1
-                return {"success": True, "task": task}
-        
-        return {"success": False, "error": f"Task {task_id} not found"}
-    
-    def get_tasks(self, owner: str = None, status: str = None, priority: str = None) -> Dict[str, Any]:
-        """Retrieve tasks, optionally filtered by owner, status, or priority."""
-        tasks = self.tasks
-        
-        if owner:
-            tasks = [t for t in tasks if t.get("owner") == owner]
-        if status:
-            tasks = [t for t in tasks if t.get("status") == status]
-        if priority:
-            tasks = [t for t in tasks if t.get("priority") == priority]
-        
-        self.metrics["total_tool_calls"] += 1
-        return {"success": True, "tasks": tasks, "count": len(tasks)}
-    
-    def mark_task_complete(self, task_id: int) -> Dict[str, Any]:
-        """Mark a task as complete."""
-        return self.update_task(task_id, status="completed")
     
     def summarize(self, transcript: str, focus_areas: List[str] = None) -> Dict[str, Any]:
         if focus_areas is None:
@@ -241,6 +148,7 @@ Example format:
             "avg_latency_ms": avg_latency
         }
 
+
 if __name__ == "__main__":
     agent = MeetingAgent()
     
@@ -274,42 +182,3 @@ if __name__ == "__main__":
         print(f"\nProcessing time: {result['latency_ms']:.0f}ms")
     else:
         print(f"Error: {result['error']}")
-    
-    # Demo: Using the calendar and task tracker tools
-    print("\n\nDEMO: Calendar & Task Tracker Tools")
-    print("=" * 80)
-    
-    # Add calendar event
-    event = agent.add_calendar_event(
-        title="Q4 Planning Follow-up",
-        date="2025-10-25",
-        time="2:00 PM",
-        attendees=["Alice", "Bob", "Carol"],
-        description="Follow-up meeting for Q4 planning"
-    )
-    print(f"✓ Created event: {event['event']['title']}")
-    
-    # Create tasks from action items
-    task1 = agent.create_task(
-        title="Create mobile app spec",
-        owner="Bob",
-        due_date="Friday",
-        priority="high"
-    )
-    print(f"✓ Created task: {task1['task']['title']}")
-    
-    task2 = agent.create_task(
-        title="Audit auth service",
-        owner="David",
-        due_date="This week",
-        priority="high"
-    )
-    print(f"✓ Created task: {task2['task']['title']}")
-    
-    # Get all tasks
-    all_tasks = agent.get_tasks()
-    print(f"\nTotal tasks: {all_tasks['count']}")
-    
-    # Mark task complete
-    agent.mark_task_complete(task1['task']['id'])
-    print(f"✓ Marked task {task1['task']['id']} as complete")

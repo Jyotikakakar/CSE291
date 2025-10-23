@@ -23,8 +23,6 @@ RUN mkdir -p data/transcripts results
 
 # Set environment variables
 ENV PYTHONPATH=/app
-ENV OLLAMA_HOST=http://ollama:11434
-ENV OLLAMA_MODEL=llama3.1:8b
 
 # Expose port (if needed for web interface in future)
 EXPOSE 8000
