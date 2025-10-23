@@ -17,7 +17,6 @@ class MeetingSummarizerClient:
             base_url: Base URL of the API (e.g., http://localhost:5000)
         """
         self.base_url = base_url.rstrip('/')
-        self.session_id = None
     
     def health_check(self) -> Dict[str, Any]:
         """Check if API is healthy"""
@@ -25,67 +24,26 @@ class MeetingSummarizerClient:
         response.raise_for_status()
         return response.json()
     
-    def create_session(self, metadata: Optional[Dict] = None) -> str:
-        """Create a new session"""
-        payload = {"metadata": metadata or {}}
-        response = requests.post(
-            f"{self.base_url}/api/session/create",
-            json=payload
-        )
-        response.raise_for_status()
-        data = response.json()
-        self.session_id = data["session_id"]
-        return self.session_id
-    
-    def get_session(self, session_id: Optional[str] = None) -> Dict[str, Any]:
-        """Get session details"""
-        sid = session_id or self.session_id
-        if not sid:
-            raise ValueError("No session_id provided or stored")
-        
-        response = requests.get(f"{self.base_url}/api/session/{sid}")
-        response.raise_for_status()
-        return response.json()
-    
-    def summarize(
+    def analyze(
         self,
         transcript: str,
-        session_id: Optional[str] = None,
-        focus_areas: Optional[List[str]] = None
+        meeting_info: Optional[Dict] = None
     ) -> Dict[str, Any]:
-        """Summarize a meeting transcript"""
+        """
+        Analyze meeting transcript with full Google integration
+        Creates summary, tasks, and calendar events
+        """
         payload = {
-            "transcript": transcript,
-            "session_id": session_id or self.session_id,
-            "focus_areas": focus_areas
+            "transcript": transcript
         }
         
+        if meeting_info:
+            payload["meeting_info"] = meeting_info
+        
         response = requests.post(
-            f"{self.base_url}/api/summarize",
+            f"{self.base_url}/analyze",
             json=payload
         )
-        response.raise_for_status()
-        return response.json()
-    
-    def get_session_history(self, session_id: Optional[str] = None) -> Dict[str, Any]:
-        """Get session request history"""
-        sid = session_id or self.session_id
-        if not sid:
-            raise ValueError("No session_id provided or stored")
-        
-        response = requests.get(f"{self.base_url}/api/session/{sid}/history")
-        response.raise_for_status()
-        return response.json()
-    
-    def list_sessions(self) -> Dict[str, Any]:
-        """List all sessions for this user"""
-        response = requests.get(f"{self.base_url}/api/sessions")
-        response.raise_for_status()
-        return response.json()
-    
-    def get_metrics(self) -> Dict[str, Any]:
-        """Get agent metrics"""
-        response = requests.get(f"{self.base_url}/api/metrics")
         response.raise_for_status()
         return response.json()
 
@@ -112,13 +70,8 @@ if __name__ == "__main__":
         print(f"✗ Health check failed: {e}")
         sys.exit(1)
     
-    # Create session
-    print("\nCreating session...")
-    session_id = client.create_session(metadata={"test": True})
-    print(f"✓ Session created: {session_id}")
-    
-    # Test summarization
-    print("\nTesting summarization...")
+    # Test analysis
+    print("\nTesting analysis...")
     test_transcript = """
     Alice: Let's start the Q4 planning meeting.
     Bob: I think we should focus on the mobile app.
@@ -126,20 +79,16 @@ if __name__ == "__main__":
     Bob: Yes, I'll have a spec by Friday.
     """
     
-    result = client.summarize(test_transcript)
+    result = client.analyze(test_transcript)
     if result.get("success"):
-        print(f"✓ Summarization successful")
+        print(f"✓ Analysis successful")
         print(f"  Latency: {result.get('latency_ms', 0):.0f}ms")
         summary = result.get("summary", {})
         print(f"  Decisions: {len(summary.get('decisions', []))}")
         print(f"  Action items: {len(summary.get('action_items', []))}")
+        print(f"  Tasks created: {len(result.get('tasks_created', []))}")
     else:
-        print(f"✗ Summarization failed: {result.get('error')}")
-    
-    # Get session history
-    print("\nGetting session history...")
-    history = client.get_session_history()
-    print(f"✓ Total requests in session: {history['total_requests']}")
+        print(f"✗ Analysis failed: {result.get('error')}")
     
     print("\n✓ All tests passed!")
 
