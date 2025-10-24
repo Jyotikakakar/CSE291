@@ -1,0 +1,16 @@
+## Transcript 14: MEDIUM - Friday 10:30 AM
+
+**Characters:** Jill, Sarah, Marcus  
+**Context:** References Thursday commitment to meet Monday, discusses resource timing.
+
+**Sarah:** So Jill, for Monday's resource allocation meeting at 2:00 PM—I have the headcount numbers ready.
+**Marcus:** I've got the engineering breakdown too.
+**Jill:** Perfect. Sarah, one question—do you have time to also pull budget allocations? That would make the analysis more complete.
+**Sarah:** Budget data? That's going to take a bit longer. Can I have until end of day Friday?
+**Jill:** Sure, no problem. So Monday we'll have headcount, budget, and engineering detail. That's everything we need.
+**Marcus:** Should we also do a three-year trend?
+**Jill:** Good idea. Can you pull that?
+**Marcus:** Yeah, I can have it by Monday morning.
+**Sarah:** Great. So Monday 2:00 PM, we have everything.
+
+---

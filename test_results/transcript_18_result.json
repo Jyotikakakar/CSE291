@@ -1,0 +1,54 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "8tnrf11vcbfpu8amvkc1q4b694",
+    "link": "https://www.google.com/calendar/event?eid=OHRucmYxMXZjYmZwdThhbXZrYzFxNGI2OTQga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from transcript_18.txt"
+  },
+  "errors": [],
+  "latency_ms": 1051.4001846313477,
+  "session_id": "0c7d790b-cbba-437c-8e22-51214f6724d3",
+  "session_name": "Transcript_20251024_230923",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Next Thursday",
+        "owner": "John",
+        "task": "Finalize strategic recommendations"
+      },
+      {
+        "due_date": "Next Thursday",
+        "owner": null,
+        "task": "Conduct final review of the market report"
+      }
+    ],
+    "decisions": [],
+    "key_points": [
+      "Progress update on market report",
+      "Integration of competitive analysis and new market data",
+      "Inclusion of customer sentiment",
+      "Draft of strategic recommendations",
+      "Market report on track for completion next Thursday"
+    ],
+    "risks": [],
+    "tldr": "The team provided a progress update on the market report. The competitive analysis and customer sentiment are integrated, and strategic recommendations are in draft form. The report is on track for final completion next Thursday."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Next Thursday",
+      "id": "SENRVmFMb3g3LTRmNW41OA",
+      "owner": "John",
+      "status": "needsAction",
+      "title": "Finalize strategic recommendations"
+    },
+    {
+      "due_date": "Next Thursday",
+      "id": "djFlMXBFbGFnNUI0MlNoMg",
+      "owner": null,
+      "status": "needsAction",
+      "title": "Conduct final review of the market report"
+    }
+  ]
+}

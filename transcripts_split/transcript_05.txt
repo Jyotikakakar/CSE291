@@ -1,0 +1,10 @@
+## Transcript 5: SHORT - Monday 8:30 AM
+
+**Characters:** Jill, Sarah  
+**Context:** One-shot request.
+
+**Jill:** Sarah, can you help me with something? I need to create a quarterly performance report by Wednesday. Can you pull the data from the analytics dashboard?
+**Sarah:** Wednesday? That's pretty tight. But yeah, I can grab the data. I'll have it to you by Tuesday morning.
+**Jill:** Perfect, thanks!
+
+---

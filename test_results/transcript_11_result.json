@@ -1,0 +1,71 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "rjm97g8h0pftpo502bvuim0uno",
+    "link": "https://www.google.com/calendar/event?eid=cmptOTdnOGgwcGZ0cG81MDJidnVpbTB1bm8ga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from transcript_11.txt"
+  },
+  "errors": [],
+  "latency_ms": 1319.9195861816406,
+  "session_id": "93cbb9ec-b07d-4447-a432-2425544675bc",
+  "session_name": "Transcript_20251024_230859",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": null,
+        "owner": "Sarah",
+        "task": "Gather company-wide headcount data."
+      },
+      {
+        "due_date": null,
+        "owner": "Marcus",
+        "task": "Pull engineering-specific headcount data."
+      },
+      {
+        "due_date": "Monday afternoon",
+        "owner": "Jill",
+        "task": "Meet to combine headcount data."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "To form the complete department resource allocation analysis.",
+        "decision": "Combine headcount data from Sarah and Marcus.",
+        "owner": "Jill"
+      }
+    ],
+    "key_points": [
+      "Quarterly performance report completion",
+      "Department resource allocation analysis",
+      "Headcount data gathering (company-wide and engineering-specific)",
+      "Collaboration on analysis"
+    ],
+    "risks": [],
+    "tldr": "The team discussed the department resource allocation analysis. Sarah and Marcus will gather headcount data company-wide and for the engineering team, respectively, to be combined on Monday."
+  },
+  "tasks_created": [
+    {
+      "due_date": null,
+      "id": "R2FGcVp3THZUd3h4WnozMw",
+      "owner": "Sarah",
+      "status": "needsAction",
+      "title": "Gather company-wide headcount data."
+    },
+    {
+      "due_date": null,
+      "id": "aUtDZmlELXVQOTBEVmNVTg",
+      "owner": "Marcus",
+      "status": "needsAction",
+      "title": "Pull engineering-specific headcount data."
+    },
+    {
+      "due_date": "Monday afternoon",
+      "id": "ZXQwWDBoSmxCTEVZR19BRw",
+      "owner": "Jill",
+      "status": "needsAction",
+      "title": "Meet to combine headcount data."
+    }
+  ]
+}

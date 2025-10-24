@@ -1,0 +1,1129 @@
+[
+  {
+    "transcript": "transcript_01.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "bu9tri6a0e99s1pdq6qgk1p784",
+        "link": "https://www.google.com/calendar/event?eid=YnU5dHJpNmEwZTk5czFwZHE2cWdrMXA3ODQga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_01.txt"
+      },
+      "errors": [],
+      "latency_ms": 1119.6939945220947,
+      "session_id": "a0636dd5-d13f-439d-abe0-392c6303dafa",
+      "session_name": "Transcript_20251024_230830",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": null,
+            "owner": "Jill",
+            "task": "Block off Tuesday 9:00 to 10:00 AM for vendor contract review."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "Jack needed to schedule a vendor contract review.",
+            "decision": "Schedule vendor contract review for next week",
+            "owner": null
+          },
+          {
+            "context": "Proposed time for the vendor contract review.",
+            "decision": "Tuesday morning from 9:00 to 10:00 AM works for the vendor contract review.",
+            "owner": "Jill"
+          }
+        ],
+        "key_points": [
+          "Scheduling a vendor contract review",
+          "Availability for the meeting"
+        ],
+        "risks": [],
+        "tldr": "Jack and Jill confirmed a meeting for next week to review a vendor contract. The meeting is scheduled for Tuesday morning from 9:00 to 10:00 AM."
+      },
+      "tasks_created": [
+        {
+          "due_date": null,
+          "id": "Vy1obkRhU01YTnRraWNONA",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Block off Tuesday 9:00 to 10:00 AM for vendor contract review."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_02.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "idg9qs5p2c73c93sk5o834mfh0",
+        "link": "https://www.google.com/calendar/event?eid=aWRnOXFzNXAyYzczYzkzc2s1bzgzNG1maDAga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_02.txt"
+      },
+      "errors": [],
+      "latency_ms": 1447.1328258514404,
+      "session_id": "d56e59b0-da1c-47fc-981d-ebc697027db9",
+      "session_name": "Transcript_20251024_230833",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Monday end of day",
+            "owner": "Jill",
+            "task": "Pull procurement files for vendor contract review."
+          },
+          {
+            "due_date": "Weekend",
+            "owner": "Jack",
+            "task": "Preliminary review of procurement files."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "Confirmation of a previously scheduled meeting.",
+            "decision": "Vendor contract review scheduled for Tuesday at 9:00 AM.",
+            "owner": null
+          },
+          {
+            "context": "To discuss findings from the initial review and allow time for reflection.",
+            "decision": "Follow-up session scheduled for Thursday from 2:00 PM to 3:30 PM.",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Vendor contract review",
+          "Preparation before review",
+          "Scheduling follow-up meeting",
+          "Procurement file retrieval"
+        ],
+        "risks": [],
+        "tldr": "The team confirmed the original vendor contract review for Tuesday at 9 AM and scheduled a follow-up session for Thursday afternoon. Jill will provide the procurement files by Monday end of day for Jack's preliminary weekend review."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Monday end of day",
+          "id": "X0NTVVp5RExfSGFURFE2RA",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Pull procurement files for vendor contract review."
+        },
+        {
+          "due_date": "Weekend",
+          "id": "cGowSGZHUlVSTV9ReXpRZQ",
+          "owner": "Jack",
+          "status": "needsAction",
+          "title": "Preliminary review of procurement files."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_03.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "vno0amo3imefs2q1qvacj15pv4",
+        "link": "https://www.google.com/calendar/event?eid=dm5vMGFtbzNpbWVmczJxMXF2YWNqMTVwdjQga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_03.txt"
+      },
+      "errors": [],
+      "latency_ms": 1681.5624237060547,
+      "session_id": "82961418-adeb-48e4-8000-2c8be219200b",
+      "session_name": "Transcript_20251024_230836",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Sunday evening",
+            "owner": "Jack",
+            "task": "Review files and send preliminary notes for the vendor review."
+          },
+          {
+            "due_date": null,
+            "owner": "Jack",
+            "task": "Send the Wednesday meeting invite."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "The scope of the vendor review is larger than initially anticipated, requiring more time.",
+            "decision": "Add a new session for detailed analysis of the vendor scope.",
+            "owner": null
+          },
+          {
+            "context": "To accommodate the increased scope and provide a better flow for the review process.",
+            "decision": "Schedule the vendor sessions as follows: Tuesday 9:00-10:00 AM (initial review), Wednesday 2:00-4:00 PM (deep dive), and Thursday 2:00-3:30 PM (follow-up).",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Rescheduling of vendor review sessions.",
+          "Increased scope of the vendor review.",
+          "Addition of a mid-week deep dive session.",
+          "Confirmation of the new three-session schedule.",
+          "Jack's preparation and distribution of notes.",
+          "Jill's ability to manage the new schedule."
+        ],
+        "risks": [
+          "The packed schedule might be challenging.",
+          "The increased scope was not initially accounted for."
+        ],
+        "tldr": "Jack and Jill are rescheduling vendor review sessions due to an increased scope. They've added a mid-week deep dive session to accommodate this, resulting in three sessions instead of the originally planned two."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Sunday evening",
+          "id": "NXE3RW1wX0dTVllOdTRZNA",
+          "owner": "Jack",
+          "status": "needsAction",
+          "title": "Review files and send preliminary notes for the vendor review."
+        },
+        {
+          "due_date": null,
+          "id": "UVlBcHdMWU51SjZfMHZqcw",
+          "owner": "Jack",
+          "status": "needsAction",
+          "title": "Send the Wednesday meeting invite."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_04.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "daeo8gd88qj8gi1unh0aur9tbo",
+        "link": "https://www.google.com/calendar/event?eid=ZGFlbzhnZDg4cWo4Z2kxdW5oMGF1cjl0Ym8ga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_04.txt"
+      },
+      "errors": [],
+      "latency_ms": 1579.7607898712158,
+      "session_id": "6185cca5-8e87-4817-94f6-243e4de64de2",
+      "session_name": "Transcript_20251024_230840",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Sunday evening",
+            "owner": "Jack",
+            "task": "Send Sunday evening notes."
+          },
+          {
+            "due_date": "Monday",
+            "owner": "Jill",
+            "task": "Gather files."
+          },
+          {
+            "due_date": "Saturday morning",
+            "owner": "Jack",
+            "task": "Prepare for Tuesday's sessions."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "Jack realized the original one-hour slot was insufficient for the initial vendor review.",
+            "decision": "Extend initial vendor review session on Tuesday from 1 hour to 2 hours.",
+            "owner": null
+          },
+          {
+            "context": "The conversation concluded with both Jack and Jill agreeing on the revised schedule.",
+            "decision": "Confirm the finalized weekly schedule.",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Review of the upcoming week's schedule.",
+          "Confirmation of vendor review and client proposal meeting times.",
+          "Adjustment to the duration of the initial vendor review.",
+          "The workflow for preparing and absorbing information for the vendor sessions.",
+          "Confirmation of the finalized schedule: Tuesday 9:00-11:00 AM (initial vendor review), Wednesday 2:00-4:00 PM (detailed vendor analysis), Thursday 10:30-11:30 AM (client proposal), Thursday 2:00-3:30 PM (vendor follow-up)."
+        ],
+        "risks": [],
+        "tldr": "Jack and Jill reviewed and finalized the schedule for the upcoming week, focusing on vendor-related sessions and a client proposal. The primary adjustment made was extending the initial vendor review session on Tuesday."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Sunday evening",
+          "id": "cTFLaTFhRHZNUEhya19aNA",
+          "owner": "Jack",
+          "status": "needsAction",
+          "title": "Send Sunday evening notes."
+        },
+        {
+          "due_date": "Monday",
+          "id": "elNMR1l4WV9UTWgxRE9wZA",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Gather files."
+        },
+        {
+          "due_date": "Saturday morning",
+          "id": "aHN5eVZEYzZnZ3BaUjN2eg",
+          "owner": "Jack",
+          "status": "needsAction",
+          "title": "Prepare for Tuesday's sessions."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_05.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "22sbe6ajid6fqgvfhbgpfeu2jg",
+        "link": "https://www.google.com/calendar/event?eid=MjJzYmU2YWppZDZmcWd2ZmhiZ3BmZXUyamcga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_05.txt"
+      },
+      "errors": [],
+      "latency_ms": 869.1191673278809,
+      "session_id": "c5158ff3-a3f8-478c-a217-2cc695a0cdce",
+      "session_name": "Transcript_20251024_230844",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Tuesday morning",
+            "owner": "Sarah",
+            "task": "Pull data from the analytics dashboard for the quarterly performance report."
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Quarterly performance report needed by Wednesday.",
+          "Data required from the analytics dashboard.",
+          "Data delivery by Tuesday morning."
+        ],
+        "risks": [
+          "The Wednesday deadline for the report is tight."
+        ],
+        "tldr": "Jill requested Sarah to pull data from the analytics dashboard for a quarterly performance report. Sarah agreed to provide the data by Tuesday morning, which is earlier than Jill's Wednesday deadline."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Tuesday morning",
+          "id": "blBoWGpwUmNGb2EycnRCTQ",
+          "owner": "Sarah",
+          "status": "needsAction",
+          "title": "Pull data from the analytics dashboard for the quarterly performance report."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_06.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "s867p5eivm9uacb0cic7dtagps",
+        "link": "https://www.google.com/calendar/event?eid=czg2N3A1ZWl2bTl1YWNiMGNpYzdkdGFncHMga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_06.txt"
+      },
+      "errors": [],
+      "latency_ms": 1196.3236331939697,
+      "session_id": "f240e15e-e633-4d7b-84eb-6c3a9b47a42f",
+      "session_name": "Transcript_20251024_230846",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Wednesday 11:00 AM",
+            "owner": "Jack, Marcus, Tom",
+            "task": "Create competitive analysis document"
+          }
+        ],
+        "decisions": [
+          {
+            "context": "To support the Q4 strategy presentation.",
+            "decision": "Create competitive analysis document collaboratively",
+            "owner": null
+          },
+          {
+            "context": "To facilitate the creation of the document.",
+            "decision": "Schedule a working session for competitive analysis",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Q4 review",
+          "Competitive analysis needed for Q4 strategy presentation",
+          "Leveraging market data (Marcus) and customer perspective (Tom)"
+        ],
+        "risks": [],
+        "tldr": "The team decided to collaborate on a competitive analysis for the Q4 strategy presentation. A working session is scheduled for Wednesday morning to create the document."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Wednesday 11:00 AM",
+          "id": "WUFpeUNneGRfWTM0cWgwLQ",
+          "owner": "Jack, Marcus, Tom",
+          "status": "needsAction",
+          "title": "Create competitive analysis document"
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_07.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "p6jt0qllbk8fqih58kbgo2mlg8",
+        "link": "https://www.google.com/calendar/event?eid=cDZqdDBxbGxiazhmcWloNThrYmdvMm1sZzgga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_07.txt"
+      },
+      "errors": [],
+      "latency_ms": 1536.1263751983643,
+      "session_id": "614db71a-28f8-4dbd-ad9e-1c8e122c66d8",
+      "session_name": "Transcript_20251024_230848",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "This afternoon, 2:00 PM - 4:00 PM",
+            "owner": "Jill, John",
+            "task": "Work on the quarterly performance report."
+          },
+          {
+            "due_date": "Next week",
+            "owner": null,
+            "task": "Create a comprehensive market report."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "This was the initially requested report from Rebecca.",
+            "decision": "Complete the quarterly performance report this week.",
+            "owner": null
+          },
+          {
+            "context": "To be completed after the quarterly performance report, addressing John's suggestion.",
+            "decision": "Start the comprehensive market report next week.",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Discussion about a proposed market report instead of the requested performance report.",
+          "John's suggestion that a market report would be more strategic for leadership.",
+          "Jill's concern about fulfilling Rebecca's specific request for the performance report.",
+          "Resolution to complete both reports sequentially.",
+          "Confirmation of the immediate work block for the performance report."
+        ],
+        "risks": [],
+        "tldr": "The team discussed prioritizing tasks, specifically a quarterly performance report versus a comprehensive market report. They decided to complete the requested performance report first and then proceed with the market report the following week."
+      },
+      "tasks_created": [
+        {
+          "due_date": "This afternoon, 2:00 PM - 4:00 PM",
+          "id": "UF82VWhDYUszMklXNlZ4SA",
+          "owner": "Jill, John",
+          "status": "needsAction",
+          "title": "Work on the quarterly performance report."
+        },
+        {
+          "due_date": "Next week",
+          "id": "NEFiNU1UUDhXcHFwRFZEaQ",
+          "owner": null,
+          "status": "needsAction",
+          "title": "Create a comprehensive market report."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_08.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "hm6vbuve17p3tbe73e189n4k6g",
+        "link": "https://www.google.com/calendar/event?eid=aG02dmJ1dmUxN3AzdGJlNzNlMTg5bjRrNmcga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_08.txt"
+      },
+      "errors": [],
+      "latency_ms": 1153.604507446289,
+      "session_id": "67c9542b-531f-44a5-8908-3f4242d57fb3",
+      "session_name": "Transcript_20251024_230852",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": null,
+            "owner": "Tom",
+            "task": "Check with Jack and Marcus about rescheduling or doing a debrief with David on Wednesday afternoon."
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Competitive analysis for Q4 strategy.",
+          "David's availability for the competitive analysis meeting.",
+          "Potential for a debrief with David on Wednesday afternoon."
+        ],
+        "risks": [
+          "David's calendar conflict with the initial competitive analysis meeting time."
+        ],
+        "tldr": "Tom informed David about a competitive analysis meeting scheduled for Wednesday morning for the Q4 strategy. David has a calendar conflict but is available Wednesday afternoon."
+      },
+      "tasks_created": [
+        {
+          "due_date": null,
+          "id": "VkhNUXdZNHYxLUNVcHdoMA",
+          "owner": "Tom",
+          "status": "needsAction",
+          "title": "Check with Jack and Marcus about rescheduling or doing a debrief with David on Wednesday afternoon."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_09.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "b5ttkbldh0kpa2v0l1se2mm6h0",
+        "link": "https://www.google.com/calendar/event?eid=YjV0dGtibGRoMGtwYTJ2MGwxc2UybW02aDAga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_09.txt"
+      },
+      "errors": [],
+      "latency_ms": 1019.911527633667,
+      "session_id": "43c6f0b1-eb6c-445b-9d9a-c7af3f85ea28",
+      "session_name": "Transcript_20251024_230854",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "2:00 PM",
+            "owner": null,
+            "task": "Compile competitive analysis findings"
+          },
+          {
+            "due_date": "2:00 PM",
+            "owner": "Jack",
+            "task": "Debrief David on competitive analysis findings"
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Completion of competitive analysis",
+          "David's absence from the morning session",
+          "Scheduling a debrief for David",
+          "Market positioning section of the analysis"
+        ],
+        "risks": [],
+        "tldr": "The team completed the competitive analysis this morning. A debrief session has been scheduled for 2:00 PM today to update David on the findings, who was unable to attend the morning session due to a scheduling conflict."
+      },
+      "tasks_created": [
+        {
+          "due_date": "2:00 PM",
+          "id": "blhZVEJMVVFIZW5xNTRZZg",
+          "owner": null,
+          "status": "needsAction",
+          "title": "Compile competitive analysis findings"
+        },
+        {
+          "due_date": "2:00 PM",
+          "id": "RzZBV2VfWXU3eF9kbzZQdQ",
+          "owner": "Jack",
+          "status": "needsAction",
+          "title": "Debrief David on competitive analysis findings"
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_10.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "b9g76nlggus1d6b4tk299nqmrc",
+        "link": "https://www.google.com/calendar/event?eid=YjlnNzZubGdndXMxZDZiNHRrMjk5bnFtcmMga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_10.txt"
+      },
+      "errors": [],
+      "latency_ms": 833.5483074188232,
+      "session_id": "ff15aabf-e4db-42ca-9efc-d7a5cce7db9c",
+      "session_name": "Transcript_20251024_230857",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "End of day",
+            "owner": "Jill",
+            "task": "Send the quarterly performance report to Rebecca"
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Quarterly performance report completion",
+          "Delivery of the report"
+        ],
+        "risks": [],
+        "tldr": "Jill provided a status update on the quarterly performance report. The report has been completed and will be sent to Rebecca by the end of the day."
+      },
+      "tasks_created": [
+        {
+          "due_date": "End of day",
+          "id": "emluM1hlODhHVEhlMXA4Yw",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Send the quarterly performance report to Rebecca"
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_11.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "rjm97g8h0pftpo502bvuim0uno",
+        "link": "https://www.google.com/calendar/event?eid=cmptOTdnOGgwcGZ0cG81MDJidnVpbTB1bm8ga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_11.txt"
+      },
+      "errors": [],
+      "latency_ms": 1319.9195861816406,
+      "session_id": "93cbb9ec-b07d-4447-a432-2425544675bc",
+      "session_name": "Transcript_20251024_230859",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": null,
+            "owner": "Sarah",
+            "task": "Gather company-wide headcount data."
+          },
+          {
+            "due_date": null,
+            "owner": "Marcus",
+            "task": "Pull engineering-specific headcount data."
+          },
+          {
+            "due_date": "Monday afternoon",
+            "owner": "Jill",
+            "task": "Meet to combine headcount data."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "To form the complete department resource allocation analysis.",
+            "decision": "Combine headcount data from Sarah and Marcus.",
+            "owner": "Jill"
+          }
+        ],
+        "key_points": [
+          "Quarterly performance report completion",
+          "Department resource allocation analysis",
+          "Headcount data gathering (company-wide and engineering-specific)",
+          "Collaboration on analysis"
+        ],
+        "risks": [],
+        "tldr": "The team discussed the department resource allocation analysis. Sarah and Marcus will gather headcount data company-wide and for the engineering team, respectively, to be combined on Monday."
+      },
+      "tasks_created": [
+        {
+          "due_date": null,
+          "id": "R2FGcVp3THZUd3h4WnozMw",
+          "owner": "Sarah",
+          "status": "needsAction",
+          "title": "Gather company-wide headcount data."
+        },
+        {
+          "due_date": null,
+          "id": "aUtDZmlELXVQOTBEVmNVTg",
+          "owner": "Marcus",
+          "status": "needsAction",
+          "title": "Pull engineering-specific headcount data."
+        },
+        {
+          "due_date": "Monday afternoon",
+          "id": "ZXQwWDBoSmxCTEVZR19BRw",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Meet to combine headcount data."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_12.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "qunsf41c8j0pigkt7t08gom1d0",
+        "link": "https://www.google.com/calendar/event?eid=cXVuc2Y0MWM4ajBwaWdrdDd0MDhnb20xZDAga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_12.txt"
+      },
+      "errors": [],
+      "latency_ms": 1247.7467060089111,
+      "session_id": "88314335-9525-4f11-ac61-9782db5fe31d",
+      "session_name": "Transcript_20251024_230903",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": null,
+            "owner": "John",
+            "task": "Document the scope of the market report."
+          },
+          {
+            "due_date": "Monday",
+            "owner": null,
+            "task": "Kick off the market report project."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "To provide more actionable insights than internal performance numbers by including market positioning, competitive analysis, and strategic recommendations.",
+            "decision": "Initiate a comprehensive market report.",
+            "owner": null
+          },
+          {
+            "context": "As the next priority following the completion of the performance report.",
+            "decision": "Add the market report to the roadmap.",
+            "owner": null
+          },
+          {
+            "context": "Based on Jack's estimate of two to three weeks for thorough completion.",
+            "decision": "Plan for market report completion in three weeks.",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Acknowledgement of timely completion of the quarterly performance report.",
+          "Discussion of next steps and priorities.",
+          "Proposal for a comprehensive market report.",
+          "Inclusion of market positioning, competitive analysis, and strategic recommendations in the market report.",
+          "Estimation of two to three weeks for market report completion.",
+          "Resource allocation for the market report (Jack, John leading, Marcus and Tom supporting).",
+          "Adding the market report to the roadmap.",
+          "Planning for the market report to start next week."
+        ],
+        "risks": [],
+        "tldr": "The team acknowledged the quick completion of the quarterly performance report and discussed strategy for the next cycle. A decision was made to prioritize and begin a comprehensive market report next week, with an estimated completion time of three weeks."
+      },
+      "tasks_created": [
+        {
+          "due_date": null,
+          "id": "SDhDTGdjcFBvdWk2U19JYQ",
+          "owner": "John",
+          "status": "needsAction",
+          "title": "Document the scope of the market report."
+        },
+        {
+          "due_date": "Monday",
+          "id": "Q0M2N3lyd0ZaNHpMcEZMVg",
+          "owner": null,
+          "status": "needsAction",
+          "title": "Kick off the market report project."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_13.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "k93muth5jvun3icqbg1f7elshc",
+        "link": "https://www.google.com/calendar/event?eid=azkzbXV0aDVqdnVuM2ljcWJnMWY3ZWxzaGMga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_13.txt"
+      },
+      "errors": [],
+      "latency_ms": 807.3034286499023,
+      "session_id": "3092e0f1-d83b-4e51-acbd-171fbd89fe7b",
+      "session_name": "Transcript_20251024_230906",
+      "success": true,
+      "summary": {
+        "action_items": [],
+        "decisions": [],
+        "key_points": [
+          "Competitive analysis receiving positive feedback",
+          "Rebecca liked the competitive analysis",
+          "Appreciation for David's perspective on the Wednesday debrief"
+        ],
+        "risks": [],
+        "tldr": "Tom provided David with a one-shot update on the competitive analysis. The analysis is receiving positive feedback, and Rebecca particularly liked it. David acknowledged the good work and Tom expressed appreciation for David's input during the debrief."
+      },
+      "tasks_created": []
+    }
+  },
+  {
+    "transcript": "transcript_14.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "3vdadh96h82o2o8get041g7hrc",
+        "link": "https://www.google.com/calendar/event?eid=M3ZkYWRoOTZoODJvMm84Z2V0MDQxZzdocmMga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_14.txt"
+      },
+      "errors": [],
+      "latency_ms": 1196.6776847839355,
+      "session_id": "ceeb356e-d09c-4c3b-a92a-cdd9ffa4c664",
+      "session_name": "Transcript_20251024_230908",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "End of day Friday",
+            "owner": "Sarah",
+            "task": "Pull budget allocations for the resource allocation meeting."
+          },
+          {
+            "due_date": "Monday morning",
+            "owner": "Marcus",
+            "task": "Pull a three-year trend for the resource allocation meeting."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "All necessary data will be gathered.",
+            "decision": "Proceed with resource allocation meeting on Monday at 2:00 PM with available data.",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Resource allocation meeting on Monday at 2:00 PM.",
+          "Headcount numbers are ready.",
+          "Engineering breakdown is ready.",
+          "Need for budget allocations.",
+          "Inclusion of a three-year trend."
+        ],
+        "risks": [],
+        "tldr": "The team confirmed preparedness for Monday's 2:00 PM resource allocation meeting. Key data points including headcount, engineering breakdown, budget, and a three-year trend will be available."
+      },
+      "tasks_created": [
+        {
+          "due_date": "End of day Friday",
+          "id": "MzV2MkhweVgzMGF3WFYybA",
+          "owner": "Sarah",
+          "status": "needsAction",
+          "title": "Pull budget allocations for the resource allocation meeting."
+        },
+        {
+          "due_date": "Monday morning",
+          "id": "N2RxeG9YbTR4bERIcmpDZw",
+          "owner": "Marcus",
+          "status": "needsAction",
+          "title": "Pull a three-year trend for the resource allocation meeting."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_15.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "ar5qgbhimpehc0vc1uc7ovqugg",
+        "link": "https://www.google.com/calendar/event?eid=YXI1cWdiaGltcGVoYzB2YzF1YzdvdnF1Z2cga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_15.txt"
+      },
+      "errors": [],
+      "latency_ms": 2264.9967670440674,
+      "session_id": "36e94d28-a8d1-4019-9016-743eb5e32a8c",
+      "session_name": "Transcript_20251024_230911",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Today 2:00 PM",
+            "owner": "John",
+            "task": "Have the scope document ready for the market report kickoff."
+          },
+          {
+            "due_date": null,
+            "owner": "Marcus, Tom",
+            "task": "Expand on competitive analysis for the market report, including market positioning, competitive landscape, and strategic recommendations."
+          },
+          {
+            "due_date": null,
+            "owner": "Tom",
+            "task": "Add customer sentiment data to the market report."
+          }
+        ],
+        "decisions": [
+          {
+            "context": "Rebecca approved the market report.",
+            "decision": "The market report kickoff is scheduled for today at 2:00 PM.",
+            "owner": null
+          },
+          {
+            "context": "To facilitate the market report kickoff.",
+            "decision": "John will have the scope document ready for the kickoff.",
+            "owner": "John"
+          },
+          {
+            "context": "Following the 2:00 PM scope review.",
+            "decision": "Workstreams for the market report will be divided after the scope review.",
+            "owner": null
+          },
+          {
+            "context": "Leveraging their previous competitive analysis work.",
+            "decision": "Marcus and Tom will handle the competitive/market section.",
+            "owner": "Marcus, Tom"
+          },
+          {
+            "context": "As part of the market report workstreams.",
+            "decision": "Jack and John will handle the strategic direction and recommendations.",
+            "owner": "Jack, John"
+          },
+          {
+            "context": "Estimated duration for the project.",
+            "decision": "The market report has a three-week completion timeline.",
+            "owner": null
+          },
+          {
+            "context": "To monitor project progress.",
+            "decision": "A progress check for the market report will be held next Thursday at 2:00 PM.",
+            "owner": null
+          }
+        ],
+        "key_points": [
+          "Market report kickoff today at 2:00 PM.",
+          "Leveraging previous competitive analysis (Transcript 9).",
+          "Incorporating customer sentiment data.",
+          "Division of workstreams for the market report.",
+          "Three-week timeline for market report completion.",
+          "Progress check scheduled for next Thursday at 2:00 PM."
+        ],
+        "risks": [],
+        "tldr": "The team is kicking off the market report today at 2:00 PM, leveraging previous competitive analysis. The report is planned for a three-week completion timeline, with a progress check scheduled for next Thursday at 2:00 PM."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Today 2:00 PM",
+          "id": "bUIyYTd2STNyZmExMGpJeA",
+          "owner": "John",
+          "status": "needsAction",
+          "title": "Have the scope document ready for the market report kickoff."
+        },
+        {
+          "due_date": null,
+          "id": "SndDUEdLcmNSc2ozbmpzNQ",
+          "owner": "Marcus, Tom",
+          "status": "needsAction",
+          "title": "Expand on competitive analysis for the market report, including market positioning, competitive landscape, and strategic recommendations."
+        },
+        {
+          "due_date": null,
+          "id": "OXgwVFE1TmJSa3NWQVZacg",
+          "owner": "Tom",
+          "status": "needsAction",
+          "title": "Add customer sentiment data to the market report."
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_16.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "dq0vq95japffacl9ds445psegg",
+        "link": "https://www.google.com/calendar/event?eid=ZHEwdnE5NWphcGZmYWNsOWRzNDQ1cHNlZ2cga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_16.txt"
+      },
+      "errors": [],
+      "latency_ms": 1449.385643005371,
+      "session_id": "288b905f-5825-4954-9787-ab7e98076ef5",
+      "session_name": "Transcript_20251024_230916",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Tomorrow",
+            "owner": "Jill, Sarah, Marcus",
+            "task": "Prepare presentation for resource allocation meeting"
+          },
+          {
+            "due_date": "End of this week",
+            "owner": "Jill",
+            "task": "Present resource allocation analysis to Rebecca"
+          },
+          {
+            "due_date": "Next Thursday",
+            "owner": "John, Jack, Marcus, Tom",
+            "task": "Check progress on market report"
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Market report kickoff was successful with scope aligned and a three-week timeline.",
+          "Resource allocation meeting concluded, with a presentation being prepared.",
+          "Three-year investment trends and budget allocations are key insights from the resource analysis.",
+          "Rebecca will review the resource allocation presentation by the end of the week."
+        ],
+        "risks": [],
+        "tldr": "The team discussed the successful kickoff of the market report and provided an update on the resource allocation meeting. Key takeaways from the resource analysis include a three-year investment trend and budget discrepancies."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Tomorrow",
+          "id": "Y3ZEc2VjVWZCNS1LR0I0aw",
+          "owner": "Jill, Sarah, Marcus",
+          "status": "needsAction",
+          "title": "Prepare presentation for resource allocation meeting"
+        },
+        {
+          "due_date": "End of this week",
+          "id": "cU10UWVEczZWMWp1cDJ3VQ",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Present resource allocation analysis to Rebecca"
+        },
+        {
+          "due_date": "Next Thursday",
+          "id": "TlNULTluR05yZnBOQ1dYTw",
+          "owner": "John, Jack, Marcus, Tom",
+          "status": "needsAction",
+          "title": "Check progress on market report"
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_17.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "u8kis9pq48qr30gaf07kup5lqc",
+        "link": "https://www.google.com/calendar/event?eid=dThraXM5cHE0OHFyMzBnYWYwN2t1cDVscWMga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_17.txt"
+      },
+      "errors": [],
+      "latency_ms": 1074.690341949463,
+      "session_id": "54612711-966b-44c3-9656-adecde19ceca",
+      "session_name": "Transcript_20251024_230920",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Tomorrow",
+            "owner": "Jill",
+            "task": "Finalize resource allocation analysis"
+          },
+          {
+            "due_date": "Friday morning",
+            "owner": "Jill",
+            "task": "Deliver resource allocation analysis"
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Resource allocation analysis status",
+          "Delivery timeline"
+        ],
+        "risks": [],
+        "tldr": "Rebecca checked in with Jill on the resource allocation analysis. Jill confirmed it is on track and will be delivered by Friday morning."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Tomorrow",
+          "id": "YzEtcmJXUl9YUm1LY2RMOQ",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Finalize resource allocation analysis"
+        },
+        {
+          "due_date": "Friday morning",
+          "id": "VmF1M1lRZnZYUnBuaFZvUg",
+          "owner": "Jill",
+          "status": "needsAction",
+          "title": "Deliver resource allocation analysis"
+        }
+      ]
+    }
+  },
+  {
+    "transcript": "transcript_18.txt",
+    "status": "success",
+    "result": {
+      "calendar_event": {
+        "date": "2025-10-30",
+        "id": "8tnrf11vcbfpu8amvkc1q4b694",
+        "link": "https://www.google.com/calendar/event?eid=OHRucmYxMXZjYmZwdThhbXZrYzFxNGI2OTQga3Jpc2hpY3BvcnRvbkBt",
+        "time": "2:00 PM",
+        "title": "Meeting from transcript_18.txt"
+      },
+      "errors": [],
+      "latency_ms": 1051.4001846313477,
+      "session_id": "0c7d790b-cbba-437c-8e22-51214f6724d3",
+      "session_name": "Transcript_20251024_230923",
+      "success": true,
+      "summary": {
+        "action_items": [
+          {
+            "due_date": "Next Thursday",
+            "owner": "John",
+            "task": "Finalize strategic recommendations"
+          },
+          {
+            "due_date": "Next Thursday",
+            "owner": null,
+            "task": "Conduct final review of the market report"
+          }
+        ],
+        "decisions": [],
+        "key_points": [
+          "Progress update on market report",
+          "Integration of competitive analysis and new market data",
+          "Inclusion of customer sentiment",
+          "Draft of strategic recommendations",
+          "Market report on track for completion next Thursday"
+        ],
+        "risks": [],
+        "tldr": "The team provided a progress update on the market report. The competitive analysis and customer sentiment are integrated, and strategic recommendations are in draft form. The report is on track for final completion next Thursday."
+      },
+      "tasks_created": [
+        {
+          "due_date": "Next Thursday",
+          "id": "SENRVmFMb3g3LTRmNW41OA",
+          "owner": "John",
+          "status": "needsAction",
+          "title": "Finalize strategic recommendations"
+        },
+        {
+          "due_date": "Next Thursday",
+          "id": "djFlMXBFbGFnNUI0MlNoMg",
+          "owner": null,
+          "status": "needsAction",
+          "title": "Conduct final review of the market report"
+        }
+      ]
+    }
+  }
+]

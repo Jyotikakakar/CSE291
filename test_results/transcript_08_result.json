@@ -1,0 +1,42 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "hm6vbuve17p3tbe73e189n4k6g",
+    "link": "https://www.google.com/calendar/event?eid=aG02dmJ1dmUxN3AzdGJlNzNlMTg5bjRrNmcga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from transcript_08.txt"
+  },
+  "errors": [],
+  "latency_ms": 1153.604507446289,
+  "session_id": "67c9542b-531f-44a5-8908-3f4242d57fb3",
+  "session_name": "Transcript_20251024_230852",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": null,
+        "owner": "Tom",
+        "task": "Check with Jack and Marcus about rescheduling or doing a debrief with David on Wednesday afternoon."
+      }
+    ],
+    "decisions": [],
+    "key_points": [
+      "Competitive analysis for Q4 strategy.",
+      "David's availability for the competitive analysis meeting.",
+      "Potential for a debrief with David on Wednesday afternoon."
+    ],
+    "risks": [
+      "David's calendar conflict with the initial competitive analysis meeting time."
+    ],
+    "tldr": "Tom informed David about a competitive analysis meeting scheduled for Wednesday morning for the Q4 strategy. David has a calendar conflict but is available Wednesday afternoon."
+  },
+  "tasks_created": [
+    {
+      "due_date": null,
+      "id": "VkhNUXdZNHYxLUNVcHdoMA",
+      "owner": "Tom",
+      "status": "needsAction",
+      "title": "Check with Jack and Marcus about rescheduling or doing a debrief with David on Wednesday afternoon."
+    }
+  ]
+}

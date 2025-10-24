@@ -1,0 +1,13 @@
+## Transcript 6: MEDIUM - Monday 3:00 PM
+
+**Characters:** Jack, Marcus, Tom  
+**Context:** References morning standup discussion.
+
+**Jack:** Hey Marcus, Tom. So in standup this morning we talked about the Q4 review. Tom, you mentioned needing a competitive analysis?
+**Tom:** Right, for the Q4 strategy presentation.
+**Jack:** Well, Marcus and I were thinking—we could create that analysis together. Marcus, you have the market data, Tom has the customer perspective. What if we schedule a working session Wednesday morning?
+**Marcus:** Wednesday 9:00 to 11:00 AM? I can do that.
+**Tom:** Works for me too.
+**Jack:** Great. So Wednesday 9:00 to 11:00 AM we create the competitive analysis doc.
+
+---
