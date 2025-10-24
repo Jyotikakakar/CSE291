@@ -71,7 +71,8 @@ class MeetingSummarizerClient:
     
     def analyze(
         self,
-        transcript: str,
+        transcript: Optional[str] = None,
+        transcript_url: Optional[str] = None,
         meeting_info: Optional[Dict] = None
     ) -> Dict[str, Any]:
         """
@@ -79,10 +80,24 @@ class MeetingSummarizerClient:
         Creates summary, tasks, and calendar events
         
         Session is automatically created from transcript content.
+        
+        Args:
+            transcript: Direct transcript text (use this OR transcript_url)
+            transcript_url: S3 URL to transcript file (use this OR transcript)
+            meeting_info: Optional meeting details for calendar event
         """
-        payload = {
-            "transcript": transcript
-        }
+        if not transcript and not transcript_url:
+            raise ValueError("Either transcript or transcript_url must be provided")
+        
+        if transcript and transcript_url:
+            raise ValueError("Provide either transcript or transcript_url, not both")
+        
+        payload = {}
+        
+        if transcript_url:
+            payload["transcript_url"] = transcript_url
+        else:
+            payload["transcript"] = transcript
         
         if meeting_info:
             payload["meeting_info"] = meeting_info

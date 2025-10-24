@@ -122,6 +122,11 @@ docker-compose down -v
 - `GEMINI_API_KEY`: Your Google Gemini API key (required)
 - `GOOGLE_CREDENTIALS_PATH`: Path to Google OAuth credentials JSON (optional, for Calendar/Tasks)
 - `GOOGLE_TOKEN_PATH`: Path to store Google OAuth token (optional)
+- AWS credentials (optional, for S3 URL support):
+  - `AWS_ACCESS_KEY_ID`: AWS access key
+  - `AWS_SECRET_ACCESS_KEY`: AWS secret key
+  - `AWS_DEFAULT_REGION`: AWS region (default: us-east-1)
+  - Or configure via `~/.aws/credentials`
 
 ### Setting up API Key
 
@@ -178,7 +183,9 @@ python3 evaluate_api.py http://your-ec2-ip:500
 
 **Main Endpoint (Simple API):**
 - `POST /analyze` - Analyze transcript (auto-creates session from transcript content)
-  - Input: `{"transcript": "..."}`
+  - **Option 1 - Direct text**: `{"transcript": "..."}`
+  - **Option 2 - S3 URL**: `{"transcript_url": "s3://bucket/path/to/file.txt"}`
+  - Optional: Add `meeting_info` to create calendar events
   - Returns: Summary, session info, tasks, and calendar events
   - Session is automatically created with a meaningful name derived from transcript
 
@@ -192,6 +199,35 @@ python3 evaluate_api.py http://your-ec2-ip:500
 - `GET /api/session/<id>/history` - Get session history
 - `POST /api/session/create` - Create new session manually (optional)
 
+### S3 URL Support
+
+Store meeting transcripts in S3 and pass URLs instead of text:
+
+**Supported URL formats:**
+- `s3://bucket-name/path/to/file.txt`
+- `https://bucket.s3.region.amazonaws.com/path/to/file.txt`
+- `https://s3.region.amazonaws.com/bucket/path/to/file.txt`
+
+**Example usage:**
+```python
+from client import MeetingSummarizerClient
+
+client = MeetingSummarizerClient("http://localhost:5000")
+
+# Use S3 URL instead of transcript text
+result = client.analyze(
+    transcript_url="s3://my-bucket/transcripts/meeting.txt",
+    meeting_info={
+        "title": "Follow-up Meeting",
+        "date": "2025-10-30",
+        "time": "2:00 PM"
+    }
+)
+```
+
+**See also:**
+- `curl_examples.txt` - cURL examples with S3 URLs
+
 ## Project Structure
 
 ```
@@ -203,10 +239,11 @@ CSE291/
 ├── evaluate_api.py       # Multi-user API evaluation
 ├── load_data.py          # Data loading utilities
 ├── run.py                # Local execution script
+├── curl_examples.txt     # cURL examples including S3 URLs
 ├── Dockerfile            # Container configuration
 ├── docker-compose.yml    # Local Docker setup
 ├── manage_containers.sh  # Container management helper
-├── requirements.txt      # Python dependencies
+├── requirements.txt      # Python dependencies (includes boto3)
 ├── DEPLOYMENT.md         # EC2 deployment guide
 ├── data/                 # Meeting transcripts
 └── results/              # Evaluation results

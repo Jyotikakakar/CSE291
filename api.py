@@ -8,6 +8,9 @@ import uuid
 from datetime import datetime
 from flask import Flask, request, jsonify
 from agent import MeetingAgent
+import boto3
+from botocore.exceptions import ClientError
+from urllib.parse import urlparse
 
 app = Flask(__name__)
 
@@ -28,6 +31,63 @@ def get_agent():
 def get_user_id():
     """Get user ID from environment variable"""
     return os.getenv('USER_ID', 'default_user')
+
+def fetch_transcript_from_s3(s3_url: str) -> str:
+    """
+    Fetch transcript content from S3 URL.
+    
+    Args:
+        s3_url: S3 URL in format s3://bucket-name/path/to/file or https://bucket.s3.region.amazonaws.com/path
+        
+    Returns:
+        Transcript text content
+        
+    Raises:
+        ValueError: If URL is invalid
+        ClientError: If S3 access fails
+    """
+    try:
+        # Parse S3 URL
+        parsed = urlparse(s3_url)
+        
+        if parsed.scheme == 's3':
+            # Format: s3://bucket-name/path/to/file
+            bucket = parsed.netloc
+            key = parsed.path.lstrip('/')
+        elif parsed.scheme in ['http', 'https']:
+            # Format: https://bucket.s3.region.amazonaws.com/path or https://s3.region.amazonaws.com/bucket/path
+            if '.s3.' in parsed.netloc or '.s3-' in parsed.netloc:
+                # Virtual-hosted-style URL: bucket.s3.region.amazonaws.com/path
+                bucket = parsed.netloc.split('.')[0]
+                key = parsed.path.lstrip('/')
+            elif parsed.netloc.startswith('s3'):
+                # Path-style URL: s3.region.amazonaws.com/bucket/path
+                parts = parsed.path.lstrip('/').split('/', 1)
+                bucket = parts[0]
+                key = parts[1] if len(parts) > 1 else ''
+            else:
+                raise ValueError(f"Invalid S3 URL format: {s3_url}")
+        else:
+            raise ValueError(f"Unsupported URL scheme: {parsed.scheme}. Use s3:// or https://")
+        
+        if not bucket or not key:
+            raise ValueError(f"Could not extract bucket and key from URL: {s3_url}")
+        
+        # Fetch from S3
+        s3_client = boto3.client('s3')
+        response = s3_client.get_object(Bucket=bucket, Key=key)
+        transcript = response['Body'].read().decode('utf-8')
+        
+        return transcript
+        
+    except ClientError as e:
+        error_code = e.response.get('Error', {}).get('Code', 'Unknown')
+        raise ClientError(
+            {'Error': {'Code': error_code, 'Message': f"Failed to fetch from S3: {str(e)}"}},
+            'get_object'
+        )
+    except Exception as e:
+        raise ValueError(f"Error fetching transcript from S3: {str(e)}")
 
 def generate_session_name_from_transcript(transcript: str) -> str:
     """
@@ -177,7 +237,7 @@ def analyze_meeting():
     """
     Analyze meeting transcript and automatically create tasks and calendar events
     
-    Request body:
+    Request body (Option 1 - Direct text):
     {
         "transcript": "Meeting transcript text...",
         "meeting_info": {  // Optional
@@ -186,6 +246,12 @@ def analyze_meeting():
             "time": "2:00 PM",
             "attendees": ["email1@example.com", "email2@example.com"]
         }
+    }
+    
+    Request body (Option 2 - S3 URL):
+    {
+        "transcript_url": "s3://bucket-name/path/to/transcript.txt",
+        "meeting_info": { ... }
     }
     
     Returns:
@@ -201,14 +267,39 @@ def analyze_meeting():
     """
     data = request.json
     
-    # Validate input
-    if not data or 'transcript' not in data:
+    # Validate input - accept either transcript or transcript_url
+    if not data:
         return jsonify({
             "success": False,
-            "error": "transcript field is required"
+            "error": "Request body is required"
         }), 400
     
-    transcript = data['transcript']
+    transcript = None
+    transcript_source = "direct"
+    
+    # Check for transcript_url first (S3 URL)
+    if 'transcript_url' in data:
+        transcript_url = data['transcript_url']
+        try:
+            print(f"\nFetching transcript from S3: {transcript_url}")
+            transcript = fetch_transcript_from_s3(transcript_url)
+            transcript_source = transcript_url
+            print(f"✓ Successfully fetched transcript ({len(transcript)} chars)")
+        except Exception as e:
+            return jsonify({
+                "success": False,
+                "error": f"Failed to fetch transcript from S3: {str(e)}"
+            }), 400
+    # Fall back to direct transcript text
+    elif 'transcript' in data:
+        transcript = data['transcript']
+        transcript_source = "direct"
+    else:
+        return jsonify({
+            "success": False,
+            "error": "Either 'transcript' or 'transcript_url' field is required"
+        }), 400
+    
     meeting_info = data.get('meeting_info', {})
     
     # Automatically create a session for each analyze request

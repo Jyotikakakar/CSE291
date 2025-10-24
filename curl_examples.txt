@@ -4,12 +4,20 @@
 ## 1. Health Check
 curl -X GET http://54.202.125.206:5001/health
 
-## 2. Analyze Meeting (Simple) - Session Auto-Created
+## 2a. Analyze Meeting (Simple) - Session Auto-Created
 # Just provide the transcript - session is automatically created from content
 curl -X POST http://54.202.125.206:5001/analyze \
   -H "Content-Type: application/json" \
   -d '{
     "transcript": "Alice: Lets start the Q4 planning meeting. Bob: I think we should focus on the mobile app. Alice: Good idea. Bob, can you lead this? Bob: Yes, I will have a spec by Friday."
+  }'
+
+## 2b. Analyze Meeting from S3 URL - Session Auto-Created
+# Pass an S3 URL instead of transcript text (requires AWS credentials configured)
+curl -X POST http://54.202.125.206:5001/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transcript_url": "s3://cse-291-meeting-agent/meeting_01.txt"
   }'
 
 ## 3. Analyze Another Meeting
@@ -19,11 +27,24 @@ curl -X POST http://54.202.125.206:5001/analyze \
     "transcript": "Carol: We need to implement SSO. David: I can help with that. Carol: Can you have it done by next week? David: Yes, I will prioritize it."
   }'
 
-## 4. Analyze with Meeting Info (creates calendar event and tasks)
+## 4a. Analyze with Meeting Info (creates calendar event and tasks)
 curl -X POST http://54.202.125.206:5001/analyze \
   -H "Content-Type: application/json" \
   -d '{
     "transcript": "Alice: Lets schedule a follow-up meeting for the mobile project. Bob: How about next Friday at 2pm? Alice: Sounds good, I will send a calendar invite.",
+    "meeting_info": {
+      "title": "Mobile App Follow-up Meeting",
+      "date": "2025-10-30",
+      "time": "2:00 PM",
+      "attendees": ["alice@example.com", "bob@example.com"]
+    }
+  }'
+
+## 4b. Analyze with S3 URL and Meeting Info
+curl -X POST http://54.202.125.206:5001/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transcript_url": "s3://cse-291-meeting-agent/meeting_01.txt",
     "meeting_info": {
       "title": "Mobile App Follow-up Meeting",
       "date": "2025-10-30",
@@ -61,4 +82,9 @@ curl -X POST http://54.202.125.206:5001/api/session/create \
 # - Response includes both session_id (UUID) and session_name (human-readable)
 # - All responses are in JSON format
 # - Add | python -m json.tool for pretty printing (if python available)
+# - S3 URLs: Supports both s3:// and https:// formats
+#   * s3://bucket-name/path/to/file.txt
+#   * https://bucket.s3.region.amazonaws.com/path/to/file.txt
+#   * https://s3.region.amazonaws.com/bucket/path/to/file.txt
+# - AWS credentials must be configured (via environment variables or ~/.aws/credentials)
 
