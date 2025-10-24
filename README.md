@@ -1,12 +1,45 @@
 # Meeting Summarizer Agent
 
-A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks. This is a Phase 1 implementation focused on meeting summarization.
+A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks. 
+
+**Phase 1**: Baseline agent with user and session management, deployed on EC2 with Docker for evaluation.
+
+## Features
+
+- ✅ Meeting transcript summarization using Gemini AI
+- ✅ Extracts decisions, action items, risks, and key points
+- ✅ **Google Calendar integration** - Create and manage meeting events
+- ✅ **Google Tasks integration** - Create and track action items
+- ✅ Multi-user support with isolated containers
+- ✅ Session management within user contexts
+- ✅ REST API for programmatic access
+- ✅ EC2 deployment ready
+- ✅ Evaluation framework with visualization
 
 ## Quick Start with Docker (Recommended)
 
 ### Prerequisites
 - Docker and Docker Compose installed
 - Google Gemini API key
+- (Optional) Google OAuth credentials for Calendar/Tasks integration
+
+### Quick Test
+
+Test the integration locally:
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Set Gemini API key
+export GEMINI_API_KEY="your_key_here"
+
+# Run test suite
+python test_tools.py
+
+# Or test the agent directly
+python agent.py
+```
 
 ### Get Your API Key
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
@@ -87,6 +120,13 @@ docker-compose down -v
 
 ### Environment Variables
 - `GEMINI_API_KEY`: Your Google Gemini API key (required)
+- `GOOGLE_CREDENTIALS_PATH`: Path to Google OAuth credentials JSON (optional, for Calendar/Tasks)
+- `GOOGLE_TOKEN_PATH`: Path to store Google OAuth token (optional)
+- AWS credentials (optional, for S3 URL support):
+  - `AWS_ACCESS_KEY_ID`: AWS access key
+  - `AWS_SECRET_ACCESS_KEY`: AWS secret key
+  - `AWS_DEFAULT_REGION`: AWS region (default: us-east-1)
+  - Or configure via `~/.aws/credentials`
 
 ### Setting up API Key
 
@@ -112,4 +152,100 @@ The application generates:
 - `results/latency_cdf.png`: Latency distribution chart
 - `results/extraction_counts.png`: Items extracted per meeting
 - `results/success_rate.png`: Success vs failure rate
+
+## EC2 Deployment
+
+For deploying on AWS EC2 with Docker and multi-user support, see:
+
+**📖 [DEPLOYMENT.md](DEPLOYMENT.md)** - Complete manual deployment guide
+
+Quick overview:
+- Deploy on EC2 with Docker (no IAM roles needed)
+- Each user gets isolated container (ports 5001-5004)
+- Multiple sessions per user in same container
+- REST API for evaluation
+- Manual steps provided (no scripts required)
+
+### Local API Testing
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Test API connection (replace with your EC2 IP)
+python3 client.py http://your-ec2-ip:5001
+
+# Run multi-user evaluation
+python3 evaluate_api.py http://your-ec2-ip:500
+```
+
+### API Endpoints
+
+**Main Endpoint (Simple API):**
+- `POST /analyze` - Analyze transcript (auto-creates session from transcript content)
+  - **Option 1 - Direct text**: `{"transcript": "..."}`
+  - **Option 2 - S3 URL**: `{"transcript_url": "s3://bucket/path/to/file.txt"}`
+  - Optional: Add `meeting_info` to create calendar events
+  - Returns: Summary, session info, tasks, and calendar events
+  - Session is automatically created with a meaningful name derived from transcript
+
+**Health & Metrics:**
+- `GET /health` - Health check
+- `GET /api/metrics` - Get agent metrics
+
+**Session Management (Advanced):**
+- `GET /api/sessions` - List all sessions
+- `GET /api/session/<id>` - Get session details
+- `GET /api/session/<id>/history` - Get session history
+- `POST /api/session/create` - Create new session manually (optional)
+
+### S3 URL Support
+
+Store meeting transcripts in S3 and pass URLs instead of text:
+
+**Supported URL formats:**
+- `s3://bucket-name/path/to/file.txt`
+- `https://bucket.s3.region.amazonaws.com/path/to/file.txt`
+- `https://s3.region.amazonaws.com/bucket/path/to/file.txt`
+
+**Example usage:**
+```python
+from client import MeetingSummarizerClient
+
+client = MeetingSummarizerClient("http://localhost:5000")
+
+# Use S3 URL instead of transcript text
+result = client.analyze(
+    transcript_url="s3://my-bucket/transcripts/meeting.txt",
+    meeting_info={
+        "title": "Follow-up Meeting",
+        "date": "2025-10-30",
+        "time": "2:00 PM"
+    }
+)
+```
+
+**See also:**
+- `curl_examples.txt` - cURL examples with S3 URLs
+
+## Project Structure
+
+```
+CSE291/
+├── agent.py              # Core meeting summarizer agent
+├── api.py                # Flask REST API with user/session mgmt
+├── client.py             # API client for testing
+├── evaluate.py           # Local evaluation script
+├── evaluate_api.py       # Multi-user API evaluation
+├── load_data.py          # Data loading utilities
+├── run.py                # Local execution script
+├── curl_examples.txt     # cURL examples including S3 URLs
+├── Dockerfile            # Container configuration
+├── docker-compose.yml    # Local Docker setup
+├── manage_containers.sh  # Container management helper
+├── requirements.txt      # Python dependencies (includes boto3)
+├── DEPLOYMENT.md         # EC2 deployment guide
+├── data/                 # Meeting transcripts
+└── results/              # Evaluation results
+```
 

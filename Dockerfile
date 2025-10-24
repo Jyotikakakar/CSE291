@@ -24,8 +24,8 @@ RUN mkdir -p data/transcripts results
 # Set environment variables
 ENV PYTHONPATH=/app
 
-# Expose port (if needed for web interface in future)
-EXPOSE 8000
+# Expose port for API
+EXPOSE 5000
 
-# Default command
-CMD ["python", "run.py"]
+# Default command - run API server
+CMD ["python", "api.py"]
