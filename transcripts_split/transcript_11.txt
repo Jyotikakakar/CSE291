@@ -1,0 +1,17 @@
+## Transcript 11: MEDIUM - Thursday 9:00 AM
+
+**Characters:** Sarah, Marcus, Jill  
+**Context:** References Tuesday report completion, introduces new task.
+
+**Sarah:** Hey Jill, I saw you finished the quarterly performance report. Great work.
+**Jill:** Thanks! John really helped with that. But now I need to do the department resource allocation analysis.
+**Marcus:** Oh, you're doing that now?
+**Jill:** Yeah, it's due next week. Sarah, I was going to ask you—can you help me gather the headcount data?
+**Sarah:** I can help. But Marcus, aren't you also doing a resource analysis? For the engineering team?
+**Marcus:** Yeah, but that's just for engineering. Jill's sounds like it's company-wide?
+**Jill:** It is. So Sarah, can you gather company-wide headcount? And Marcus, can you pull the engineering-specific detail?
+**Marcus:** Sure, I can do that.
+**Sarah:** Yeah, I'll compile the overall numbers.
+**Jill:** Great. Let's meet Monday afternoon to combine everything.
+
+---

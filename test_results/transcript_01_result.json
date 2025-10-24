@@ -1,0 +1,50 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "bu9tri6a0e99s1pdq6qgk1p784",
+    "link": "https://www.google.com/calendar/event?eid=YnU5dHJpNmEwZTk5czFwZHE2cWdrMXA3ODQga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from transcript_01.txt"
+  },
+  "errors": [],
+  "latency_ms": 1119.6939945220947,
+  "session_id": "a0636dd5-d13f-439d-abe0-392c6303dafa",
+  "session_name": "Transcript_20251024_230830",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": null,
+        "owner": "Jill",
+        "task": "Block off Tuesday 9:00 to 10:00 AM for vendor contract review."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "Jack needed to schedule a vendor contract review.",
+        "decision": "Schedule vendor contract review for next week",
+        "owner": null
+      },
+      {
+        "context": "Proposed time for the vendor contract review.",
+        "decision": "Tuesday morning from 9:00 to 10:00 AM works for the vendor contract review.",
+        "owner": "Jill"
+      }
+    ],
+    "key_points": [
+      "Scheduling a vendor contract review",
+      "Availability for the meeting"
+    ],
+    "risks": [],
+    "tldr": "Jack and Jill confirmed a meeting for next week to review a vendor contract. The meeting is scheduled for Tuesday morning from 9:00 to 10:00 AM."
+  },
+  "tasks_created": [
+    {
+      "due_date": null,
+      "id": "Vy1obkRhU01YTnRraWNONA",
+      "owner": "Jill",
+      "status": "needsAction",
+      "title": "Block off Tuesday 9:00 to 10:00 AM for vendor contract review."
+    }
+  ]
+}

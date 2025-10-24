@@ -1,0 +1,51 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "u8kis9pq48qr30gaf07kup5lqc",
+    "link": "https://www.google.com/calendar/event?eid=dThraXM5cHE0OHFyMzBnYWYwN2t1cDVscWMga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from transcript_17.txt"
+  },
+  "errors": [],
+  "latency_ms": 1074.690341949463,
+  "session_id": "54612711-966b-44c3-9656-adecde19ceca",
+  "session_name": "Transcript_20251024_230920",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Tomorrow",
+        "owner": "Jill",
+        "task": "Finalize resource allocation analysis"
+      },
+      {
+        "due_date": "Friday morning",
+        "owner": "Jill",
+        "task": "Deliver resource allocation analysis"
+      }
+    ],
+    "decisions": [],
+    "key_points": [
+      "Resource allocation analysis status",
+      "Delivery timeline"
+    ],
+    "risks": [],
+    "tldr": "Rebecca checked in with Jill on the resource allocation analysis. Jill confirmed it is on track and will be delivered by Friday morning."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Tomorrow",
+      "id": "YzEtcmJXUl9YUm1LY2RMOQ",
+      "owner": "Jill",
+      "status": "needsAction",
+      "title": "Finalize resource allocation analysis"
+    },
+    {
+      "due_date": "Friday morning",
+      "id": "VmF1M1lRZnZYUnBuaFZvUg",
+      "owner": "Jill",
+      "status": "needsAction",
+      "title": "Deliver resource allocation analysis"
+    }
+  ]
+}
