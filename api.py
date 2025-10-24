@@ -29,6 +29,48 @@ def get_user_id():
     """Get user ID from environment variable"""
     return os.getenv('USER_ID', 'default_user')
 
+def generate_session_name_from_transcript(transcript: str) -> str:
+    """
+    Generate a meaningful session name from transcript content.
+    Extracts key topics/names or creates a timestamp-based name.
+    
+    Args:
+        transcript: The meeting transcript text
+        
+    Returns:
+        A session name string
+    """
+    # Clean and get first 200 characters for analysis
+    clean_text = ' '.join(transcript.split()[:50])  # First 50 words
+    
+    # Try to extract a meaningful topic/name
+    # Look for common meeting patterns
+    import re
+    
+    # Pattern 1: "Let's discuss/talk about X"
+    discuss_match = re.search(r'(?:discuss|talk about|meeting about|planning)\s+(?:the\s+)?([A-Za-z0-9\s]{3,30})', clean_text, re.IGNORECASE)
+    if discuss_match:
+        topic = discuss_match.group(1).strip()
+        return f"{topic.title()}_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Pattern 2: Look for project names (capitalized words)
+    project_match = re.findall(r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2}\b', clean_text)
+    if project_match and len(project_match[0]) > 3:
+        topic = project_match[0].replace(' ', '_')
+        return f"{topic}_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Pattern 3: Extract first meaningful words (skip common filler)
+    words = [w for w in clean_text.split()[:10] if len(w) > 3 and w.lower() not in 
+             ['this', 'that', 'with', 'from', 'have', 'will', 'been', 'were', 'they']]
+    if words:
+        topic = '_'.join(words[:3])
+        # Remove special characters
+        topic = re.sub(r'[^A-Za-z0-9_]', '', topic)
+        return f"{topic}_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Fallback: Use timestamp with "meeting" prefix
+    return "meeting_" + datetime.now().strftime("%Y%m%d_%H%M%S")
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
@@ -138,7 +180,6 @@ def analyze_meeting():
     Request body:
     {
         "transcript": "Meeting transcript text...",
-        "session_id": "uuid",  // Optional - for session tracking
         "meeting_info": {  // Optional
             "title": "Follow-up Meeting",
             "date": "2025-10-30",
@@ -151,6 +192,7 @@ def analyze_meeting():
     {
         "success": true,
         "session_id": "uuid",
+        "session_name": "Q4_Planning_20251023_143022",
         "summary": { ... },
         "tasks_created": [ ... ],
         "calendar_event": { ... },
@@ -167,15 +209,24 @@ def analyze_meeting():
         }), 400
     
     transcript = data['transcript']
-    session_id = data.get('session_id')
     meeting_info = data.get('meeting_info', {})
     
-    # Validate session if provided
-    if session_id and session_id not in sessions:
-        return jsonify({
-            "success": False,
-            "error": "Invalid session_id"
-        }), 400
+    # Automatically create a session for each analyze request
+    session_name = generate_session_name_from_transcript(transcript)
+    session_id = str(uuid.uuid4())
+    
+    # Create session with generated name
+    sessions[session_id] = {
+        'metadata': {
+            'session_name': session_name,
+            'auto_generated': True
+        },
+        'requests': [],
+        'created_at': datetime.now().isoformat(),
+        'user_id': get_user_id()
+    }
+    
+    print(f"\n✓ Auto-created session: {session_name} ({session_id})")
     
     try:
         agent = get_agent()
@@ -202,6 +253,7 @@ def analyze_meeting():
         response = {
             "success": True,
             "session_id": session_id,
+            "session_name": session_name,
             "summary": summary,
             "latency_ms": summary_result.get('latency_ms', 0),
             "tasks_created": [],
@@ -339,6 +391,7 @@ def analyze_meeting():
         return jsonify({
             "success": False,
             "session_id": session_id,
+            "session_name": session_name if 'session_name' in locals() else None,
             "error": str(e)
         }), 500
 

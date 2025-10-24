@@ -1,72 +1,64 @@
-# Session Management API - Curl Examples
+# Meeting Analyzer API - Curl Examples
 # Base URL: http://54.202.125.206:5001
 
 ## 1. Health Check
 curl -X GET http://54.202.125.206:5001/health
 
-## 2. Create a Session
-curl -X POST http://54.202.125.206:5001/api/session/create \
-  -H "Content-Type: application/json" \
-  -d '{
-    "metadata": {
-      "name": "Q4 Planning Session",
-      "project": "Mobile App"
-    }
-  }'
-
-## 3. Analyze WITH Session
-# Replace SESSION_ID_HERE with actual session ID from step 2
+## 2. Analyze Meeting (Simple) - Session Auto-Created
+# Just provide the transcript - session is automatically created from content
 curl -X POST http://54.202.125.206:5001/analyze \
   -H "Content-Type: application/json" \
   -d '{
-    "transcript": "Alice: Lets start the Q4 planning meeting. Bob: I think we should focus on the mobile app. Alice: Good idea. Bob, can you lead this? Bob: Yes, I will have a spec by Friday.",
-    "session_id": "SESSION_ID_HERE"
+    "transcript": "Alice: Lets start the Q4 planning meeting. Bob: I think we should focus on the mobile app. Alice: Good idea. Bob, can you lead this? Bob: Yes, I will have a spec by Friday."
   }'
 
-## 4. Analyze WITHOUT Session (still works)
+## 3. Analyze Another Meeting
 curl -X POST http://54.202.125.206:5001/analyze \
   -H "Content-Type: application/json" \
   -d '{
-    "transcript": "Carol: We need to implement SSO. David: I can help with that."
+    "transcript": "Carol: We need to implement SSO. David: I can help with that. Carol: Can you have it done by next week? David: Yes, I will prioritize it."
   }'
 
-## 5. Get Session Details
-curl -X GET http://54.202.125.206:5001/api/session/SESSION_ID_HERE
-
-## 6. Get Session History
-curl -X GET http://54.202.125.206:5001/api/session/SESSION_ID_HERE/history
-
-## 7. List All Sessions for User
-curl -X GET http://54.202.125.206:5001/api/sessions
-
-## 8. Get Aggregate Metrics
-curl -X GET http://54.202.125.206:5001/api/metrics
-
-## 9. Test Invalid Session ID (should return 400 error)
+## 4. Analyze with Meeting Info (creates calendar event and tasks)
 curl -X POST http://54.202.125.206:5001/analyze \
   -H "Content-Type: application/json" \
   -d '{
-    "transcript": "test",
-    "session_id": "invalid-session-id"
-  }'
-
-## 10. Analyze with Meeting Info (creates calendar event and tasks)
-curl -X POST http://54.202.125.206:5001/analyze \
-  -H "Content-Type: application/json" \
-  -d '{
-    "transcript": "Alice: Lets schedule a follow-up meeting. Bob: How about next Friday at 2pm?",
-    "session_id": "SESSION_ID_HERE",
+    "transcript": "Alice: Lets schedule a follow-up meeting for the mobile project. Bob: How about next Friday at 2pm? Alice: Sounds good, I will send a calendar invite.",
     "meeting_info": {
-      "title": "Follow-up Meeting",
+      "title": "Mobile App Follow-up Meeting",
       "date": "2025-10-30",
       "time": "2:00 PM",
       "attendees": ["alice@example.com", "bob@example.com"]
     }
   }'
 
+## 5. List All Sessions for User
+curl -X GET http://54.202.125.206:5001/api/sessions
+
+## 6. Get Session Details (use session_id from analyze response)
+curl -X GET http://54.202.125.206:5001/api/session/SESSION_ID_HERE
+
+## 7. Get Session History (use session_id from analyze response)
+curl -X GET http://54.202.125.206:5001/api/session/SESSION_ID_HERE/history
+
+## 8. Get Aggregate Metrics
+curl -X GET http://54.202.125.206:5001/api/metrics
+
+## 9. Create Session Manually (Optional - for advanced use cases)
+# Note: Sessions are auto-created by /analyze, but you can create them manually if needed
+curl -X POST http://54.202.125.206:5001/api/session/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "metadata": {
+      "name": "Manual Session",
+      "project": "Special Project"
+    }
+  }'
+
 # Notes:
-# - Replace SESSION_ID_HERE with actual session ID
+# - Sessions are automatically created from transcript content
+# - Replace SESSION_ID_HERE with the session_id returned in /analyze response
+# - Response includes both session_id (UUID) and session_name (human-readable)
 # - All responses are in JSON format
 # - Add | python -m json.tool for pretty printing (if python available)
-# - Session IDs are UUIDs that persist within each user container
 

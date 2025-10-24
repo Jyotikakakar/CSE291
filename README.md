@@ -176,27 +176,21 @@ python3 evaluate_api.py http://your-ec2-ip:500
 
 ### API Endpoints
 
-**Session Management:**
-- `GET /health` - Health check
-- `POST /api/session/create` - Create new session
-- `GET /api/session/<id>` - Get session details
-- `GET /api/session/<id>/history` - Get session history
-- `GET /api/sessions` - List all sessions
+**Main Endpoint (Simple API):**
+- `POST /analyze` - Analyze transcript (auto-creates session from transcript content)
+  - Input: `{"transcript": "..."}`
+  - Returns: Summary, session info, tasks, and calendar events
+  - Session is automatically created with a meaningful name derived from transcript
 
-**Meeting Summarization:**
-- `POST /api/summarize` - Summarize transcript
+**Health & Metrics:**
+- `GET /health` - Health check
 - `GET /api/metrics` - Get agent metrics
 
-**Google Calendar:**
-- `POST /api/calendar/events` - Create calendar event
-- `GET /api/calendar/events` - List calendar events
-- `DELETE /api/calendar/events/<id>` - Delete calendar event
-
-**Google Tasks:**
-- `POST /api/tasks` - Create new task
-- `GET /api/tasks` - List tasks
-- `PATCH /api/tasks/<id>` - Update task
-- `POST /api/tasks/<id>/complete` - Mark task complete
+**Session Management (Advanced):**
+- `GET /api/sessions` - List all sessions
+- `GET /api/session/<id>` - Get session details
+- `GET /api/session/<id>/history` - Get session history
+- `POST /api/session/create` - Create new session manually (optional)
 
 ## Project Structure
 

@@ -72,16 +72,16 @@ class MeetingSummarizerClient:
     def analyze(
         self,
         transcript: str,
-        session_id: Optional[str] = None,
         meeting_info: Optional[Dict] = None
     ) -> Dict[str, Any]:
         """
         Analyze meeting transcript with full Google integration
         Creates summary, tasks, and calendar events
+        
+        Session is automatically created from transcript content.
         """
         payload = {
-            "transcript": transcript,
-            "session_id": session_id or self.session_id
+            "transcript": transcript
         }
         
         if meeting_info:
@@ -118,17 +118,8 @@ if __name__ == "__main__":
         print(f"✗ Health check failed: {e}")
         sys.exit(1)
     
-    # Create session
-    print("\nCreating session...")
-    try:
-        session_id = client.create_session(metadata={"test": True, "purpose": "client test"})
-        print(f"✓ Session created: {session_id}")
-    except Exception as e:
-        print(f"✗ Session creation failed: {e}")
-        sys.exit(1)
-    
-    # Test analysis with session
-    print("\nTesting analysis with session...")
+    # Test analysis - session is automatically created
+    print("\nTesting analysis (session auto-created from transcript)...")
     test_transcript = """
     Alice: Let's start the Q4 planning meeting.
     Bob: I think we should focus on the mobile app.
@@ -139,19 +130,24 @@ if __name__ == "__main__":
     result = client.analyze(test_transcript)
     if result.get("success"):
         print(f"✓ Analysis successful")
+        print(f"  Session Name: {result.get('session_name')}")
         print(f"  Session ID: {result.get('session_id')}")
         print(f"  Latency: {result.get('latency_ms', 0):.0f}ms")
         summary = result.get("summary", {})
         print(f"  Decisions: {len(summary.get('decisions', []))}")
         print(f"  Action items: {len(summary.get('action_items', []))}")
         print(f"  Tasks created: {len(result.get('tasks_created', []))}")
+        
+        # Store session_id for subsequent queries
+        auto_session_id = result.get('session_id')
     else:
         print(f"✗ Analysis failed: {result.get('error')}")
+        sys.exit(1)
     
     # Get session history
     print("\nGetting session history...")
     try:
-        history = client.get_session_history()
+        history = client.get_session_history(auto_session_id)
         print(f"✓ Total requests in session: {history['total_requests']}")
     except Exception as e:
         print(f"✗ Get history failed: {e}")
