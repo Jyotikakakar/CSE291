@@ -1,5 +1,6 @@
 .DS_Store
 .env
+env/
 
 # Google OAuth credentials (security)
 client_secret*.json
