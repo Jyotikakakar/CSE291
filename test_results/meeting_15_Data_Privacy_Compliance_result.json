@@ -1,0 +1,127 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "k3cf5rk7j5g13q5fnea9lgse6s",
+    "link": "https://www.google.com/calendar/event?eid=azNjZjVyazdqNWcxM3E1Zm5lYTlsZ3NlNnMga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_15_Data_Privacy_Compliance.txt"
+  },
+  "errors": [],
+  "latency_ms": 2032.8927040100098,
+  "session_id": "9763771d-94c1-4216-979b-69b4686d7a22",
+  "session_name": "Meeting_20251025_000410",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": null,
+        "owner": "Michelle",
+        "task": "Implement data deletion feature."
+      },
+      {
+        "due_date": null,
+        "owner": "Michelle",
+        "task": "Implement data portability feature."
+      },
+      {
+        "due_date": null,
+        "owner": "Michelle",
+        "task": "Adjust roadmap to accommodate data deletion and portability implementation."
+      },
+      {
+        "due_date": "Next Friday",
+        "owner": "Angela",
+        "task": "Work with legal on updating the privacy policy."
+      },
+      {
+        "due_date": null,
+        "owner": "Michelle",
+        "task": "Create documentation for the support team once features are built."
+      },
+      {
+        "due_date": null,
+        "owner": "Ryan",
+        "task": "Schedule a compliance check in early December."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "To meet the January 1st data privacy compliance deadline.",
+        "decision": "Prioritize implementation of data deletion and portability features.",
+        "owner": "Michelle"
+      },
+      {
+        "context": "To accurately inform users about data privacy practices.",
+        "decision": "Update the privacy policy to reflect new data handling capabilities.",
+        "owner": "Angela"
+      },
+      {
+        "context": "To ensure efficient and compliant customer support for new features.",
+        "decision": "Train the support team on handling data deletion and portability requests.",
+        "owner": "Michelle"
+      },
+      {
+        "context": "To verify that all new data privacy requirements are met before the deadline.",
+        "decision": "Conduct a compliance check in early December.",
+        "owner": "Angela"
+      }
+    ],
+    "key_points": [
+      "New data privacy regulations take effect January 1st.",
+      "Key requirements include explicit consent, right to deletion, and data portability.",
+      "The company is compliant with explicit consent but needs to implement deletion and portability.",
+      "Deletion feature is estimated to take two weeks; portability will take a month.",
+      "The privacy policy needs to be updated.",
+      "The support team requires training on new data privacy features."
+    ],
+    "risks": [
+      "Significant fines for non-compliance with data privacy regulations.",
+      "Data portability implementation complexity may cause delays."
+    ],
+    "tldr": "The team discussed upcoming data privacy regulations taking effect January 1st. They will implement new features for data deletion and portability, update the privacy policy, and train the support team to ensure compliance before the deadline."
+  },
+  "tasks_created": [
+    {
+      "due_date": null,
+      "id": "Qm1sQ3NFQjZWTUEwbjdNbA",
+      "owner": "Michelle",
+      "status": "needsAction",
+      "title": "Implement data deletion feature."
+    },
+    {
+      "due_date": null,
+      "id": "cHdpQVRKbzRMNFV2Vi1ycQ",
+      "owner": "Michelle",
+      "status": "needsAction",
+      "title": "Implement data portability feature."
+    },
+    {
+      "due_date": null,
+      "id": "N1hTdEJBcnEzbFJyMHFoTA",
+      "owner": "Michelle",
+      "status": "needsAction",
+      "title": "Adjust roadmap to accommodate data deletion and portability implementation."
+    },
+    {
+      "due_date": "Next Friday",
+      "id": "UUFQSTRnb2RkcXFLNnB2QQ",
+      "owner": "Angela",
+      "status": "needsAction",
+      "title": "Work with legal on updating the privacy policy."
+    },
+    {
+      "due_date": null,
+      "id": "S3dLUDlBY0dwMVZnSC0wTg",
+      "owner": "Michelle",
+      "status": "needsAction",
+      "title": "Create documentation for the support team once features are built."
+    },
+    {
+      "due_date": null,
+      "id": "REZ4M1NrbHdMd0tSRHRCMA",
+      "owner": "Ryan",
+      "status": "needsAction",
+      "title": "Schedule a compliance check in early December."
+    }
+  ]
+}

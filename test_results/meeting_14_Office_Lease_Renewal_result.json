@@ -1,0 +1,62 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "q0ift8mo9b5vgff9t66ctt3fo0",
+    "link": "https://www.google.com/calendar/event?eid=cTBpZnQ4bW85YjV2Z2ZmOXQ2NmN0dDNmbzAga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_14_Office_Lease_Renewal.txt"
+  },
+  "errors": [],
+  "latency_ms": 1243.0694103240967,
+  "session_id": "647cfe52-21e0-4adb-ad97-16d4cb5101e1",
+  "session_name": "Meeting_20251025_000407",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Next week",
+        "owner": "Patricia",
+        "task": "Set up a meeting with the landlord to discuss terms for expanding into the adjacent suite"
+      },
+      {
+        "due_date": null,
+        "owner": "Patricia",
+        "task": "Get a proposal from the landlord in writing"
+      }
+    ],
+    "decisions": [
+      {
+        "context": "The current office space is too small as the team has outgrown it.",
+        "decision": "Pursue expansion into the adjacent suite",
+        "owner": null
+      }
+    ],
+    "key_points": [
+      "Office lease renewal in February.",
+      "Current office space is insufficient.",
+      "Options: expand into adjacent suite or find a new space.",
+      "Adjacent suite offers less disruption and landlord is amenable to combining spaces.",
+      "Landlord is asking for a 12% rent increase for the expansion."
+    ],
+    "risks": [
+      "Potential difficulty negotiating the 12% rent increase with the landlord."
+    ],
+    "tldr": "The office lease is up for renewal in February, and the team has outgrown the current space. The preferred option is to expand into the adjacent suite, which requires landlord negotiation."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Next week",
+      "id": "dThRM2I1NzBESE84R1EyeA",
+      "owner": "Patricia",
+      "status": "needsAction",
+      "title": "Set up a meeting with the landlord to discuss terms for expanding into the adjacent suite"
+    },
+    {
+      "due_date": null,
+      "id": "VUowa190aHR5amVtaGNhRw",
+      "owner": "Patricia",
+      "status": "needsAction",
+      "title": "Get a proposal from the landlord in writing"
+    }
+  ]
+}

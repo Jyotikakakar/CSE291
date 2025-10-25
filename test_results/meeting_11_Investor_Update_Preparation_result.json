@@ -1,0 +1,94 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "6ceh1h2obe0egc56725u7pndl0",
+    "link": "https://www.google.com/calendar/event?eid=NmNlaDFoMm9iZTBlZ2M1NjcyNXU3cG5kbDAga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_11_Investor_Update_Preparation.txt"
+  },
+  "errors": [],
+  "latency_ms": 1777.710199356079,
+  "session_id": "ebf7a652-8ab4-4b22-a089-5a9481071336",
+  "session_name": "Meeting_20251025_000348",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Friday",
+        "owner": "Brian",
+        "task": "Pull together the financial data for the investor update."
+      },
+      {
+        "due_date": null,
+        "owner": null,
+        "task": "Provide user growth metrics from the product team."
+      },
+      {
+        "due_date": null,
+        "owner": "Brian",
+        "task": "Create charts visualizing growth trajectory, including quarter-over-quarter comparisons."
+      },
+      {
+        "due_date": "2025-11-19",
+        "owner": null,
+        "task": "Review the investor update materials."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "It is due on November 22nd.",
+        "decision": "The quarterly investor update will be prepared.",
+        "owner": null
+      },
+      {
+        "context": "These deals are considered significant wins.",
+        "decision": "Enterprise deals closed last month will be prominently featured.",
+        "owner": "Brian"
+      },
+      {
+        "context": "To ensure everything is ready before submission.",
+        "decision": "A review of the investor update will be conducted together.",
+        "owner": null
+      }
+    ],
+    "key_points": [
+      "Quarterly investor update preparation",
+      "Information required: financial performance, user growth metrics, product updates",
+      "Highlighting significant enterprise deal wins",
+      "Visualizing growth trajectory with charts and comparisons",
+      "Review meeting scheduled before submission"
+    ],
+    "risks": [],
+    "tldr": "The team met to prepare for the quarterly investor update, due November 22nd. Key information to be included consists of financial performance, user growth metrics, and product updates, with a focus on highlighting recent enterprise deal wins."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Friday",
+      "id": "MWg5aEdLS3ZEVXpsYmZHaw",
+      "owner": "Brian",
+      "status": "needsAction",
+      "title": "Pull together the financial data for the investor update."
+    },
+    {
+      "due_date": null,
+      "id": "Skp3OWpZZnY2OWsxOXRuSw",
+      "owner": null,
+      "status": "needsAction",
+      "title": "Provide user growth metrics from the product team."
+    },
+    {
+      "due_date": null,
+      "id": "a3NkUlhLbndjb0FmM05OUA",
+      "owner": "Brian",
+      "status": "needsAction",
+      "title": "Create charts visualizing growth trajectory, including quarter-over-quarter comparisons."
+    },
+    {
+      "due_date": "2025-11-19",
+      "id": "amdzQm01eE5jRUZBUmxscw",
+      "owner": null,
+      "status": "needsAction",
+      "title": "Review the investor update materials."
+    }
+  ]
+}

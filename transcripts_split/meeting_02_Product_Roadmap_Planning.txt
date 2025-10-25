@@ -1,0 +1,42 @@
+MEETING TRANSCRIPT
+================
+
+Meeting ID: 2
+Title: Product Roadmap Planning
+Date: 2025-10-28
+Duration: medium
+
+TRANSCRIPT:
+-----------
+
+Alex: Thanks for joining. We need to nail down the product roadmap for the next quarter.
+
+David: I've been analyzing user feedback. The top request is definitely the dark mode feature.
+
+Alex: Interesting. What's the level of effort on that?
+
+David: Engineering estimates about three weeks if we prioritize it.
+
+Lisa: We should also consider the API integration that the enterprise clients have been asking for.
+
+Alex: Good point. How critical is that?
+
+Lisa: Very. We have two major clients who said they'd increase their contracts by 40% if we deliver it by end of year.
+
+David: That's significant revenue impact.
+
+Alex: Okay, so we're looking at dark mode and API integration as top priorities. David, can you work with engineering to create detailed specs for both?
+
+David: Absolutely. I'll need to meet with the engineering leads to scope this properly.
+
+Alex: Lisa, can you document the exact requirements from those enterprise clients?
+
+Lisa: Yes, I'll reach out to them this week and compile everything.
+
+Alex: Perfect. Let's reconvene in two weeks to review the specs and timeline. David, can you send out a meeting invite?
+
+David: Will do.
+
+Alex: Also, we should loop in the design team early on the dark mode work. Lisa, can you set up a sync with them?
+
+Lisa: Sure thing. I'll get that on the calendar for next Monday.

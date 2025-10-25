@@ -1,0 +1,82 @@
+MEETING TRANSCRIPT
+================
+
+Meeting ID: 12
+Title: Supply Chain Optimization
+Date: 2025-11-11
+Duration: long
+
+TRANSCRIPT:
+-----------
+
+Robert: Thanks for joining. We need to address some supply chain challenges we've been facing.
+
+Monica: What are the main issues?
+
+Robert: Lead times have increased by 40% over the last quarter. It's impacting our ability to fulfill orders on time.
+
+Monica: That's significant. What's causing it?
+
+Robert: Our primary supplier is having production delays. They're dealing with equipment failures.
+
+David: Do we have alternative suppliers?
+
+Robert: We have two backup suppliers, but we haven't fully qualified them yet.
+
+Monica: What does the qualification process entail?
+
+Robert: We need to audit their facilities, test their quality standards, and negotiate contracts.
+
+David: How long does that typically take?
+
+Robert: About six weeks if we expedite it.
+
+Monica: We can't wait that long. What can we do in the short term?
+
+Robert: I suggest we place smaller orders with our current supplier more frequently to reduce the impact of delays.
+
+David: That might increase our costs though.
+
+Robert: True, but the cost of stockouts and unhappy customers is higher.
+
+Monica: Agreed. Robert, can you implement that new ordering pattern immediately?
+
+Robert: Yes, I'll coordinate with the supplier today.
+
+Monica: And let's fast-track the supplier qualification process. David, can you lead that?
+
+David: Absolutely. I'll need someone from quality assurance to help with the audits.
+
+Robert: I can assign Jennifer from our team. She has experience with supplier audits.
+
+David: Perfect. Robert, can you send me the contact information for both backup suppliers?
+
+Robert: I'll email that over this afternoon.
+
+Monica: We should also look at our inventory management. Are we holding enough safety stock?
+
+Robert: Currently we keep 30 days of inventory. Given these supply chain issues, I recommend increasing that to 45 days.
+
+David: What's the financial impact?
+
+Robert: About $200K in additional working capital.
+
+Monica: That's manageable. Let's do it. Robert, can you work with finance to arrange that?
+
+Robert: I'll set up a meeting with them this week.
+
+Monica: We should also implement better tracking of supplier performance. David, can you develop a scorecard?
+
+David: Good idea. I'll include metrics like on-time delivery, quality scores, and responsiveness.
+
+Monica: How soon can you have that?
+
+David: I'll have a draft by next Tuesday for your review.
+
+Robert: This will really help us make data-driven decisions about our supplier relationships.
+
+Monica: Exactly. Let's meet again in two weeks to review progress on all these initiatives.
+
+David: I'll send out a calendar invite.
+
+Monica: Great work everyone. Let's execute on this quickly.

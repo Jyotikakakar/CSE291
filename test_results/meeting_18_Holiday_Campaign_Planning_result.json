@@ -1,0 +1,136 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "7a1a8q1920o5l2384285bo3890",
+    "link": "https://www.google.com/calendar/event?eid=N2ExYThxMTkyMG81bDIzODQyODVibzM4OTAga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_18_Holiday_Campaign_Planning.txt"
+  },
+  "errors": [],
+  "latency_ms": 2677.4978637695312,
+  "session_id": "23267bbb-598c-46b0-b5b3-752504de4288",
+  "session_name": "Date_20251025_000425",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Tomorrow (briefing), End of next week (mockups)",
+        "owner": "Ben",
+        "task": "Brief the design team on visual assets for the campaign."
+      },
+      {
+        "due_date": "Monday",
+        "owner": "Lisa",
+        "task": "Draft the email sequence (four emails over three weeks)."
+      },
+      {
+        "due_date": null,
+        "owner": "Ben",
+        "task": "Create the special landing page, including the 20% discount for new annual subscriptions."
+      },
+      {
+        "due_date": "This week (outreach)",
+        "owner": "Lisa",
+        "task": "Coordinate with influencers, confirm availability, and get content submitted for approval."
+      },
+      {
+        "due_date": null,
+        "owner": "Ben",
+        "task": "Set up a dashboard to track campaign performance (opens, clicks, conversions, revenue by channel)."
+      },
+      {
+        "due_date": "Now",
+        "owner": "Lisa",
+        "task": "Schedule daily check-in meetings from December 1st to December 23rd at 9 AM."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "To define the core messaging of the holiday campaign.",
+        "decision": "The main campaign concept will be 'Gift of Productivity', positioning the product as a gift for professionals.",
+        "owner": null
+      },
+      {
+        "context": "To determine where the campaign will be executed.",
+        "decision": "Campaign channels will include email, social media, paid search, and potentially influencer partnerships.",
+        "owner": null
+      },
+      {
+        "context": "To establish the campaign's duration.",
+        "decision": "The campaign will launch on December 1st and run through December 23rd.",
+        "owner": null
+      },
+      {
+        "context": "To provide a dedicated destination for campaign traffic.",
+        "decision": "A special landing page will be created for the campaign.",
+        "owner": null
+      },
+      {
+        "context": "To incentivize purchases and drive conversions.",
+        "decision": "The campaign will include a limited-time discount of 20% off for new annual subscriptions.",
+        "owner": null
+      },
+      {
+        "context": "To ensure the campaign is monitored and adjusted effectively.",
+        "decision": "Daily check-ins will occur from December 1st to December 23rd at 9 AM for real-time optimization.",
+        "owner": null
+      }
+    ],
+    "key_points": [
+      "Holiday campaign planning",
+      "Campaign concept: Gift of Productivity",
+      "Target audience: Professionals",
+      "Campaign channels: Email, social media, paid search, influencers",
+      "Campaign timeline: December 1st - December 23rd",
+      "Required assets: Creative, email templates, ad copy, landing page",
+      "Offer: 20% off new annual subscriptions",
+      "Performance tracking and daily optimization"
+    ],
+    "risks": [],
+    "tldr": "The team planned the upcoming holiday campaign focused on the 'Gift of Productivity' concept. Key channels, timeline, and required assets were defined, with specific responsibilities assigned for creative, email sequences, landing page, influencer coordination, and performance tracking."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Tomorrow (briefing), End of next week (mockups)",
+      "id": "dW90b0psQWFHUXRLWldJaA",
+      "owner": "Ben",
+      "status": "needsAction",
+      "title": "Brief the design team on visual assets for the campaign."
+    },
+    {
+      "due_date": "Monday",
+      "id": "UHZURDEwam5SSWxpTUJteg",
+      "owner": "Lisa",
+      "status": "needsAction",
+      "title": "Draft the email sequence (four emails over three weeks)."
+    },
+    {
+      "due_date": null,
+      "id": "dExteTMtazdoYlNNYnBWdQ",
+      "owner": "Ben",
+      "status": "needsAction",
+      "title": "Create the special landing page, including the 20% discount for new annual subscriptions."
+    },
+    {
+      "due_date": "This week (outreach)",
+      "id": "WGwxOEV2VThVd2xwLWZaag",
+      "owner": "Lisa",
+      "status": "needsAction",
+      "title": "Coordinate with influencers, confirm availability, and get content submitted for approval."
+    },
+    {
+      "due_date": null,
+      "id": "VkFYRUhDbmNrVXVPMU5zNQ",
+      "owner": "Ben",
+      "status": "needsAction",
+      "title": "Set up a dashboard to track campaign performance (opens, clicks, conversions, revenue by channel)."
+    },
+    {
+      "due_date": "Now",
+      "id": "b2RVejJ6dlE4aTdERVEzag",
+      "owner": "Lisa",
+      "status": "needsAction",
+      "title": "Schedule daily check-in meetings from December 1st to December 23rd at 9 AM."
+    }
+  ]
+}

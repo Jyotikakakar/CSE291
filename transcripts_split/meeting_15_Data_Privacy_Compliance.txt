@@ -1,0 +1,48 @@
+MEETING TRANSCRIPT
+================
+
+Meeting ID: 15
+Title: Data Privacy Compliance
+Date: 2025-11-14
+Duration: medium
+
+TRANSCRIPT:
+-----------
+
+Angela: We need to ensure we're fully compliant with the new data privacy regulations that take effect January 1st.
+
+Ryan: What are the key requirements?
+
+Angela: The main ones are: explicit consent for data collection, right to deletion, and data portability.
+
+Ryan: Where do we stand on those?
+
+Angela: We're okay on explicit consent - our signup flow already covers that. But we need to implement mechanisms for deletion and portability.
+
+Michelle: What's involved in implementing those?
+
+Angela: For deletion, users need to be able to request removal of their data through their account settings. For portability, they need to be able to download all their data in a standard format.
+
+Ryan: How long will that take to build?
+
+Michelle: The deletion feature is straightforward - maybe two weeks. Data portability is more complex, probably a month.
+
+Angela: We can't miss the January 1st deadline. Non-compliance could result in significant fines.
+
+Ryan: Understood. Michelle, can you prioritize this work and get it into the sprint?
+
+Michelle: Yes, I'll adjust our roadmap to accommodate it.
+
+Angela: We also need to update our privacy policy to reflect these new capabilities.
+
+Ryan: Angela, can you work with legal on that?
+
+Angela: Already planning to. I'll have a draft by next Friday.
+
+Ryan: We should also train our support team on how to handle these requests.
+
+Michelle: Good point. Once the features are built, I'll create documentation for the support team.
+
+Angela: Let's do a compliance check in early December to make sure everything is in place.
+
+Ryan: I'll put that on the calendar. Thanks for staying on top of this, Angela.

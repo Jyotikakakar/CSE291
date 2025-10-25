@@ -1,0 +1,112 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "amvdr82npkbtmr2mtkoicp798o",
+    "link": "https://www.google.com/calendar/event?eid=YW12ZHI4Mm5wa2J0bXIybXRrb2ljcDc5OG8ga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_02_Product_Roadmap_Planning.txt"
+  },
+  "errors": [],
+  "latency_ms": 1896.3384628295898,
+  "session_id": "2f5ffb69-93c6-4c32-984d-6cbc0fbb4a97",
+  "session_name": "Date_20251025_000251",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": null,
+        "owner": "David",
+        "task": "Create detailed specifications for dark mode and API integration."
+      },
+      {
+        "due_date": null,
+        "owner": "David",
+        "task": "Meet with engineering leads to scope dark mode and API integration."
+      },
+      {
+        "due_date": "This week",
+        "owner": "Lisa",
+        "task": "Document exact requirements from enterprise clients for API integration."
+      },
+      {
+        "due_date": null,
+        "owner": "David",
+        "task": "Send out a meeting invite for the follow-up meeting in two weeks."
+      },
+      {
+        "due_date": "Next Monday",
+        "owner": "Lisa",
+        "task": "Set up a sync with the design team for dark mode work."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "Top user request and estimated to take three weeks of engineering effort.",
+        "decision": "Prioritize dark mode feature.",
+        "owner": null
+      },
+      {
+        "context": "Critical for two major clients who indicated significant contract increases upon delivery by year-end.",
+        "decision": "Prioritize API integration for enterprise clients.",
+        "owner": null
+      },
+      {
+        "context": "To assess progress on developing detailed specifications and timelines for prioritized features.",
+        "decision": "Reconvene in two weeks to review specs and timeline.",
+        "owner": null
+      },
+      {
+        "context": "To ensure design considerations are integrated from the start for the dark mode feature.",
+        "decision": "Loop in the design team early for dark mode work.",
+        "owner": null
+      }
+    ],
+    "key_points": [
+      "Product roadmap planning for the next quarter.",
+      "User feedback highlights dark mode as a top request.",
+      "Enterprise client demand for API integration.",
+      "Significant revenue impact from API integration delivery.",
+      "Engineering effort estimation for features.",
+      "Involving the design team in early development stages."
+    ],
+    "risks": [],
+    "tldr": "The team planned the product roadmap for the next quarter, prioritizing dark mode and API integration. Detailed specifications and timelines will be developed, and the design team will be looped in for dark mode."
+  },
+  "tasks_created": [
+    {
+      "due_date": null,
+      "id": "TmRHY0RYTDdWV1Z5aTFScw",
+      "owner": "David",
+      "status": "needsAction",
+      "title": "Create detailed specifications for dark mode and API integration."
+    },
+    {
+      "due_date": null,
+      "id": "SVpjbW1CVjNIaFVrUnRVOA",
+      "owner": "David",
+      "status": "needsAction",
+      "title": "Meet with engineering leads to scope dark mode and API integration."
+    },
+    {
+      "due_date": "This week",
+      "id": "MHZXdDJiNWIxUmRKSVA5ZQ",
+      "owner": "Lisa",
+      "status": "needsAction",
+      "title": "Document exact requirements from enterprise clients for API integration."
+    },
+    {
+      "due_date": null,
+      "id": "cGYwSjhhMWhNZW1RM0JKdA",
+      "owner": "David",
+      "status": "needsAction",
+      "title": "Send out a meeting invite for the follow-up meeting in two weeks."
+    },
+    {
+      "due_date": "Next Monday",
+      "id": "TkhobUdsMzBqbUFrY3RrYw",
+      "owner": "Lisa",
+      "status": "needsAction",
+      "title": "Set up a sync with the design team for dark mode work."
+    }
+  ]
+}

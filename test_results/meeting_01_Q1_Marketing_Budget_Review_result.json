@@ -1,0 +1,60 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "gngob3j0catu0ab567k5lopgfg",
+    "link": "https://www.google.com/calendar/event?eid=Z25nb2IzajBjYXR1MGFiNTY3azVsb3BnZmcga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_01_Q1_Marketing_Budget_Review.txt"
+  },
+  "errors": [],
+  "latency_ms": 1185.4054927825928,
+  "session_id": "4ffbf354-ca20-426f-8511-f723ecb34d61",
+  "session_name": "Meeting_20251025_000248",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Wednesday",
+        "owner": "Mike",
+        "task": "Pull together a detailed breakdown of digital ad performance."
+      },
+      {
+        "due_date": "Early November",
+        "owner": "Jen",
+        "task": "Schedule kickoff calls with each influencer once contracts are signed."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "Three out of five contacted influencers have responded positively.",
+        "decision": "Finalize influencer contracts by the end of the week.",
+        "owner": "Jen"
+      }
+    ],
+    "key_points": [
+      "Q1 marketing budget review",
+      "Digital ad spend tracking (87% allocated)",
+      "Influencer partnership outreach and progress",
+      "Contract finalization for influencers",
+      "Scheduling influencer kickoff calls"
+    ],
+    "risks": [],
+    "tldr": "The Q1 marketing budget review focused on digital ad spend and influencer partnerships. The team is on track with digital ad spend, and progress is being made on securing influencer collaborations."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Wednesday",
+      "id": "SkdCZU1mYVJMWlhTckFmWQ",
+      "owner": "Mike",
+      "status": "needsAction",
+      "title": "Pull together a detailed breakdown of digital ad performance."
+    },
+    {
+      "due_date": "Early November",
+      "id": "SFpLYklJdUs5NjZka0FsRw",
+      "owner": "Jen",
+      "status": "needsAction",
+      "title": "Schedule kickoff calls with each influencer once contracts are signed."
+    }
+  ]
+}
