@@ -1,0 +1,90 @@
+MEETING TRANSCRIPT
+================
+
+Meeting ID: 5
+Title: Website Redesign Kickoff
+Date: 2025-10-31
+Duration: long
+
+TRANSCRIPT:
+-----------
+
+Emily: Thanks everyone for making time. Today we're kicking off the website redesign project.
+
+Carlos: This is exciting. What's driving the redesign?
+
+Emily: A few things. Our bounce rate has increased by 23% over the last six months, and user testing showed that people find the navigation confusing.
+
+Carlos: That's significant.
+
+Emily: Yes. We also need to modernize the visual design to better reflect our brand evolution.
+
+Mia: What's the timeline we're looking at?
+
+Emily: We want to launch the new site by end of January. That gives us about three months.
+
+Carlos: That's tight but doable.
+
+Emily: We need to break this into phases. First, we need to complete the user research and finalize the information architecture.
+
+Mia: I can lead the user research. We should probably interview at least 20 users across different segments.
+
+Emily: Great. How long will that take?
+
+Mia: If we start next week, we can complete interviews and analysis by mid-November.
+
+Emily: Perfect. Mia, can you create a research plan and share it with the team?
+
+Mia: Yes, I'll have that ready by Wednesday.
+
+Carlos: What about the visual design phase?
+
+Emily: That should start once we have the information architecture locked down. Carlos, I'd like you to lead that.
+
+Carlos: Happy to. I'll need to involve the brand team to make sure we're aligned on the visual direction.
+
+Emily: Absolutely. Can you set up a workshop with them?
+
+Carlos: Sure, I'll schedule that for the week of November 18th.
+
+Emily: We also need to think about the technical implementation. Our current CMS is outdated.
+
+Jordan: I've been researching alternatives. I think we should consider migrating to a headless CMS.
+
+Emily: What are the benefits?
+
+Jordan: More flexibility, better performance, and easier to maintain long-term.
+
+Emily: Sounds promising. Can you put together a comparison of the top three options?
+
+Jordan: Absolutely. I'll include pros, cons, and cost analysis.
+
+Emily: When can you have that ready?
+
+Jordan: I'll need about a week. Let's say by November 7th.
+
+Emily: Great. Once we select the CMS, we'll need to start the migration planning.
+
+Jordan: Right. That'll require coordination with the content team to audit all existing pages.
+
+Emily: Mia, can you work with Jordan on that content audit?
+
+Mia: Yes, we should start that in parallel with the user research actually.
+
+Emily: Good thinking. Let's also make sure we have a solid QA process. Carlos, can you develop a testing checklist?
+
+Carlos: Will do. I'll cover functionality, responsiveness, accessibility, and browser compatibility.
+
+Emily: Perfect. We should plan for weekly check-ins throughout the project. Can someone send out a recurring meeting invite?
+
+Mia: I'll take care of that.
+
+Emily: Last thing - we need executive buy-in on the budget. I'll prepare a presentation for the leadership team.
+
+Carlos: When's that presentation?
+
+Emily: Next Tuesday. I'll need some preliminary mockups if possible, Carlos.
+
+Carlos: I'll work on some concepts this weekend and have them ready Monday.
+
+Emily: Fantastic. This is going to be a great project. Thanks everyone.

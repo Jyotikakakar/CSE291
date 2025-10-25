@@ -1,0 +1,30 @@
+MEETING TRANSCRIPT
+================
+
+Meeting ID: 3
+Title: Customer Support Escalation
+Date: 2025-10-29
+Duration: short
+
+TRANSCRIPT:
+-----------
+
+Tom: We've got a situation with the Acme Corp account.
+
+Rachel: What's happening?
+
+Tom: They're experiencing intermittent outages. Started yesterday morning.
+
+Rachel: Have we identified the cause?
+
+Tom: Engineering is investigating. Looks like it might be related to the database migration last week.
+
+Rachel: This is a priority account. Tom, can you provide hourly updates to the client until it's resolved?
+
+Tom: Yes, I'll set up a communication schedule with them.
+
+Rachel: Good. I'll need a full incident report once this is resolved.
+
+Tom: I'll document everything and have that ready.
+
+Rachel: Let's also schedule a post-mortem with engineering for Friday to make sure this doesn't happen again.

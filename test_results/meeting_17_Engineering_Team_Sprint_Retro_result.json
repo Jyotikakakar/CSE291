@@ -1,0 +1,103 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "tv9eknoh4im19pn70nn2uk7d9c",
+    "link": "https://www.google.com/calendar/event?eid=dHY5ZWtub2g0aW0xOXBuNzBubjJ1azdkOWMga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_17_Engineering_Team_Sprint_Retro.txt"
+  },
+  "errors": [],
+  "latency_ms": 2143.4764862060547,
+  "session_id": "2ac405bc-1181-495e-875a-16f4f102281c",
+  "session_name": "Meeting_20251025_000420",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "2025-11-25",
+        "owner": "Derek",
+        "task": "Research options for automated CI/CD pipeline and estimate effort."
+      },
+      {
+        "due_date": null,
+        "owner": "Amy",
+        "task": "Document action items and share with the team."
+      },
+      {
+        "due_date": null,
+        "owner": "Tyler",
+        "task": "Schedule a standing meeting for requirements review before each sprint."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "Helped solve bugs faster.",
+        "decision": "Continue pair programming sessions.",
+        "owner": null
+      },
+      {
+        "context": "To prevent issues with changing requirements midway through the sprint.",
+        "decision": "Involve engineering earlier in the planning process.",
+        "owner": null
+      },
+      {
+        "context": "To address testing taking longer than expected.",
+        "decision": "Make writing unit tests as code is developed a standard practice.",
+        "owner": null
+      },
+      {
+        "context": "To improve upfront requirements gathering.",
+        "decision": "Implement a requirements review session before each sprint starts.",
+        "owner": null
+      },
+      {
+        "context": "To acknowledge shipped features and boost morale.",
+        "decision": "Celebrate wins more regularly.",
+        "owner": null
+      },
+      {
+        "context": "As a way to celebrate wins.",
+        "decision": "Organize team lunches when major milestones are hit.",
+        "owner": null
+      }
+    ],
+    "key_points": [
+      "Improved communication and effectiveness of daily standups.",
+      "Benefits of pair programming for bug resolution.",
+      "Challenges with mid-sprint requirement changes.",
+      "Need for better upfront requirements gathering.",
+      "Testing taking longer than expected.",
+      "Importance of writing unit tests proactively.",
+      "Desire for better tooling for the deployment process (CI/CD).",
+      "Need to celebrate team achievements more effectively."
+    ],
+    "risks": [
+      "Requirements for the dashboard feature changed midway through the sprint, causing rework.",
+      "Manual deployment steps are error-prone."
+    ],
+    "tldr": "The engineering team conducted a sprint retrospective, identifying improved communication and pair programming as successes. Key areas for improvement include upfront requirement gathering, better testing practices, and tooling for deployment. Several action items were assigned to address these points and improve future sprints."
+  },
+  "tasks_created": [
+    {
+      "due_date": "2025-11-25",
+      "id": "Ykt5Q3QyX0lzcHNaa3M5UA",
+      "owner": "Derek",
+      "status": "needsAction",
+      "title": "Research options for automated CI/CD pipeline and estimate effort."
+    },
+    {
+      "due_date": null,
+      "id": "SWQ1bnFvNU5ISjNadXFWbA",
+      "owner": "Amy",
+      "status": "needsAction",
+      "title": "Document action items and share with the team."
+    },
+    {
+      "due_date": null,
+      "id": "VV8tS05lUENKVFFRWUR1OA",
+      "owner": "Tyler",
+      "status": "needsAction",
+      "title": "Schedule a standing meeting for requirements review before each sprint."
+    }
+  ]
+}

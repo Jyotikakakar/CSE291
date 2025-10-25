@@ -1,0 +1,160 @@
+{
+  "calendar_event": {
+    "date": "2025-10-30",
+    "id": "h5fdc8b4qoaj308u7num98qcd0",
+    "link": "https://www.google.com/calendar/event?eid=aDVmZGM4YjRxb2FqMzA4dTdudW05OHFjZDAga3Jpc2hpY3BvcnRvbkBt",
+    "time": "2:00 PM",
+    "title": "Meeting from meeting_05_Website_Redesign_Kickoff.txt"
+  },
+  "errors": [],
+  "latency_ms": 2493.5176372528076,
+  "session_id": "10310d68-dffd-4ebd-9e6a-e00cd0d1a68f",
+  "session_name": "Meeting_20251025_000308",
+  "success": true,
+  "summary": {
+    "action_items": [
+      {
+        "due_date": "Wednesday",
+        "owner": "Mia",
+        "task": "Create a user research plan and share with the team."
+      },
+      {
+        "due_date": null,
+        "owner": "Carlos",
+        "task": "Lead the visual design phase and involve the brand team."
+      },
+      {
+        "due_date": "Week of November 18th",
+        "owner": "Carlos",
+        "task": "Schedule a workshop with the brand team for visual direction."
+      },
+      {
+        "due_date": "November 7th",
+        "owner": "Jordan",
+        "task": "Put together a comparison of the top three headless CMS options, including pros, cons, and cost analysis."
+      },
+      {
+        "due_date": null,
+        "owner": "Mia",
+        "task": "Work with Jordan on the content audit."
+      },
+      {
+        "due_date": null,
+        "owner": "Carlos",
+        "task": "Develop a testing checklist covering functionality, responsiveness, accessibility, and browser compatibility."
+      },
+      {
+        "due_date": null,
+        "owner": "Mia",
+        "task": "Send out a recurring meeting invite for weekly check-ins."
+      },
+      {
+        "due_date": "Next Tuesday",
+        "owner": "Emily",
+        "task": "Prepare a presentation for the leadership team on the budget."
+      },
+      {
+        "due_date": "Monday",
+        "owner": "Carlos",
+        "task": "Work on preliminary mockups for the executive presentation."
+      }
+    ],
+    "decisions": [
+      {
+        "context": "Increased bounce rate, confusing navigation, and outdated visual design necessitated a redesign.",
+        "decision": "Proceed with website redesign.",
+        "owner": null
+      },
+      {
+        "context": "Exploration of alternatives indicated a headless CMS offers more flexibility, better performance, and easier long-term maintenance.",
+        "decision": "Migrate to a headless CMS.",
+        "owner": null
+      },
+      {
+        "context": "To ensure ongoing progress and coordination throughout the project.",
+        "decision": "Establish weekly project check-ins.",
+        "owner": null
+      }
+    ],
+    "key_points": [
+      "Website redesign kickoff meeting.",
+      "Driving factors: 23% increase in bounce rate, confusing navigation, need for visual modernization.",
+      "Target launch date: End of January (approx. 3 months).",
+      "Phases: User research, information architecture, visual design, technical implementation, content audit, QA.",
+      "User research to involve at least 20 users across segments.",
+      "Exploration and recommendation for a new CMS (headless CMS suggested).",
+      "Need for executive buy-in on budget.",
+      "Project requires collaboration between Emily, Carlos, Mia, and Jordan."
+    ],
+    "risks": [
+      "Tight timeline (three months for launch)",
+      "Outdated current CMS"
+    ],
+    "tldr": "This meeting kicked off the website redesign project, driven by increased bounce rates and confusing navigation. The team outlined a three-month timeline aiming for an end-of-January launch, with key phases including user research, information architecture, and visual design."
+  },
+  "tasks_created": [
+    {
+      "due_date": "Wednesday",
+      "id": "Q014MWNxSHh0UnNSSFVfQg",
+      "owner": "Mia",
+      "status": "needsAction",
+      "title": "Create a user research plan and share with the team."
+    },
+    {
+      "due_date": null,
+      "id": "X0Q5X3BjSGx1SHVWNTlmTA",
+      "owner": "Carlos",
+      "status": "needsAction",
+      "title": "Lead the visual design phase and involve the brand team."
+    },
+    {
+      "due_date": "Week of November 18th",
+      "id": "UUdhRDZaWkV1UHZ0aGlZbA",
+      "owner": "Carlos",
+      "status": "needsAction",
+      "title": "Schedule a workshop with the brand team for visual direction."
+    },
+    {
+      "due_date": "November 7th",
+      "id": "ZlNwYjRLVXRxSmNhbnkwTw",
+      "owner": "Jordan",
+      "status": "needsAction",
+      "title": "Put together a comparison of the top three headless CMS options, including pros, cons, and cost analysis."
+    },
+    {
+      "due_date": null,
+      "id": "dDFKc05OLXQxbkJSQ3NKUw",
+      "owner": "Mia",
+      "status": "needsAction",
+      "title": "Work with Jordan on the content audit."
+    },
+    {
+      "due_date": null,
+      "id": "SDNGZlZMYng0RUVYTmh5Ug",
+      "owner": "Carlos",
+      "status": "needsAction",
+      "title": "Develop a testing checklist covering functionality, responsiveness, accessibility, and browser compatibility."
+    },
+    {
+      "due_date": null,
+      "id": "ODRhanNocGpGR1UxTHlSXw",
+      "owner": "Mia",
+      "status": "needsAction",
+      "title": "Send out a recurring meeting invite for weekly check-ins."
+    },
+    {
+      "due_date": "Next Tuesday",
+      "id": "LVd6RjNRQ3JhdFVWOVlEYg",
+      "owner": "Emily",
+      "status": "needsAction",
+      "title": "Prepare a presentation for the leadership team on the budget."
+    },
+    {
+      "due_date": "Monday",
+      "id": "czJXWXJVU2gxSHdlM2lEdw",
+      "owner": "Carlos",
+      "status": "needsAction",
+      "title": "Work on preliminary mockups for the executive presentation."
+    }
+  ]
+}
