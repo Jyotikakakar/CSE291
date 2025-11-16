@@ -4,15 +4,12 @@ Client for interacting with Meeting Summarizer API
 Used for evaluation and testing
 """
 import requests
-import json
-import time
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 
 class MeetingSummarizerClient:
     def __init__(self, base_url: str):
         """
-        Initialize client
-        
+        Initialize client 
         Args:
             base_url: Base URL of the API (e.g., http://localhost:5000)
         """
@@ -20,13 +17,23 @@ class MeetingSummarizerClient:
         self.session_id = None
     
     def health_check(self) -> Dict[str, Any]:
-        """Check if API is healthy"""
+        """
+        Check if API is healthy
+        Returns:
+            Health status dictionary
+        """
         response = requests.get(f"{self.base_url}/health")
         response.raise_for_status()
         return response.json()
     
     def create_session(self, metadata: Optional[Dict] = None) -> str:
-        """Create a new session"""
+        """
+        Create a new session
+        Args:
+            metadata: Optional metadata dictionary to attach to the session
+        Returns:
+            session_id: ID of the created session
+        """
         payload = {"metadata": metadata or {}}
         response = requests.post(
             f"{self.base_url}/api/session/create",
@@ -38,7 +45,13 @@ class MeetingSummarizerClient:
         return self.session_id
     
     def get_session(self, session_id: Optional[str] = None) -> Dict[str, Any]:
-        """Get session details"""
+        """
+        Get session details
+        Args:
+            session_id: Optional session ID to retrieve (uses stored session if not provided)
+        Returns:
+            Session details dictionary
+        """
         sid = session_id or self.session_id
         if not sid:
             raise ValueError("No session_id provided or stored")
@@ -48,7 +61,13 @@ class MeetingSummarizerClient:
         return response.json()
     
     def get_session_history(self, session_id: Optional[str] = None) -> Dict[str, Any]:
-        """Get session request history"""
+        """
+        Get session request history
+        Args:
+            session_id: Optional session ID to retrieve (uses stored session if not provided)
+        Returns:
+            Session history dictionary
+        """
         sid = session_id or self.session_id
         if not sid:
             raise ValueError("No session_id provided or stored")
@@ -76,15 +95,16 @@ class MeetingSummarizerClient:
         meeting_info: Optional[Dict] = None
     ) -> Dict[str, Any]:
         """
-        Analyze meeting transcript with full Google integration
-        Creates summary, tasks, and calendar events
-        
+        Analyze meeting transcript with full Google integration.
+        Creates summary, tasks, and calendar events.
         Session is automatically created from transcript content.
         
         Args:
             transcript: Direct transcript text (use this OR transcript_url)
             transcript_url: S3 URL to transcript file (use this OR transcript)
             meeting_info: Optional meeting details for calendar event
+        Returns:
+            Analysis result dictionary
         """
         if not transcript and not transcript_url:
             raise ValueError("Either transcript or transcript_url must be provided")

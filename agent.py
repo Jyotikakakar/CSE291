@@ -484,27 +484,13 @@ Example format:
 
 if __name__ == "__main__":
     agent = MeetingAgent()
-    
-    sample_transcript = """
-    Alice: Let's start the Q4 planning meeting. We need to prioritize features.
-    
-    Bob: I think we should focus on the mobile app. Users have been requesting it.
-    
-    Alice: Good point. Bob, can you lead the mobile app project?
-    
-    Bob: Yes, I'll create a spec by next Friday.
-    
-    Carol: We also need to implement SSO for enterprise customers.
-    
-    Alice: That's critical. Carol, you own SSO. Target is November 30th.
-    
-    Carol: Got it. I'll need David's help on backend.
-    
-    David: Happy to help. I see a risk though - our auth service is outdated.
-    
-    Alice: Let's address that. David, audit the auth service this week.
-    """
-    
+    sample_transcript_path = "samples/sample_transcript.txt"
+    if os.path.exists(sample_transcript_path):
+        try:
+            with open(sample_transcript_path, "r") as fh:
+                sample_transcript = fh.read()
+        except Exception:
+            sample_transcript = None
     print("Testing Gemini agent with Google Calendar and Tasks integration")
     print("=" * 80)
     result = agent.summarize(sample_transcript)

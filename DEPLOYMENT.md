@@ -13,14 +13,14 @@ This guide provides **manual steps** to deploy the Meeting Summarizer Agent on A
 ┌─────────────────────────────────────────────┐
 │         EC2 Instance (Ubuntu)               │
 │                                             │
-│  ┌──────────────┐  ┌──────────────┐        │
-│  │ User 1       │  │ User 2       │        │
-│  │ Container    │  │ Container    │  ...   │
-│  │ Port: 5001   │  │ Port: 5002   │        │
-│  │              │  │              │        │
-│  │ Session 1    │  │ Session 1    │        │
-│  │ Session 2    │  │ Session 2    │        │
-│  └──────────────┘  └──────────────┘        │
+│  ┌──────────────┐  ┌──────────────┐         │
+│  │ User 1       │  │ User 2       │         │
+│  │ Container    │  │ Container    │  ...    │
+│  │ Port: 5001   │  │ Port: 5002   │         │
+│  │              │  │              │         │
+│  │ Session 1    │  │ Session 1    │         │
+│  │ Session 2    │  │ Session 2    │         │
+│  └──────────────┘  └──────────────┘         │
 └─────────────────────────────────────────────┘
 ```
 
