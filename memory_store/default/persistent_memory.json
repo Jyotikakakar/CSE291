@@ -1,0 +1,354 @@
+{
+  "persistent_context": {
+    "ongoing_projects": [],
+    "key_people": [
+      "Bob",
+      "Carol",
+      "David"
+    ],
+    "recurring_topics": [],
+    "action_items_history": [
+      {
+        "task": "Lead the mobile app project",
+        "owner": "Bob",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:08:58.030388"
+      },
+      {
+        "task": "Create a spec for the mobile app",
+        "owner": "Bob",
+        "due_date": "next Friday",
+        "timestamp": "2025-11-16T13:08:58.030400"
+      },
+      {
+        "task": "Own the SSO implementation",
+        "owner": "Carol",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:08:58.030428"
+      },
+      {
+        "task": "Review the mobile app spec.",
+        "owner": null,
+        "due_date": "tomorrow",
+        "timestamp": "2025-11-16T13:08:59.556675"
+      },
+      {
+        "task": "Document the security concern with the auth service and share with Carol.",
+        "owner": "David",
+        "due_date": "end of day",
+        "timestamp": "2025-11-16T13:08:59.556684"
+      },
+      {
+        "task": "Lead the mobile app project.",
+        "owner": "Bob",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:16:41.283752"
+      },
+      {
+        "task": "Create a spec for the mobile app.",
+        "owner": "Bob",
+        "due_date": "next Friday",
+        "timestamp": "2025-11-16T13:16:41.283764"
+      },
+      {
+        "task": "Own the SSO implementation.",
+        "owner": "Carol",
+        "due_date": "November 30th",
+        "timestamp": "2025-11-16T13:16:41.283772"
+      },
+      {
+        "task": "Review the mobile app spec.",
+        "owner": null,
+        "due_date": "tomorrow",
+        "timestamp": "2025-11-16T13:16:43.229087"
+      },
+      {
+        "task": "Document the security concern with the auth service and share with Carol.",
+        "owner": "David",
+        "due_date": "end of day",
+        "timestamp": "2025-11-16T13:16:43.229097"
+      }
+    ],
+    "decisions_history": [
+      {
+        "decision": "Prioritize mobile app development",
+        "owner": "Bob",
+        "context": "User requests for the mobile app.",
+        "timestamp": "2025-11-16T13:08:58.030437"
+      },
+      {
+        "decision": "Implement SSO for enterprise customers",
+        "owner": "Carol",
+        "context": "SSO is critical for enterprise customers.",
+        "timestamp": "2025-11-16T13:08:58.030445"
+      },
+      {
+        "decision": "Schedule a review for the mobile app spec.",
+        "owner": "Alice",
+        "context": "Bob has finished the mobile app spec.",
+        "timestamp": "2025-11-16T13:08:59.556693"
+      },
+      {
+        "decision": "David to document and share the security concern with Carol.",
+        "owner": "David",
+        "context": "A security concern with the auth service was identified that might affect SSO.",
+        "timestamp": "2025-11-16T13:08:59.556700"
+      },
+      {
+        "decision": "Prioritize the mobile app for Q4.",
+        "owner": "Bob",
+        "context": "User requests and team consensus.",
+        "timestamp": "2025-11-16T13:16:41.283781"
+      },
+      {
+        "decision": "Implement SSO for enterprise customers.",
+        "owner": "Carol",
+        "context": "Critical for enterprise clients.",
+        "timestamp": "2025-11-16T13:16:41.283788"
+      },
+      {
+        "decision": "Schedule a review for the mobile app spec for tomorrow.",
+        "owner": null,
+        "context": "Bob has completed the mobile app spec.",
+        "timestamp": "2025-11-16T13:16:43.229106"
+      }
+    ]
+  },
+  "meeting_summaries": [
+    {
+      "timestamp": "2025-11-16T13:08:58.030333",
+      "summary": {
+        "tldr": "This Q4 planning meeting focused on prioritizing features. The team decided to prioritize the mobile app and implement SSO for enterprise customers.",
+        "context_connections": [],
+        "decisions": [
+          {
+            "decision": "Prioritize mobile app development",
+            "owner": "Bob",
+            "context": "User requests for the mobile app."
+          },
+          {
+            "decision": "Implement SSO for enterprise customers",
+            "owner": "Carol",
+            "context": "SSO is critical for enterprise customers."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Lead the mobile app project",
+            "owner": "Bob",
+            "due_date": null,
+            "related_to_previous": false
+          },
+          {
+            "task": "Create a spec for the mobile app",
+            "owner": "Bob",
+            "due_date": "next Friday",
+            "related_to_previous": false
+          },
+          {
+            "task": "Own the SSO implementation",
+            "owner": "Carol",
+            "due_date": null,
+            "related_to_previous": false
+          }
+        ],
+        "risks": [],
+        "key_points": [
+          "Q4 planning",
+          "Feature prioritization",
+          "Mobile app development",
+          "SSO implementation for enterprise"
+        ],
+        "people_mentioned": [
+          "Alice",
+          "Bob",
+          "Carol"
+        ]
+      },
+      "transcript_preview": "\n    Alice: Let's start the Q4 planning meeting. We need to prioritize features.\n    \n    Bob: I think we should focus on the mobile app. Users have been requesting it.\n    \n    Alice: Good point. Bob, can you lead the mobile app project?\n    \n    Bob: Yes, I'll create a spec by next Friday.\n    \n    Carol: We also need to implement SSO for enterprise customers.\n    \n    Alice: That's critical. Carol, you own SSO. Target is November 30th.\n    "
+    },
+    {
+      "timestamp": "2025-11-16T13:08:59.556633",
+      "summary": {
+        "tldr": "This meeting provided updates on Q4 initiatives, specifically the mobile app and SSO implementation. A security concern with the auth service was raised, potentially impacting SSO, and requires immediate documentation and sharing.",
+        "context_connections": [
+          {
+            "connection": "Follow-up on the mobile app spec development.",
+            "reference": "Action item: Create a spec for the mobile app (Owner: Bob, Due Date: next Friday)."
+          },
+          {
+            "connection": "Update on the SSO implementation progress.",
+            "reference": "Action item: Own the SSO implementation (Owner: Carol)."
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Schedule a review for the mobile app spec.",
+            "owner": "Alice",
+            "context": "Bob has finished the mobile app spec."
+          },
+          {
+            "decision": "David to document and share the security concern with Carol.",
+            "owner": "David",
+            "context": "A security concern with the auth service was identified that might affect SSO."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Review the mobile app spec.",
+            "owner": null,
+            "due_date": "tomorrow",
+            "related_to_previous": true
+          },
+          {
+            "task": "Document the security concern with the auth service and share with Carol.",
+            "owner": "David",
+            "due_date": "end of day",
+            "related_to_previous": true
+          }
+        ],
+        "risks": [
+          "Security concern with auth service affecting SSO implementation."
+        ],
+        "key_points": [
+          "Q4 initiatives status update",
+          "Mobile app spec completion",
+          "SSO implementation progress",
+          "Security concern identified"
+        ],
+        "people_mentioned": [
+          "Alice",
+          "Bob",
+          "Carol",
+          "David"
+        ]
+      },
+      "transcript_preview": "\n    Alice: Status update on our Q4 initiatives.\n    \n    Bob: I've finished the mobile app spec we discussed. Ready for review.\n    \n    Alice: Excellent! Let's schedule a review for tomorrow.\n    \n    Carol: SSO implementation is underway. I'm 30% complete.\n    \n    David: I noticed a security concern with our auth service that might affect SSO.\n    \n    Alice: David, document that and share with Carol by end of day.\n    "
+    },
+    {
+      "timestamp": "2025-11-16T13:16:41.283689",
+      "summary": {
+        "tldr": "The Q4 planning meeting focused on feature prioritization, confirming the mobile app and SSO implementation as key initiatives. Bob was assigned to lead the mobile app project, including creating a specification. Carol will continue to own the SSO implementation with a target date.",
+        "context_connections": [
+          {
+            "connection": "Reiteration and confirmation of previously prioritized features.",
+            "reference": "Meeting 1: Prioritization of mobile app and SSO."
+          },
+          {
+            "connection": "Action item assigned for the mobile app project, building on previous prioritization.",
+            "reference": "Meeting 1: Decision to prioritize mobile app. Recent Action Item: Lead the mobile app project (Owner: Bob), Create a spec for the mobile app (Owner: Bob)."
+          },
+          {
+            "connection": "Confirmation of ownership and target date for SSO implementation.",
+            "reference": "Meeting 1: Decision to implement SSO for enterprise customers. Recent Action Item: Own the SSO implementation (Owner: Carol)."
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Prioritize the mobile app for Q4.",
+            "owner": "Bob",
+            "context": "User requests and team consensus."
+          },
+          {
+            "decision": "Implement SSO for enterprise customers.",
+            "owner": "Carol",
+            "context": "Critical for enterprise clients."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Lead the mobile app project.",
+            "owner": "Bob",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Create a spec for the mobile app.",
+            "owner": "Bob",
+            "due_date": "next Friday",
+            "related_to_previous": true
+          },
+          {
+            "task": "Own the SSO implementation.",
+            "owner": "Carol",
+            "due_date": "November 30th",
+            "related_to_previous": true
+          }
+        ],
+        "risks": [],
+        "key_points": [
+          "Q4 feature prioritization",
+          "Mobile app development",
+          "SSO implementation for enterprise customers"
+        ],
+        "people_mentioned": [
+          "Alice",
+          "Bob",
+          "Carol"
+        ]
+      },
+      "transcript_preview": "\n    Alice: Let's start the Q4 planning meeting. We need to prioritize features.\n    \n    Bob: I think we should focus on the mobile app. Users have been requesting it.\n    \n    Alice: Good point. Bob, can you lead the mobile app project?\n    \n    Bob: Yes, I'll create a spec by next Friday.\n    \n    Carol: We also need to implement SSO for enterprise customers.\n    \n    Alice: That's critical. Carol, you own SSO. Target is November 30th.\n    "
+    },
+    {
+      "timestamp": "2025-11-16T13:16:43.229039",
+      "summary": {
+        "tldr": "This meeting provided status updates on Q4 initiatives. Bob completed the mobile app spec, and a review is scheduled for tomorrow. Carol is 30% done with SSO implementation, but David raised a potential security concern with the auth service that needs immediate attention.",
+        "context_connections": [
+          {
+            "connection": "Follow-up on the mobile app specification, a key Q4 initiative.",
+            "reference": "Meeting 3: Bob was assigned to lead the mobile app project, including creating a specification. Recent Action Item: Create a spec for the mobile app (Owner: Bob)."
+          },
+          {
+            "connection": "Update on the SSO implementation progress.",
+            "reference": "Meeting 3: Carol will continue to own the SSO implementation with a target date. Recent Action Item: Own the SSO implementation (Owner: Carol)."
+          },
+          {
+            "connection": "Identification of a potential blocker for SSO implementation.",
+            "reference": "Meeting 2: A security concern with the auth service was raised, potentially impacting SSO."
+          },
+          {
+            "connection": "Action item to address the previously identified security concern.",
+            "reference": "Meeting 2: A security concern with the auth service was raised, potentially impacting SSO, and requires immediate documentation and sharing. Recent Action Item: Document the security concern with the auth service and share with Carol. (Owner: David)"
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Schedule a review for the mobile app spec for tomorrow.",
+            "owner": null,
+            "context": "Bob has completed the mobile app spec."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Review the mobile app spec.",
+            "owner": null,
+            "due_date": "tomorrow",
+            "related_to_previous": true
+          },
+          {
+            "task": "Document the security concern with the auth service and share with Carol.",
+            "owner": "David",
+            "due_date": "end of day",
+            "related_to_previous": true
+          }
+        ],
+        "risks": [
+          "Security concern with the auth service may affect SSO implementation."
+        ],
+        "key_points": [
+          "Status update on Q4 initiatives",
+          "Mobile app spec completion and review",
+          "SSO implementation progress",
+          "Security concern with auth service"
+        ],
+        "people_mentioned": [
+          "Alice",
+          "Bob",
+          "Carol",
+          "David"
+        ]
+      },
+      "transcript_preview": "\n    Alice: Status update on our Q4 initiatives.\n    \n    Bob: I've finished the mobile app spec we discussed. Ready for review.\n    \n    Alice: Excellent! Let's schedule a review for tomorrow.\n    \n    Carol: SSO implementation is underway. I'm 30% complete.\n    \n    David: I noticed a security concern with our auth service that might affect SSO.\n    \n    Alice: David, document that and share with Carol by end of day.\n    "
+    }
+  ]
+}

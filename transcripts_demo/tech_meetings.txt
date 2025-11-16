@@ -1,0 +1,78 @@
+# Tech Team Meeting Transcripts
+
+## Meeting 1: Sprint Planning
+Date: November 1, 2024
+
+Alice: Good morning team. Let's plan our sprint for the mobile app backend.
+
+Bob: I think we should focus on the API authentication layer first. We're getting security audit feedback.
+
+Carol: Agree. The OAuth implementation needs work. I can lead that effort.
+
+Alice: Perfect. Carol owns OAuth. Target is two weeks. Bob, what about the database schema?
+
+Bob: I've designed the schema for user profiles and sessions. Ready to implement. Should take one week.
+
+David: We also need to set up Redis for caching. Performance tests show we need it for scale.
+
+Alice: Good point. David, you own Redis integration. One week timeline.
+
+Carol: One risk - the OAuth provider API has been flaky. We might need a backup plan.
+
+Alice: Let's schedule a checkpoint on Wednesday to assess OAuth progress. Any blockers?
+
+Bob: We need staging environment access. DevOps hasn't provisioned it yet.
+
+Alice: I'll follow up with DevOps today. Let's move forward. Sprint goal: OAuth, database schema, and Redis caching.
+
+---
+
+## Meeting 2: Mid-Sprint Standup
+Date: November 8, 2024
+
+Alice: Quick standup. Carol, OAuth status?
+
+Carol: OAuth integration is 70% done. The provider API issues we worried about haven't appeared yet. Should finish by tomorrow.
+
+Alice: Excellent news. Bob, database?
+
+Bob: Database schema is deployed to staging. Running migration scripts now. Found one issue with foreign key constraints that I'm fixing.
+
+Alice: Timeline impact?
+
+Bob: Minimal. Still on track for end of week.
+
+David: Redis is integrated and tested. Cache hit rate is 85% in local testing. Ready to deploy to staging.
+
+Alice: Great progress team. Carol, once OAuth is done, can you help Bob with the constraint issue?
+
+Carol: Yes, I'll pair with him tomorrow afternoon.
+
+Alice: Perfect. One concern - we haven't load tested yet. David, can you set up load tests for Monday?
+
+David: On it. I'll use k6 for load testing.
+
+---
+
+## Meeting 3: Sprint Retrospective
+Date: November 15, 2024
+
+Alice: Sprint retro time. What went well?
+
+Bob: We hit all our targets. OAuth is live, database schema is solid, Redis is performing great.
+
+Carol: Collaboration was excellent. Pairing with Bob on the constraint issue saved us a day.
+
+David: Load tests showed impressive results. We can handle 10K concurrent users with current setup.
+
+Alice: Outstanding work. What could be improved?
+
+Carol: We should have involved QA earlier. We caught some edge cases late in the sprint.
+
+Bob: Agreed. Also, documentation was rushed at the end. We should document as we code.
+
+Alice: Good points. Next sprint, let's have QA shadow us from day one. And let's adopt docs-as-code practice.
+
+David: One more thing - we need better monitoring. I want to set up Datadog.
+
+Alice: Add that to next sprint backlog. Overall, great sprint team. Let's take this momentum forward.

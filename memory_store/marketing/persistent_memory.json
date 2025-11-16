@@ -1,0 +1,903 @@
+{
+  "persistent_context": {
+    "ongoing_projects": [],
+    "key_people": [
+      "Emma",
+      "Tom"
+    ],
+    "recurring_topics": [],
+    "action_items_history": [
+      {
+        "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates).",
+        "owner": "Emma",
+        "due_date": "November 20th",
+        "timestamp": "2025-11-16T13:00:15.362983"
+      },
+      {
+        "task": "Reach out to top 5 influencers.",
+        "owner": "Emma",
+        "due_date": "Friday",
+        "timestamp": "2025-11-16T13:00:15.362984"
+      },
+      {
+        "task": "Own and track the campaign metrics dashboard.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:00:15.362986"
+      },
+      {
+        "task": "Make the Twitter ads budget reallocation to Instagram.",
+        "owner": "Tom",
+        "due_date": "Today",
+        "timestamp": "2025-11-16T13:00:17.411798"
+      },
+      {
+        "task": "Create a landing page showcasing all user-generated content submissions.",
+        "owner": "Tom",
+        "due_date": "Monday",
+        "timestamp": "2025-11-16T13:00:17.411801"
+      },
+      {
+        "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates).",
+        "owner": "Emma",
+        "due_date": "November 20th",
+        "timestamp": "2025-11-16T13:10:11.237637"
+      },
+      {
+        "task": "Reach out to top 5 influencers.",
+        "owner": "Emma",
+        "due_date": "Friday",
+        "timestamp": "2025-11-16T13:10:11.237646"
+      },
+      {
+        "task": "Own and track the campaign metrics dashboard.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:10:11.237653"
+      },
+      {
+        "task": "Track daily engagement, conversion rates, and ROI.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:10:11.237659"
+      },
+      {
+        "task": "Make the Twitter ads budget reallocation to Instagram.",
+        "owner": "Tom",
+        "due_date": "Today",
+        "timestamp": "2025-11-16T13:10:14.881850"
+      },
+      {
+        "task": "Create a landing page showcasing all user-generated content submissions.",
+        "owner": "Tom",
+        "due_date": "Monday",
+        "timestamp": "2025-11-16T13:10:14.881858"
+      },
+      {
+        "task": "Own and track the campaign metrics dashboard.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:10:14.881865"
+      },
+      {
+        "task": "Track daily engagement, conversion rates, and ROI.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:10:14.881871"
+      },
+      {
+        "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates).",
+        "owner": "Emma",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:10:14.881878"
+      },
+      {
+        "task": "Reach out to top 5 influencers.",
+        "owner": "Emma",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:10:14.881884"
+      },
+      {
+        "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates)",
+        "owner": "Emma",
+        "due_date": "November 20th",
+        "timestamp": "2025-11-16T13:16:07.798018"
+      },
+      {
+        "task": "Reach out to top 5 influencers",
+        "owner": "Emma",
+        "due_date": "Friday",
+        "timestamp": "2025-11-16T13:16:07.798039"
+      },
+      {
+        "task": "Own and track the campaign metrics dashboard",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:16:07.798043"
+      },
+      {
+        "task": "Track daily engagement, conversion rates, and ROI",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:16:07.798046"
+      },
+      {
+        "task": "Make the Twitter ads budget reallocation to Instagram.",
+        "owner": "Tom",
+        "due_date": "Today",
+        "timestamp": "2025-11-16T13:16:10.359578"
+      },
+      {
+        "task": "Create a landing page showcasing all user-generated content submissions.",
+        "owner": "Tom",
+        "due_date": "Monday",
+        "timestamp": "2025-11-16T13:16:10.359580"
+      },
+      {
+        "task": "Own and track the campaign metrics dashboard.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:16:10.359581"
+      },
+      {
+        "task": "Track daily engagement, conversion rates, and ROI.",
+        "owner": "Tom",
+        "due_date": null,
+        "timestamp": "2025-11-16T13:16:10.359582"
+      }
+    ],
+    "decisions_history": [
+      {
+        "decision": "Focus budget on Instagram and TikTok for the Q4 holiday campaign.",
+        "owner": null,
+        "context": "Demographic is most active on these platforms, and social media ads performed better than email last year.",
+        "timestamp": "2025-11-16T13:00:15.362987"
+      },
+      {
+        "decision": "Adopt 'Your Year, Elevated' as the campaign tagline.",
+        "owner": null,
+        "context": "Tagline focuses on personal achievement and product's role in success.",
+        "timestamp": "2025-11-16T13:00:15.362989"
+      },
+      {
+        "decision": "Incorporate user-generated content around the 'Your Year, Elevated' theme.",
+        "owner": null,
+        "context": "Encourage customers to share success stories to align with the campaign theme.",
+        "timestamp": "2025-11-16T13:00:15.362990"
+      },
+      {
+        "decision": "Campaign launches December 1st.",
+        "owner": null,
+        "context": "Set launch date for the Q4 holiday campaign.",
+        "timestamp": "2025-11-16T13:00:15.362991"
+      },
+      {
+        "decision": "Set creative asset deadline for November 20th.",
+        "owner": null,
+        "context": "Required for campaign launch preparation.",
+        "timestamp": "2025-11-16T13:00:15.362992"
+      },
+      {
+        "decision": "Set campaign budget at $150K.",
+        "owner": null,
+        "context": "Budget allocation for the Q4 holiday campaign.",
+        "timestamp": "2025-11-16T13:00:15.362993"
+      },
+      {
+        "decision": "Add influencer partnerships to the campaign strategy.",
+        "owner": null,
+        "context": "To ensure distinctiveness and move fast against competition.",
+        "timestamp": "2025-11-16T13:00:15.362994"
+      },
+      {
+        "decision": "Influencer partnerships will be commission-based.",
+        "owner": null,
+        "context": "To align incentives.",
+        "timestamp": "2025-11-16T13:00:15.362995"
+      },
+      {
+        "decision": "Reallocate Twitter ads budget to Instagram.",
+        "owner": "Tom",
+        "context": "Twitter ads are underperforming (1.2% CTR).",
+        "timestamp": "2025-11-16T13:00:17.411804"
+      },
+      {
+        "decision": "Create a landing page showcasing all user-generated content submissions.",
+        "owner": "Tom",
+        "context": "To amplify user-generated content, boost credibility, and encourage more submissions.",
+        "timestamp": "2025-11-16T13:00:17.411807"
+      },
+      {
+        "decision": "Focus Q4 holiday campaign budget on Instagram and TikTok.",
+        "owner": null,
+        "context": "Demographic is most active on these platforms.",
+        "timestamp": "2025-11-16T13:10:11.237669"
+      },
+      {
+        "decision": "Adopt 'Your Year, Elevated' as the campaign tagline.",
+        "owner": null,
+        "context": "Focuses on personal achievement and product's role in success.",
+        "timestamp": "2025-11-16T13:10:11.237676"
+      },
+      {
+        "decision": "Launch campaign on December 1st.",
+        "owner": null,
+        "context": "Timeline for Q4 holiday campaign.",
+        "timestamp": "2025-11-16T13:10:11.237682"
+      },
+      {
+        "decision": "Set budget at $150K for the campaign.",
+        "owner": null,
+        "context": "Budget for Q4 holiday campaign.",
+        "timestamp": "2025-11-16T13:10:11.237688"
+      },
+      {
+        "decision": "Utilize commission-based influencer partnerships.",
+        "owner": null,
+        "context": "Aligns incentives.",
+        "timestamp": "2025-11-16T13:10:11.237694"
+      },
+      {
+        "decision": "Reallocate Twitter ads budget to Instagram.",
+        "owner": "Tom",
+        "context": "Twitter ads are underperforming with only a 1.2% CTR.",
+        "timestamp": "2025-11-16T13:10:14.881892"
+      },
+      {
+        "decision": "Create a landing page showcasing all user-generated content submissions.",
+        "owner": "Tom",
+        "context": "To amplify user-generated content and encourage more submissions.",
+        "timestamp": "2025-11-16T13:10:14.881899"
+      },
+      {
+        "decision": "Focus Q4 holiday campaign on Instagram and TikTok",
+        "owner": null,
+        "context": "Based on past data showing better performance on these platforms and current demographic activity.",
+        "timestamp": "2025-11-16T13:16:07.798051"
+      },
+      {
+        "decision": "Adopt 'Your Year, Elevated' as the creative concept/tagline",
+        "owner": null,
+        "context": "To focus on personal achievement and product benefits.",
+        "timestamp": "2025-11-16T13:16:07.798053"
+      },
+      {
+        "decision": "Launch Q4 holiday campaign on December 1st",
+        "owner": null,
+        "context": "To maximize holiday shopping period.",
+        "timestamp": "2025-11-16T13:16:07.798057"
+      },
+      {
+        "decision": "Set Q4 holiday campaign budget at $150K",
+        "owner": null,
+        "context": "To allocate resources effectively across chosen channels.",
+        "timestamp": "2025-11-16T13:16:07.798060"
+      },
+      {
+        "decision": "Utilize user-generated content around the 'Your Year, Elevated' theme",
+        "owner": null,
+        "context": "To encourage customer engagement and authentic promotion.",
+        "timestamp": "2025-11-16T13:16:07.798063"
+      },
+      {
+        "decision": "Engage influencers on a commission-based partnership model",
+        "owner": null,
+        "context": "To align incentives and potentially drive higher ROI.",
+        "timestamp": "2025-11-16T13:16:07.798066"
+      },
+      {
+        "decision": "Reallocate Twitter ads budget to Instagram",
+        "owner": "Tom",
+        "context": "Twitter ads are underperforming with only a 1.2% CTR.",
+        "timestamp": "2025-11-16T13:16:10.359584"
+      },
+      {
+        "decision": "Create a landing page showcasing all user-generated content submissions",
+        "owner": "Tom",
+        "context": "To boost credibility and encourage more submissions.",
+        "timestamp": "2025-11-16T13:16:10.359586"
+      }
+    ]
+  },
+  "meeting_summaries": [
+    {
+      "timestamp": "2025-11-16T13:00:15.362970",
+      "summary": {
+        "tldr": "The team planned the Q4 holiday campaign, focusing on Instagram and TikTok with a \"Your Year, Elevated\" theme. Key decisions include a December 1st launch, a $150K budget, and commission-based influencer partnerships.",
+        "context_connections": [],
+        "decisions": [
+          {
+            "decision": "Focus budget on Instagram and TikTok for the Q4 holiday campaign.",
+            "owner": null,
+            "context": "Demographic is most active on these platforms, and social media ads performed better than email last year."
+          },
+          {
+            "decision": "Adopt 'Your Year, Elevated' as the campaign tagline.",
+            "owner": null,
+            "context": "Tagline focuses on personal achievement and product's role in success."
+          },
+          {
+            "decision": "Incorporate user-generated content around the 'Your Year, Elevated' theme.",
+            "owner": null,
+            "context": "Encourage customers to share success stories to align with the campaign theme."
+          },
+          {
+            "decision": "Campaign launches December 1st.",
+            "owner": null,
+            "context": "Set launch date for the Q4 holiday campaign."
+          },
+          {
+            "decision": "Set creative asset deadline for November 20th.",
+            "owner": null,
+            "context": "Required for campaign launch preparation."
+          },
+          {
+            "decision": "Set campaign budget at $150K.",
+            "owner": null,
+            "context": "Budget allocation for the Q4 holiday campaign."
+          },
+          {
+            "decision": "Add influencer partnerships to the campaign strategy.",
+            "owner": null,
+            "context": "To ensure distinctiveness and move fast against competition."
+          },
+          {
+            "decision": "Influencer partnerships will be commission-based.",
+            "owner": null,
+            "context": "To align incentives."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates).",
+            "owner": "Emma",
+            "due_date": "November 20th",
+            "related_to_previous": false
+          },
+          {
+            "task": "Reach out to top 5 influencers.",
+            "owner": "Emma",
+            "due_date": "Friday",
+            "related_to_previous": false
+          },
+          {
+            "task": "Own and track the campaign metrics dashboard.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": false
+          }
+        ],
+        "risks": [
+          "Competition is launching similar campaigns.",
+          "Need to move fast and be distinctive."
+        ],
+        "key_points": [
+          "Planning Q4 holiday campaign.",
+          "Analysis of last year's campaign data (email vs. social media performance).",
+          "Focus on Instagram and TikTok.",
+          "Creative concept development: 'Your Year, Elevated' and user-generated content.",
+          "Campaign timeline and budget.",
+          "Risks and competitive landscape.",
+          "Influencer marketing strategy.",
+          "Key metrics to track."
+        ],
+        "people_mentioned": [
+          "Sarah",
+          "Tom",
+          "Emma"
+        ]
+      },
+      "transcript_preview": "\nSarah: Welcome everyone. Let's plan our Q4 holiday campaign.\n\nTom: I've analyzed last year's data. Email campaigns had 24% open rate. Social media ads performed better at 3.2% CTR.\n\nEmma: We should focus budget on Instagram and TikTok. Our demographic is most active there.\n\nSarah: Agreed. What's the creative concept?\n\nTom: I propose \"Your Year, Elevated\" as the tagline. Focuses on personal achievement and our product helping them succeed.\n\nEmma: Love it. We can create user-generated content aro"
+    },
+    {
+      "timestamp": "2025-11-16T13:00:17.411778",
+      "summary": {
+        "tldr": "The team reviewed the first week of the Q4 holiday campaign, noting strong email and social media (Instagram, TikTok) performance exceeding initial targets. Conversions are on track to meet the revenue goal, and influencer partnerships are showing good reach. Twitter ads are underperforming and will be reallocated.",
+        "context_connections": [
+          {
+            "connection": "Follow-up on email open rates from the previous campaign planning meeting.",
+            "reference": "Email campaigns had 24% open rate (last year's data mentioned in previous meeting)."
+          },
+          {
+            "connection": "Follow-up on social media ad performance from the previous campaign planning meeting.",
+            "reference": "Social media ads performed better at 3.2% CTR (last year's data mentioned in previous meeting)."
+          },
+          {
+            "connection": "Follow-up on the influencer partnership strategy decided in the previous meeting.",
+            "reference": "Influencer partnerships were decided to be commission-based in the previous meeting."
+          },
+          {
+            "connection": "Follow-up on the user-generated content initiative decided in the previous meeting.",
+            "reference": "User-generated content was discussed as a way to amplify the campaign theme in the previous meeting."
+          },
+          {
+            "connection": "Confirmation of campaign budget reallocation, stemming from previous discussion on budget focus.",
+            "reference": "Campaign budget was set at $150K and focus was on Instagram/TikTok in the previous meeting."
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Reallocate Twitter ads budget to Instagram.",
+            "owner": "Tom",
+            "context": "Twitter ads are underperforming (1.2% CTR)."
+          },
+          {
+            "decision": "Create a landing page showcasing all user-generated content submissions.",
+            "owner": "Tom",
+            "context": "To amplify user-generated content, boost credibility, and encourage more submissions."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Make the Twitter ads budget reallocation to Instagram.",
+            "owner": "Tom",
+            "due_date": "Today",
+            "related_to_previous": true
+          },
+          {
+            "task": "Create a landing page showcasing all user-generated content submissions.",
+            "owner": "Tom",
+            "due_date": "Monday",
+            "related_to_previous": true
+          }
+        ],
+        "risks": [
+          "Twitter ads are underperforming."
+        ],
+        "key_points": [
+          "Review of week one campaign results.",
+          "Email campaign exceeded expectations (31% open rate, 4.8% CTR).",
+          "Instagram ads performing well (3.8% CTR).",
+          "TikTok engagement is high despite slightly lower CTR (2.9%).",
+          "Conversion rate is 2.1%, on track for $500K revenue target.",
+          "Influencer partnerships are active and reaching 2M people.",
+          "Twitter ads are underperforming.",
+          "User-generated content is being submitted (47 so far) and featured on Instagram stories.",
+          "Need to amplify user-generated content and encourage more submissions."
+        ],
+        "people_mentioned": [
+          "Sarah",
+          "Tom",
+          "Emma"
+        ]
+      },
+      "transcript_preview": "\nSarah: Week one results are in. Tom, walk us through the numbers.\n\nTom: Email campaign exceeded expectations. 31% open rate, up from our 24% target. Click-through is 4.8%.\n\nEmma: Social media is performing well. Instagram ads at 3.8% CTR. TikTok is slightly lower at 2.9% but engagement is high.\n\nSarah: What about conversions?\n\nTom: Conversion rate is 2.1%. We're tracking to hit our $500K revenue target for Q4.\n\nEmma: Influencer partnerships are working. Three of our five influencers have posted"
+    },
+    {
+      "timestamp": "2025-11-16T13:10:11.237592",
+      "summary": {
+        "tldr": "The team planned the Q4 holiday campaign focusing on Instagram and TikTok with a \"Your Year, Elevated\" theme. Key decisions include a December 1st launch, a $150K budget, and commission-based influencer partnerships. Creative assets are needed by November 20th.",
+        "context_connections": [
+          {
+            "connection": "Planning of the Q4 holiday campaign aligns with the previous meeting's initiation of this planning.",
+            "reference": "Meeting 1: The team planned the Q4 holiday campaign, focusing on Instagram and TikTok with a \"Your Year, Elevated\" theme. Key decisions include a December 1st launch, a $150K budget, and commission-based influencer partnerships."
+          },
+          {
+            "connection": "Focus on Instagram and TikTok as discussed previously.",
+            "reference": "Meeting 1: ...focusing on Instagram and TikTok..."
+          },
+          {
+            "connection": "The theme \"Your Year, Elevated\" was decided upon in this meeting, echoing the theme mentioned in the previous summary.",
+            "reference": "Meeting 1: ...with a \"Your Year, Elevated\" theme."
+          },
+          {
+            "connection": "The launch date of December 1st was confirmed, as previously decided.",
+            "reference": "Meeting 1: Key decisions include a December 1st launch..."
+          },
+          {
+            "connection": "The budget of $150K was confirmed, as previously decided.",
+            "reference": "Meeting 1: Key decisions include a December 1st launch, a $150K budget..."
+          },
+          {
+            "connection": "Commission-based influencer partnerships were decided upon, as previously decided.",
+            "reference": "Meeting 1: ...and commission-based influencer partnerships."
+          },
+          {
+            "connection": "Coordination with the design team for creative assets is an ongoing action item.",
+            "reference": "Recent Action Items: Coordinate with the design team for creative assets (video ads, static posts, email templates). (Owner: Emma)"
+          },
+          {
+            "connection": "Reaching out to top influencers is an ongoing action item.",
+            "reference": "Recent Action Items: Reach out to top 5 influencers. (Owner: Emma)"
+          },
+          {
+            "connection": "Tracking the campaign metrics dashboard is an ongoing action item.",
+            "reference": "Recent Action Items: Own and track the campaign metrics dashboard. (Owner: Tom)"
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Focus Q4 holiday campaign budget on Instagram and TikTok.",
+            "owner": null,
+            "context": "Demographic is most active on these platforms."
+          },
+          {
+            "decision": "Adopt 'Your Year, Elevated' as the campaign tagline.",
+            "owner": null,
+            "context": "Focuses on personal achievement and product's role in success."
+          },
+          {
+            "decision": "Launch campaign on December 1st.",
+            "owner": null,
+            "context": "Timeline for Q4 holiday campaign."
+          },
+          {
+            "decision": "Set budget at $150K for the campaign.",
+            "owner": null,
+            "context": "Budget for Q4 holiday campaign."
+          },
+          {
+            "decision": "Utilize commission-based influencer partnerships.",
+            "owner": null,
+            "context": "Aligns incentives."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates).",
+            "owner": "Emma",
+            "due_date": "November 20th",
+            "related_to_previous": true
+          },
+          {
+            "task": "Reach out to top 5 influencers.",
+            "owner": "Emma",
+            "due_date": "Friday",
+            "related_to_previous": true
+          },
+          {
+            "task": "Own and track the campaign metrics dashboard.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Track daily engagement, conversion rates, and ROI.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": false
+          }
+        ],
+        "risks": [
+          "Competition is launching similar campaigns.",
+          "Need to move fast and be distinctive."
+        ],
+        "key_points": [
+          "Q4 holiday campaign planning",
+          "Analysis of last year's data (email open rates, social media CTR)",
+          "Platform focus: Instagram and TikTok",
+          "Creative concept: 'Your Year, Elevated'",
+          "User-generated content strategy",
+          "Campaign launch date: December 1st",
+          "Creative asset deadline: November 20th",
+          "Budget: $150K",
+          "Influencer partnerships",
+          "Campaign metrics tracking"
+        ],
+        "people_mentioned": [
+          "Sarah",
+          "Tom",
+          "Emma"
+        ]
+      },
+      "transcript_preview": "\nSarah: Welcome everyone. Let's plan our Q4 holiday campaign.\n\nTom: I've analyzed last year's data. Email campaigns had 24% open rate. Social media ads performed better at 3.2% CTR.\n\nEmma: We should focus budget on Instagram and TikTok. Our demographic is most active there.\n\nSarah: Agreed. What's the creative concept?\n\nTom: I propose \"Your Year, Elevated\" as the tagline. Focuses on personal achievement and our product helping them succeed.\n\nEmma: Love it. We can create user-generated content aro"
+    },
+    {
+      "timestamp": "2025-11-16T13:10:14.881809",
+      "summary": {
+        "tldr": "The team reviewed week one results of the Q4 holiday campaign, with strong performance in email and social media (Instagram, TikTok) exceeding targets. Twitter ads are underperforming and their budget will be reallocated to Instagram. A landing page for user-generated content will be created.",
+        "context_connections": [
+          {
+            "connection": "This meeting is a follow-up to the Q4 holiday campaign planning from Meeting 1 and Meeting 3.",
+            "reference": "Meeting 1: The team planned the Q4 holiday campaign, focusing on Instagram and TikTok with a \"Your Year, Elevated\" theme. Key decisions include a December 1st launch, a $150K budget, and commission-based influencer partnerships. Meeting 3: The team planned the Q4 holiday campaign focusing on Instagram and TikTok with a \"Your Year, Elevated\" theme. Key decisions include a December 1st launch, a $150K budget, and commission-based influencer partnerships. Creative assets are needed by November 20th."
+          },
+          {
+            "connection": "Review of campaign performance is a direct continuation of the campaign launch discussed in previous meetings.",
+            "reference": "Meeting 2: The team reviewed the first week of the Q4 holiday campaign, noting strong email and social media (Instagram, TikTok) performance exceeding initial targets."
+          },
+          {
+            "connection": "Email campaign performance is being discussed, with results exceeding previous targets.",
+            "reference": "Meeting 2: ...noting strong email and social media (Instagram, TikTok) performance exceeding initial targets."
+          },
+          {
+            "connection": "Social media (Instagram, TikTok) performance is discussed and is performing well.",
+            "reference": "Meeting 2: ...noting strong email and social media (Instagram, TikTok) performance exceeding initial targets."
+          },
+          {
+            "connection": "Conversion rates are discussed, and the team is on track to meet the revenue goal.",
+            "reference": "Meeting 2: Conversions are on track to meet the revenue goal..."
+          },
+          {
+            "connection": "Influencer partnerships are discussed, with initial results showing good reach.",
+            "reference": "Meeting 2: ...and influencer partnerships are showing good reach."
+          },
+          {
+            "connection": "Twitter ads are underperforming and a reallocation of budget is decided.",
+            "reference": "Meeting 2: Twitter ads are underperforming and will be reallocated."
+          },
+          {
+            "connection": "The user-generated content initiative is being discussed.",
+            "reference": "Meeting 3 mentions the need for creative assets, which can encompass UGC."
+          },
+          {
+            "connection": "Tom is responsible for tracking the campaign metrics dashboard.",
+            "reference": "Recent Action Items: Own and track the campaign metrics dashboard. (Owner: Tom)"
+          },
+          {
+            "connection": "Emma is responsible for reaching out to influencers.",
+            "reference": "Recent Action Items: Reach out to top 5 influencers. (Owner: Emma)"
+          },
+          {
+            "connection": "Tom is responsible for making Twitter ad budget reallocations.",
+            "reference": "Recent Action Items: Make the Twitter ads budget reallocation to Instagram. (Owner: Tom)"
+          },
+          {
+            "connection": "Emma is responsible for coordinating creative assets.",
+            "reference": "Recent Action Items: Coordinate with the design team for creative assets (video ads, static posts, email templates). (Owner: Emma)"
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Reallocate Twitter ads budget to Instagram.",
+            "owner": "Tom",
+            "context": "Twitter ads are underperforming with only a 1.2% CTR."
+          },
+          {
+            "decision": "Create a landing page showcasing all user-generated content submissions.",
+            "owner": "Tom",
+            "context": "To amplify user-generated content and encourage more submissions."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Make the Twitter ads budget reallocation to Instagram.",
+            "owner": "Tom",
+            "due_date": "Today",
+            "related_to_previous": true
+          },
+          {
+            "task": "Create a landing page showcasing all user-generated content submissions.",
+            "owner": "Tom",
+            "due_date": "Monday",
+            "related_to_previous": true
+          },
+          {
+            "task": "Own and track the campaign metrics dashboard.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Track daily engagement, conversion rates, and ROI.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates).",
+            "owner": "Emma",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Reach out to top 5 influencers.",
+            "owner": "Emma",
+            "due_date": null,
+            "related_to_previous": true
+          }
+        ],
+        "risks": [
+          "Underperforming Twitter ads budget."
+        ],
+        "key_points": [
+          "Week one Q4 holiday campaign results review",
+          "Email campaign performance (31% open rate, 4.8% CTR)",
+          "Instagram ads performance (3.8% CTR)",
+          "TikTok performance (2.9% CTR, high engagement)",
+          "Conversion rate (2.1%)",
+          "On track to hit $500K Q4 revenue target",
+          "Influencer partnerships showing good reach",
+          "Underperforming Twitter ads",
+          "User-generated content (47 submissions, featured on Instagram story)",
+          "Need for a landing page for UGC"
+        ],
+        "people_mentioned": [
+          "Sarah",
+          "Tom",
+          "Emma"
+        ]
+      },
+      "transcript_preview": "\nSarah: Week one results are in. Tom, walk us through the numbers.\n\nTom: Email campaign exceeded expectations. 31% open rate, up from our 24% target. Click-through is 4.8%.\n\nEmma: Social media is performing well. Instagram ads at 3.8% CTR. TikTok is slightly lower at 2.9% but engagement is high.\n\nSarah: What about conversions?\n\nTom: Conversion rate is 2.1%. We're tracking to hit our $500K revenue target for Q4.\n\nEmma: Influencer partnerships are working. Three of our five influencers have posted"
+    },
+    {
+      "timestamp": "2025-11-16T13:16:07.797988",
+      "summary": {
+        "tldr": "The team planned the Q4 holiday campaign, setting a December 1st launch date, a $150K budget, and the \"Your Year, Elevated\" theme. Focus will be on Instagram and TikTok, utilizing influencer partnerships and user-generated content.",
+        "context_connections": [
+          {
+            "connection": "Confirms decisions and theme from a previous meeting",
+            "reference": "Meeting 1 and Meeting 3 both focused on Q4 holiday campaign planning with a \"Your Year, Elevated\" theme, December 1st launch, and $150K budget."
+          },
+          {
+            "connection": "Updates on previous action items and decisions regarding campaign channels",
+            "reference": "Meeting 2 and Meeting 4 mentioned strong performance on Instagram and TikTok and underperforming Twitter ads, leading to budget reallocation. This meeting confirms the focus on Instagram and TikTok."
+          },
+          {
+            "connection": "Confirms previous action item regarding creative assets",
+            "reference": "Meeting 3 stated creative assets are needed by November 20th, and this meeting reiterates this deadline and assigns coordination to Emma."
+          },
+          {
+            "connection": "Confirms previous action item regarding influencer outreach",
+            "reference": "Meeting 1 and Meeting 3 mentioned influencer partnerships, and this meeting assigns outreach to Emma."
+          },
+          {
+            "connection": "Confirms previous action item regarding campaign metrics",
+            "reference": "Meeting 2 and Meeting 4 assigned ownership of the campaign metrics dashboard and tracking to Tom, which is reiterated in this meeting."
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Focus Q4 holiday campaign on Instagram and TikTok",
+            "owner": null,
+            "context": "Based on past data showing better performance on these platforms and current demographic activity."
+          },
+          {
+            "decision": "Adopt 'Your Year, Elevated' as the creative concept/tagline",
+            "owner": null,
+            "context": "To focus on personal achievement and product benefits."
+          },
+          {
+            "decision": "Launch Q4 holiday campaign on December 1st",
+            "owner": null,
+            "context": "To maximize holiday shopping period."
+          },
+          {
+            "decision": "Set Q4 holiday campaign budget at $150K",
+            "owner": null,
+            "context": "To allocate resources effectively across chosen channels."
+          },
+          {
+            "decision": "Utilize user-generated content around the 'Your Year, Elevated' theme",
+            "owner": null,
+            "context": "To encourage customer engagement and authentic promotion."
+          },
+          {
+            "decision": "Engage influencers on a commission-based partnership model",
+            "owner": null,
+            "context": "To align incentives and potentially drive higher ROI."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Coordinate with the design team for creative assets (video ads, static posts, email templates)",
+            "owner": "Emma",
+            "due_date": "November 20th",
+            "related_to_previous": true
+          },
+          {
+            "task": "Reach out to top 5 influencers",
+            "owner": "Emma",
+            "due_date": "Friday",
+            "related_to_previous": true
+          },
+          {
+            "task": "Own and track the campaign metrics dashboard",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Track daily engagement, conversion rates, and ROI",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          }
+        ],
+        "risks": [
+          "Competition launching similar campaigns",
+          "Need to move fast and be distinctive"
+        ],
+        "key_points": [
+          "Q4 holiday campaign planning",
+          "Analysis of last year's campaign data (email open rates, social media CTR)",
+          "Strategic channel focus (Instagram, TikTok)",
+          "Creative concept development ('Your Year, Elevated')",
+          "User-generated content strategy",
+          "Campaign timeline and budget",
+          "Influencer marketing integration",
+          "Campaign performance tracking"
+        ],
+        "people_mentioned": [
+          "Sarah",
+          "Tom",
+          "Emma"
+        ]
+      },
+      "transcript_preview": "\nSarah: Welcome everyone. Let's plan our Q4 holiday campaign.\n\nTom: I've analyzed last year's data. Email campaigns had 24% open rate. Social media ads performed better at 3.2% CTR.\n\nEmma: We should focus budget on Instagram and TikTok. Our demographic is most active there.\n\nSarah: Agreed. What's the creative concept?\n\nTom: I propose \"Your Year, Elevated\" as the tagline. Focuses on personal achievement and our product helping them succeed.\n\nEmma: Love it. We can create user-generated content aro"
+    },
+    {
+      "timestamp": "2025-11-16T13:16:10.359563",
+      "summary": {
+        "tldr": "The team reviewed the first week of the Q4 holiday campaign, reporting strong performance in email and social media (Instagram, TikTok). Conversions are on track to meet revenue targets, and influencer partnerships are yielding good reach. Twitter ads are underperforming and will have their budget reallocated to Instagram.",
+        "context_connections": [
+          {
+            "connection": "Updates on performance metrics from previous meetings",
+            "reference": "Meeting 2 and Meeting 4 discussed strong performance in email and social media (Instagram, TikTok) and underperforming Twitter ads."
+          },
+          {
+            "connection": "Confirms previous action item regarding Twitter ads budget reallocation",
+            "reference": "Meeting 2 and Meeting 4 noted Twitter ads underperformance and the intention to reallocate budget."
+          },
+          {
+            "connection": "Follow-up on user-generated content initiative",
+            "reference": "Meeting 4 mentioned the creation of a landing page for user-generated content."
+          },
+          {
+            "connection": "Confirms previous action item regarding campaign metrics dashboard",
+            "reference": "Meeting 2 and Meeting 4 assigned ownership of the campaign metrics dashboard and tracking to Tom."
+          },
+          {
+            "connection": "Updates on influencer partnership progress",
+            "reference": "Meeting 1 and Meeting 3 mentioned influencer partnerships as a key strategy."
+          }
+        ],
+        "decisions": [
+          {
+            "decision": "Reallocate Twitter ads budget to Instagram",
+            "owner": "Tom",
+            "context": "Twitter ads are underperforming with only a 1.2% CTR."
+          },
+          {
+            "decision": "Create a landing page showcasing all user-generated content submissions",
+            "owner": "Tom",
+            "context": "To boost credibility and encourage more submissions."
+          }
+        ],
+        "action_items": [
+          {
+            "task": "Make the Twitter ads budget reallocation to Instagram.",
+            "owner": "Tom",
+            "due_date": "Today",
+            "related_to_previous": true
+          },
+          {
+            "task": "Create a landing page showcasing all user-generated content submissions.",
+            "owner": "Tom",
+            "due_date": "Monday",
+            "related_to_previous": true
+          },
+          {
+            "task": "Own and track the campaign metrics dashboard.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          },
+          {
+            "task": "Track daily engagement, conversion rates, and ROI.",
+            "owner": "Tom",
+            "due_date": null,
+            "related_to_previous": true
+          }
+        ],
+        "risks": [
+          "Twitter ads underperforming"
+        ],
+        "key_points": [
+          "Week one results of Q4 holiday campaign",
+          "Email campaign performance (open rate, CTR)",
+          "Social media performance (Instagram CTR, TikTok engagement)",
+          "Conversion rates and revenue target tracking",
+          "Influencer partnership reach",
+          "Underperforming Twitter ads",
+          "User-generated content submissions and amplification"
+        ],
+        "people_mentioned": [
+          "Sarah",
+          "Tom",
+          "Emma"
+        ]
+      },
+      "transcript_preview": "\nSarah: Week one results are in. Tom, walk us through the numbers.\n\nTom: Email campaign exceeded expectations. 31% open rate, up from our 24% target. Click-through is 4.8%.\n\nEmma: Social media is performing well. Instagram ads at 3.8% CTR. TikTok is slightly lower at 2.9% but engagement is high.\n\nSarah: What about conversions?\n\nTom: Conversion rate is 2.1%. We're tracking to hit our $500K revenue target for Q4.\n\nEmma: Influencer partnerships are working. Three of our five influencers have posted"
+    }
+  ]
+}
