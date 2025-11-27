@@ -6,3 +6,4 @@ env/
 # Google OAuth credentials (security)
 client_secret*.json
 token.json
+meetings.db
