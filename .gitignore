@@ -7,3 +7,4 @@ env/
 client_secret*.json
 token.json
 meetings.db
+credentials.json

@@ -1,27 +1,193 @@
 #!/usr/bin/env python3
 """
-Simple Meeting Agent with Context Awareness
-Demonstrates meeting summarization with memory of previous meetings
+Enhanced Meeting Agent with Google Calendar and Tasks Integration
+Demonstrates meeting summarization with automatic calendar event and task creation
 """
 import os
 import json
 import time
 import google.generativeai as genai
-from typing import Dict, Any, List
-from datetime import datetime
+from typing import Dict, Any, List, Optional
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import sqlite3
+
+# Google Calendar and Tasks
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-exp")
 
+# Google API Scopes
+SCOPES = [
+    'https://www.googleapis.com/auth/calendar',
+    'https://www.googleapis.com/auth/tasks'
+]
+
+
+class GoogleIntegration:
+    """Handle Google Calendar and Tasks API interactions."""
+    
+    def __init__(self, credentials_file: str = 'credentials.json', token_file: str = 'token.json'):
+        self.credentials_file = credentials_file
+        self.token_file = token_file
+        self.calendar_service = None
+        self.tasks_service = None
+        self.authenticate()
+    
+    def authenticate(self):
+        """Authenticate with Google APIs."""
+        creds = None
+        
+        # Load existing token
+        if os.path.exists(self.token_file):
+            creds = Credentials.from_authorized_user_file(self.token_file, SCOPES)
+        
+        # Refresh or get new credentials
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                try:
+                    creds.refresh(Request())
+                except Exception as e:
+                    print(f"Token refresh failed: {e}")
+                    creds = None
+            
+            if not creds:
+                if not os.path.exists(self.credentials_file):
+                    raise FileNotFoundError(
+                        f"Credentials file not found: {self.credentials_file}\n"
+                        "Download from Google Cloud Console: https://console.cloud.google.com/apis/credentials"
+                    )
+                
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    self.credentials_file, SCOPES
+                )
+                creds = flow.run_local_server(port=0)
+            
+            # Save credentials
+            with open(self.token_file, 'w') as token:
+                token.write(creds.to_json())
+        
+        # Build services
+        self.calendar_service = build('calendar', 'v3', credentials=creds)
+        self.tasks_service = build('tasks', 'v1', credentials=creds)
+        
+        print("✓ Authenticated with Google Calendar and Tasks")
+    
+    def create_calendar_event(
+        self,
+        summary: str,
+        description: str = "",
+        start_time: datetime = None,
+        duration_minutes: int = 60,
+        attendees: List[str] = None
+    ) -> Optional[Dict]:
+        """Create a calendar event."""
+        try:
+            if start_time is None:
+                start_time = datetime.now() + timedelta(days=1)
+            
+            end_time = start_time + timedelta(minutes=duration_minutes)
+            
+            event = {
+                'summary': summary,
+                'description': description,
+                'start': {
+                    'dateTime': start_time.isoformat(),
+                    'timeZone': 'America/Los_Angeles',
+                },
+                'end': {
+                    'dateTime': end_time.isoformat(),
+                    'timeZone': 'America/Los_Angeles',
+                },
+            }
+            
+            if attendees:
+                event['attendees'] = [{'email': email} for email in attendees]
+            
+            created_event = self.calendar_service.events().insert(
+                calendarId='primary',
+                body=event
+            ).execute()
+            
+            print(f"✓ Created calendar event: {summary}")
+            return created_event
+            
+        except HttpError as e:
+            print(f"Calendar API error: {e}")
+            return None
+    
+    def create_task(
+        self,
+        title: str,
+        notes: str = "",
+        due_date: datetime = None,
+        task_list_id: str = '@default'
+    ) -> Optional[Dict]:
+        """Create a task in Google Tasks."""
+        try:
+            task = {
+                'title': title,
+                'notes': notes,
+            }
+            
+            if due_date:
+                # Google Tasks expects RFC 3339 format for due date (date only, no time)
+                task['due'] = due_date.strftime('%Y-%m-%dT00:00:00.000Z')
+            
+            created_task = self.tasks_service.tasks().insert(
+                tasklist=task_list_id,
+                body=task
+            ).execute()
+            
+            print(f"✓ Created task: {title}")
+            return created_task
+            
+        except HttpError as e:
+            print(f"Tasks API error: {e}")
+            return None
+    
+    def list_task_lists(self) -> List[Dict]:
+        """List all task lists."""
+        try:
+            results = self.tasks_service.tasklists().list().execute()
+            return results.get('items', [])
+        except HttpError as e:
+            print(f"Tasks API error: {e}")
+            return []
+    
+    def get_upcoming_events(self, days: int = 7) -> List[Dict]:
+        """Get upcoming calendar events."""
+        try:
+            now = datetime.utcnow().isoformat() + 'Z'
+            max_time = (datetime.utcnow() + timedelta(days=days)).isoformat() + 'Z'
+            
+            events_result = self.calendar_service.events().list(
+                calendarId='primary',
+                timeMin=now,
+                timeMax=max_time,
+                maxResults=10,
+                singleEvents=True,
+                orderBy='startTime'
+            ).execute()
+            
+            return events_result.get('items', [])
+            
+        except HttpError as e:
+            print(f"Calendar API error: {e}")
+            return []
+
 
 class MCPMeetingAgent:
-    """Meeting agent with context-aware summarization and local storage."""
+    """Meeting agent with context-aware summarization, local storage, and Google integration."""
     
-    def __init__(self, thread_id: str = "default"):
+    def __init__(self, thread_id: str = "default", enable_google: bool = True):
         if not GEMINI_API_KEY:
             raise ValueError("GEMINI_API_KEY environment variable is required")
         
@@ -31,6 +197,14 @@ class MCPMeetingAgent:
         self.thread_id = thread_id
         self.db_path = "./meetings.db"
         self.conn = None
+        
+        # Google integration
+        self.google = None
+        if enable_google:
+            try:
+                self.google = GoogleIntegration()
+            except Exception as e:
+                print(f"Warning: Google integration disabled - {e}")
         
         self.metrics = {
             "total_requests": 0,
@@ -66,6 +240,7 @@ class MCPMeetingAgent:
                     task TEXT NOT NULL,
                     owner TEXT,
                     due_date TEXT,
+                    google_task_id TEXT,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (meeting_id) REFERENCES meetings(id)
                 )
@@ -83,6 +258,18 @@ class MCPMeetingAgent:
                 )
             """)
             
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS calendar_events (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    meeting_id INTEGER,
+                    google_event_id TEXT,
+                    summary TEXT,
+                    start_time TEXT,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (meeting_id) REFERENCES meetings(id)
+                )
+            """)
+            
             self.conn.commit()
             print(f"✓ Database initialized ({self.db_path})")
             
@@ -92,7 +279,7 @@ class MCPMeetingAgent:
     def store_meeting_in_db(self, summary: Dict[str, Any], transcript: str):
         """Store meeting summary in database."""
         if not self.conn:
-            return
+            return None
         
         try:
             cursor = self.conn.cursor()
@@ -136,9 +323,93 @@ class MCPMeetingAgent:
             
             self.conn.commit()
             print(f"✓ Stored meeting in database (ID: {meeting_id})")
+            return meeting_id
             
         except Exception as e:
             print(f"Error storing meeting: {e}")
+            return None
+    
+    def sync_to_google(self, meeting_id: int, summary: Dict[str, Any], create_followup: bool = True):
+        """Sync meeting data to Google Calendar and Tasks."""
+        if not self.google:
+            print("⚠ Google integration not available")
+            return
+        
+        synced_count = 0
+        
+        # Create tasks for action items
+        for action in summary.get('action_items', []):
+            task_title = action.get('task', '')
+            owner = action.get('owner', '')
+            due_date_str = action.get('due_date')
+            
+            # Parse due date
+            due_date = None
+            if due_date_str:
+                try:
+                    # Try to parse common date formats
+                    for fmt in ['%Y-%m-%d', '%m/%d/%Y', '%B %d', '%b %d']:
+                        try:
+                            due_date = datetime.strptime(due_date_str, fmt)
+                            break
+                        except ValueError:
+                            continue
+                except Exception:
+                    pass
+            
+            # Create task
+            notes = f"Owner: {owner}\nFrom meeting: {summary.get('tldr', '')}"
+            task = self.google.create_task(
+                title=task_title,
+                notes=notes,
+                due_date=due_date
+            )
+            
+            if task:
+                # Update database with Google task ID
+                try:
+                    cursor = self.conn.cursor()
+                    cursor.execute("""
+                        UPDATE action_items
+                        SET google_task_id = ?
+                        WHERE meeting_id = ? AND task = ?
+                    """, (task['id'], meeting_id, task_title))
+                    self.conn.commit()
+                    synced_count += 1
+                except Exception as e:
+                    print(f"Error updating task ID: {e}")
+        
+        # Create follow-up meeting if requested
+        if create_followup and summary.get('action_items'):
+            followup_time = datetime.now() + timedelta(days=7)
+            
+            # Build description with action items
+            description_parts = [summary.get('tldr', ''), "\n\nAction Items to Review:"]
+            for action in summary.get('action_items', []):
+                owner = action.get('owner', 'N/A')
+                description_parts.append(f"• {action.get('task')} (Owner: {owner})")
+            
+            event = self.google.create_calendar_event(
+                summary=f"Follow-up: {summary.get('tldr', 'Meeting')[:50]}",
+                description="\n".join(description_parts),
+                start_time=followup_time,
+                duration_minutes=30
+            )
+            
+            if event:
+                # Store in database
+                try:
+                    cursor = self.conn.cursor()
+                    cursor.execute("""
+                        INSERT INTO calendar_events (meeting_id, google_event_id, summary, start_time)
+                        VALUES (?, ?, ?, ?)
+                    """, (meeting_id, event['id'], event['summary'], followup_time.isoformat()))
+                    self.conn.commit()
+                    synced_count += 1
+                except Exception as e:
+                    print(f"Error storing calendar event: {e}")
+        
+        print(f"✓ Synced {synced_count} items to Google")
     
     def get_context_from_db(self, max_meetings: int = 3) -> str:
         """Retrieve context from previous meetings."""
@@ -200,8 +471,14 @@ class MCPMeetingAgent:
         except Exception as e:
             raise Exception(f"Gemini API error: {str(e)}")
     
-    def summarize(self, transcript: str, use_context: bool = True) -> Dict[str, Any]:
-        """Summarize meeting with context from previous meetings."""
+    def summarize(
+        self,
+        transcript: str,
+        use_context: bool = True,
+        sync_google: bool = True,
+        create_followup: bool = True
+    ) -> Dict[str, Any]:
+        """Summarize meeting with context from previous meetings and Google sync."""
         start_time = time.time()
         
         # Get context from database
@@ -279,7 +556,11 @@ Return ONLY the JSON object, no other text.
             summary.setdefault('key_points', [])
             
             # Store in database
-            self.store_meeting_in_db(summary, transcript)
+            meeting_id = self.store_meeting_in_db(summary, transcript)
+            
+            # Sync to Google if enabled
+            if sync_google and meeting_id and self.google:
+                self.sync_to_google(meeting_id, summary, create_followup)
             
             latency_ms = (time.time() - start_time) * 1000
             self.metrics["total_requests"] += 1
@@ -288,9 +569,11 @@ Return ONLY the JSON object, no other text.
             return {
                 "success": True,
                 "summary": summary,
+                "meeting_id": meeting_id,
                 "latency_ms": latency_ms,
                 "timestamp": datetime.now().isoformat(),
-                "used_context": use_context and "No previous" not in context_summary if use_context else False
+                "used_context": use_context and "No previous" not in context_summary if use_context else False,
+                "synced_to_google": sync_google and self.google is not None
             }
             
         except Exception as e:
@@ -308,13 +591,13 @@ Return ONLY the JSON object, no other text.
 
 
 def main():
-    """Demo: Analyze sample meetings with context awareness."""
+    """Demo: Analyze sample meetings with context awareness and Google sync."""
     print("\n" + "=" * 80)
-    print("MEETING AGENT WITH CONTEXT-AWARE SUMMARIZATION")
+    print("MEETING AGENT WITH GOOGLE CALENDAR & TASKS INTEGRATION")
     print("=" * 80)
     
-    # Initialize agent
-    agent = MCPMeetingAgent(thread_id="q4_planning")
+    # Initialize agent (set enable_google=False to skip Google auth)
+    agent = MCPMeetingAgent(thread_id="q4_planning", enable_google=True)
     
     # Read sample transcripts
     sample_files = [
@@ -326,6 +609,7 @@ def main():
     for i, file_path in enumerate(sample_files, 1):
         if not os.path.exists(file_path):
             print(f"\n⚠ Sample file not found: {file_path}")
+            print(f"   Create sample transcripts in {os.path.dirname(file_path)}/")
             continue
         
         print(f"\n{'='*80}")
@@ -338,12 +622,20 @@ def main():
         print(f"Transcript length: {len(transcript.split())} words")
         
         # Summarize with context (use context only after first meeting)
-        result = agent.summarize(transcript, use_context=(i > 1))
+        # Set sync_google=True to create Google Tasks and Calendar events
+        result = agent.summarize(
+            transcript,
+            use_context=(i > 1),
+            sync_google=True,  # Enable Google sync
+            create_followup=True  # Create follow-up meeting
+        )
         
         if result["success"]:
             summary = result['summary']
             print(f"\n✓ Summarized in {result['latency_ms']:.0f}ms")
             print(f"  Used context: {result['used_context']}")
+            print(f"  Synced to Google: {result['synced_to_google']}")
+            print(f"  Meeting ID: {result['meeting_id']}")
             
             print(f"\nTL;DR:")
             print(f"  {summary['tldr']}")
@@ -365,6 +657,8 @@ def main():
                     owner = a.get('owner', 'N/A')
                     due = a.get('due_date', 'N/A')
                     print(f"  - {a.get('task')} (Owner: {owner}, Due: {due})")
+                    if result['synced_to_google']:
+                        print(f"    → Synced to Google Tasks")
             
             if summary.get('risks'):
                 print(f"\nRisks ({len(summary['risks'])}):")
@@ -387,6 +681,7 @@ def main():
         print(f"Average latency: {avg_latency:.0f}ms")
     print(f"Database: {agent.db_path}")
     print(f"Thread: {agent.thread_id}")
+    print(f"Google integration: {'Enabled' if agent.google else 'Disabled'}")
     
     # Cleanup
     agent.cleanup()
