@@ -2,6 +2,7 @@
 .env
 *.pem
 env/
+venv
 
 # Google OAuth credentials (security)
 client_secret*.json
