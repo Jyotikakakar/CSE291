@@ -17,12 +17,14 @@ from google_integration import GoogleIntegration
 class MCPMeetingAgent:
     """Meeting agent with context-aware summarization, local storage, and Google integration."""
     
-    def __init__(self, thread_id: str = "default", enable_google: bool = True):
-        if not GEMINI_API_KEY:
-            raise ValueError("GEMINI_API_KEY environment variable is required")
-        
-        genai.configure(api_key=GEMINI_API_KEY)
-        self.model = genai.GenerativeModel(GEMINI_MODEL)
+    def __init__(self, thread_id: str = "default", enable_google: bool = True, require_gemini: bool = True):
+        # Gemini is optional for sync-only mode
+        self.model = None
+        if require_gemini:
+            if not GEMINI_API_KEY:
+                raise ValueError("GEMINI_API_KEY environment variable is required")
+            genai.configure(api_key=GEMINI_API_KEY)
+            self.model = genai.GenerativeModel(GEMINI_MODEL)
         
         self.thread_id = thread_id
         self.db_path = "./meetings.db"
@@ -209,7 +211,7 @@ class MCPMeetingAgent:
                 except Exception as e:
                     print(f"Error updating task ID: {e}")
         
-        # Create follow-up meeting if requested
+        # Create follow-up meeting if requested (with smart conflict resolution)
         if create_followup and summary.get('action_items'):
             followup_time = datetime.now() + timedelta(days=7)
             
@@ -219,10 +221,11 @@ class MCPMeetingAgent:
                 owner = action.get('owner', 'N/A')
                 description_parts.append(f"• {action.get('task')} (Owner: {owner})")
             
-            event = self.google.create_calendar_event(
+            # Use smart scheduling to avoid conflicts
+            event = self.google.create_calendar_event_smart(
                 summary=f"Follow-up: {summary.get('tldr', 'Meeting')[:50]}",
                 description="\n".join(description_parts),
-                start_time=followup_time,
+                preferred_time=followup_time,
                 duration_minutes=30
             )
             
@@ -413,6 +416,107 @@ Return ONLY the JSON object, no other text.
                 "error": str(e),
                 "latency_ms": (time.time() - start_time) * 1000
             }
+    
+    def _parse_meeting_datetime(self, date_str: str, time_str: str) -> datetime:
+        """Parse date and time strings into a datetime object."""
+        try:
+            # Parse date (expected YYYY-MM-DD format)
+            if date_str:
+                date_part = datetime.strptime(date_str, '%Y-%m-%d').date()
+            else:
+                # Default to tomorrow if no date
+                date_part = (datetime.now() + timedelta(days=1)).date()
+            
+            # Parse time (expected HH:MM format)
+            if time_str:
+                time_part = datetime.strptime(time_str, '%H:%M').time()
+            else:
+                # Default to 10:00 AM if no time
+                time_part = datetime.strptime('10:00', '%H:%M').time()
+            
+            return datetime.combine(date_part, time_part)
+        except Exception as e:
+            print(f"Warning: Could not parse datetime ({date_str}, {time_str}): {e}")
+            # Fallback to tomorrow at 10 AM
+            return datetime.now().replace(hour=10, minute=0, second=0, microsecond=0) + timedelta(days=1)
+    
+    def sync_from_extracted(self, summary: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Sync extracted data to Google Calendar and Tasks.
+        This method doesn't require Gemini - it uses pre-extracted data.
+        Returns dict with count and IDs of created items.
+        """
+        result = {
+            "synced_count": 0,
+            "task_ids": [],
+            "event_ids": []
+        }
+        
+        if not self.google:
+            print("⚠ Google integration not available")
+            return result
+        
+        # Create tasks for action items
+        for action in summary.get('action_items', []):
+            task_title = action.get('task', '')
+            owner = action.get('owner', '')
+            due_date_str = action.get('due_date')
+            
+            # Parse due date
+            due_date = None
+            if due_date_str:
+                try:
+                    for fmt in ['%Y-%m-%d', '%Y-%m-%dT%H:%M:%S', '%m/%d/%Y', '%B %d', '%b %d']:
+                        try:
+                            due_date = datetime.strptime(due_date_str, fmt)
+                            break
+                        except ValueError:
+                            continue
+                except Exception:
+                    pass
+            
+            # Create task
+            notes = f"Owner: {owner}\nFrom meeting: {summary.get('tldr', '')}"
+            task = self.google.create_task(
+                title=task_title,
+                notes=notes,
+                due_date=due_date
+            )
+            
+            if task:
+                result["synced_count"] += 1
+                result["task_ids"].append(task.get('id'))
+        
+        # Create calendar events for scheduled meetings
+        for meeting in summary.get('meetings_to_schedule', []):
+            title = meeting.get('title', 'Scheduled Meeting')
+            description = meeting.get('description', '')
+            date_str = meeting.get('date', '')
+            time_str = meeting.get('time', '')
+            duration = meeting.get('duration_minutes', 60)
+            attendees = meeting.get('attendees', [])
+            
+            # Parse the meeting datetime
+            meeting_time = self._parse_meeting_datetime(date_str, time_str)
+            
+            # Build description with context
+            full_description = f"{description}\n\nFrom meeting: {summary.get('tldr', '')}"
+            if attendees:
+                full_description += f"\n\nAttendees: {', '.join(attendees)}"
+            
+            # Use smart scheduling to avoid conflicts
+            event = self.google.create_calendar_event_smart(
+                summary=title,
+                description=full_description,
+                preferred_time=meeting_time,
+                duration_minutes=duration
+            )
+            
+            if event:
+                result["synced_count"] += 1
+                result["event_ids"].append(event.get('id'))
+        
+        return result
     
     def cleanup(self):
         """Close database connection."""

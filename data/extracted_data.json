@@ -1,0 +1,161 @@
+{
+  "sample_001.txt": {
+    "tldr": "The Q4 planning meeting prioritized mobile app development and SSO implementation. Speaker B will lead the mobile app project, targeting a beta launch by end of December, while Speaker C will own SSO implementation, aiming for completion by November 30th. Speaker D will audit the outdated authentication service this week, identified as a risk. A progress review meeting is scheduled for December 10th at 2:00 PM.",
+    "decisions": [
+      {"decision": "Mobile app development is the top priority for Q4.", "owner": "Speaker A"},
+      {"decision": "Enterprise features, specifically SSO, will also be a key focus.", "owner": "Speaker A"},
+      {"decision": "Speaker B will lead the mobile app project.", "owner": "Speaker A"},
+      {"decision": "Speaker C will own the SSO implementation.", "owner": "Speaker A"},
+      {"decision": "The mobile app beta launch is targeted for the end of December.", "owner": "Speaker A"},
+      {"decision": "SSO implementation is targeted for completion by November 30th.", "owner": "Speaker A"},
+      {"decision": "Speaker D will audit the current authentication service.", "owner": "Speaker A"},
+      {"decision": "A checkpoint meeting will be held on December 10th at 2:00 PM to review progress.", "owner": "Speaker A"}
+    ],
+    "action_items": [
+      {"task": "Lead the mobile app development project.", "owner": "Speaker B", "due_date": null},
+      {"task": "Have a detailed spec ready for the mobile app.", "owner": "Speaker B", "due_date": null},
+      {"task": "Own the SSO implementation.", "owner": "Speaker C", "due_date": "2025-11-30"},
+      {"task": "Help Speaker C on the backend authentication for SSO.", "owner": "Speaker D", "due_date": null},
+      {"task": "Audit the authentication service.", "owner": "Speaker D", "due_date": null}
+    ],
+    "meetings_to_schedule": [
+      {
+        "title": "Q4 Mobile App & SSO Progress Review",
+        "description": "Checkpoint meeting to review mobile app spec and SSO progress",
+        "date": "2025-12-10",
+        "time": "14:00",
+        "duration_minutes": 60,
+        "attendees": ["Speaker A", "Speaker B", "Speaker C", "Speaker D"]
+      }
+    ],
+    "risks": ["Our current authentication service is outdated."]
+  },
+  "sample_002.txt": {
+    "tldr": "The team conducted a sprint retrospective, noting successful story point completion and improved code quality, but identified slow code reviews as an area for improvement. They decided to implement a 24-hour review target and addressed blockers for the next sprint, including needing vendor API keys and a database upgrade. Sprint planning for next week was scheduled for December 12th.",
+    "decisions": [
+      {"decision": "Set a 24-hour code review target.", "owner": null}
+    ],
+    "action_items": [
+      {"task": "Document the 24-hour code review target in the team handbook.", "owner": "Speaker C", "due_date": "2025-12-06"},
+      {"task": "Email the vendor to follow up on API keys.", "owner": "Speaker A", "due_date": "2025-12-06"},
+      {"task": "Create a proposal for the database upgrade.", "owner": "Speaker C", "due_date": "2025-12-09"},
+      {"task": "Send the calendar invite for sprint planning.", "owner": "Speaker C", "due_date": null}
+    ],
+    "meetings_to_schedule": [
+      {
+        "title": "Sprint Planning",
+        "description": "Sprint planning meeting for the next sprint",
+        "date": "2025-12-12",
+        "time": "10:00",
+        "duration_minutes": 60,
+        "attendees": ["Speaker A", "Speaker B", "Speaker C"]
+      }
+    ],
+    "risks": [
+      "Code reviews are taking too long, with some PRs sitting for 3 days.",
+      "Need API keys from the vendor, which is a blocker for the next sprint.",
+      "Database upgrade is needed due to performance risks."
+    ]
+  },
+  "sample_003.txt": {
+    "tldr": "The team provided updates on current tasks: Speaker B encountered a blocker with payment integration's webhook validation and will schedule a vendor call. Speaker C completed the authentication module, ready for review. Speaker D is migrating the database schema and will test it thoroughly before completion tomorrow, with Speaker C tasked to review the migration script.",
+    "decisions": [
+      {"decision": "Speaker B will schedule a vendor call for the payment integration webhook validation blocker.", "owner": "Speaker B"},
+      {"decision": "Speaker A will review Speaker C's authentication module.", "owner": "Speaker A"},
+      {"decision": "Speaker C will review Speaker D's database migration script.", "owner": "Speaker C"},
+      {"decision": "The team will aim to ship 'this feature' by Friday.", "owner": null}
+    ],
+    "action_items": [
+      {"task": "Schedule a vendor call for webhook validation.", "owner": "Speaker B", "due_date": "2025-12-09"},
+      {"task": "Review Speaker C's completed authentication module.", "owner": "Speaker A", "due_date": "2025-12-06"},
+      {"task": "Review Speaker D's database migration script.", "owner": "Speaker C", "due_date": null},
+      {"task": "Test the new database schema migration thoroughly in staging.", "owner": "Speaker D", "due_date": "2025-12-07"}
+    ],
+    "meetings_to_schedule": [
+      {
+        "title": "Vendor Call - Webhook Validation",
+        "description": "Call with vendor to resolve webhook validation blocker for payment integration",
+        "date": "2025-12-09",
+        "time": "11:00",
+        "duration_minutes": 60,
+        "attendees": ["Speaker B"]
+      }
+    ],
+    "risks": [
+      "Blocker with webhook validation for payment integration.",
+      "Risk to project timeline due to webhook validation blocker."
+    ]
+  },
+  "sample_004.txt": {
+    "tldr": "The roadmap planning meeting prioritized Q4 initiatives based on customer feedback, focusing on SSO, basic analytics, and mobile web improvements. SSO was identified as the top priority, with Speaker B as product lead and Speaker D as technical lead, and a detailed project plan due Monday. Risks concerning team capacity and potential SSO blockers led to a 2-week buffer for SSO, and a stakeholder demo for SSO progress is scheduled for December 18th.",
+    "decisions": [
+      {"decision": "SSO is the clear first priority for Q4.", "owner": null},
+      {"decision": "SSO project approved with an estimated effort of 6 weeks with two engineers for SAML and OAuth.", "owner": null},
+      {"decision": "Speaker B designated as Product Lead for the SSO project.", "owner": "Speaker B"},
+      {"decision": "Speaker D designated as Technical Lead for the SSO project.", "owner": "Speaker D"},
+      {"decision": "Analytics will follow a phased approach: basic reporting in Q4, advanced in Q1.", "owner": null},
+      {"decision": "Mobile support will focus on improving mobile web in Q4, deferring native app development to Q1.", "owner": null},
+      {"decision": "Q4 priorities are finalized as SSO, basic analytics, and mobile web improvements.", "owner": null},
+      {"decision": "A 2-week buffer will be added for the SSO project.", "owner": null}
+    ],
+    "action_items": [
+      {"task": "Prepare the spec for the SSO project.", "owner": "Speaker B", "due_date": "2025-12-13"},
+      {"task": "Present three options for analytics.", "owner": "Speaker C", "due_date": null},
+      {"task": "Handle mobile web improvements.", "owner": "Speaker F", "due_date": null},
+      {"task": "Create a detailed project plan for SSO.", "owner": "Speaker B", "due_date": "2025-12-09"},
+      {"task": "Prepare the technical demo for the SSO stakeholder demo.", "owner": "Speaker D", "due_date": "2025-12-18"},
+      {"task": "Prepare product overview slides for the SSO stakeholder demo.", "owner": "Speaker B", "due_date": "2025-12-18"}
+    ],
+    "meetings_to_schedule": [
+      {
+        "title": "Stakeholder Demo",
+        "description": "Stakeholder demo to show SSO progress",
+        "date": "2025-12-18",
+        "time": "15:30",
+        "duration_minutes": 60,
+        "attendees": ["Speaker A", "Speaker B", "Speaker D"]
+      }
+    ],
+    "risks": [
+      "The team might be stretched too thin with only 4 engineers to handle Q4 priorities.",
+      "If SSO hits blockers, other planned projects could slip."
+    ]
+  },
+  "sample_005.txt": {
+    "tldr": "The team conducted a design review for Speaker B's new navigation system, which offers a clearer hierarchy, improved mobile responsiveness, and faster load times. The sidebar design was approved, with Speaker D assigned to lead implementation targeting November 15th completion. Speaker C will work with Speaker B on a user testing plan, with sessions scheduled for mid-December.",
+    "decisions": [
+      {"decision": "Approved and decided to move forward with Speaker B's new navigation system design.", "owner": null},
+      {"decision": "Speaker D will own the implementation of the new navigation system.", "owner": "Speaker D"},
+      {"decision": "Speaker C will work with Speaker B on the user testing plan for the new navigation system.", "owner": "Speaker C"}
+    ],
+    "action_items": [
+      {"task": "Implement the new navigation system.", "owner": "Speaker D", "due_date": "2025-11-15"},
+      {"task": "Work with Speaker B on the user testing plan for the new navigation system.", "owner": "Speaker C", "due_date": null},
+      {"task": "Prepare the user testing plan.", "owner": "Speaker C", "due_date": null},
+      {"task": "Recruit test participants for user testing sessions.", "owner": "Speaker B", "due_date": null},
+      {"task": "Send calendar invites for user testing sessions.", "owner": "Speaker B", "due_date": null}
+    ],
+    "meetings_to_schedule": [
+      {
+        "title": "User Testing Session 1",
+        "description": "First user testing session for the new navigation system",
+        "date": "2025-12-16",
+        "time": "13:00",
+        "duration_minutes": 60,
+        "attendees": ["Speaker B", "Speaker C"]
+      },
+      {
+        "title": "User Testing Session 2",
+        "description": "Second user testing session for the new navigation system",
+        "date": "2025-12-20",
+        "time": "16:00",
+        "duration_minutes": 60,
+        "attendees": ["Speaker B", "Speaker C"]
+      }
+    ],
+    "risks": [
+      "Breaking existing functionality during the implementation of the new navigation system."
+    ]
+  }
+}
+

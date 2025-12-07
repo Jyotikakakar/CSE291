@@ -166,4 +166,209 @@ class GoogleIntegration:
         except HttpError as e:
             print(f"Calendar API error: {e}")
             return []
+    
+    def get_events_on_date(self, target_date: datetime) -> List[Dict]:
+        """Get all events on a specific date."""
+        try:
+            # Start of day
+            start_of_day = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
+            # End of day
+            end_of_day = start_of_day + timedelta(days=1)
+            
+            events_result = self.calendar_service.events().list(
+                calendarId='primary',
+                timeMin=start_of_day.isoformat() + 'Z',
+                timeMax=end_of_day.isoformat() + 'Z',
+                singleEvents=True,
+                orderBy='startTime'
+            ).execute()
+            
+            return events_result.get('items', [])
+            
+        except HttpError as e:
+            print(f"Calendar API error: {e}")
+            return []
+    
+    def check_conflict(self, start_time: datetime, duration_minutes: int = 60) -> bool:
+        """Check if there's a conflict at the given time slot."""
+        try:
+            end_time = start_time + timedelta(minutes=duration_minutes)
+            
+            # Query for events that overlap with our time slot
+            # Google Calendar API requires RFC3339 format with timezone
+            events_result = self.calendar_service.events().list(
+                calendarId='primary',
+                timeMin=start_time.isoformat() + '-08:00',  # PST timezone
+                timeMax=end_time.isoformat() + '-08:00',
+                singleEvents=True
+            ).execute()
+            
+            events = events_result.get('items', [])
+            return len(events) > 0
+            
+        except HttpError as e:
+            print(f"Calendar API error checking conflict: {e}")
+            return False  # Assume no conflict on error
+    
+    def find_free_slot(
+        self, 
+        target_date: datetime, 
+        duration_minutes: int = 60,
+        start_hour: int = 9,
+        end_hour: int = 17
+    ) -> Optional[datetime]:
+        """
+        Find a free time slot on the given date.
+        Searches between start_hour and end_hour (default 9 AM to 5 PM).
+        Returns the first available slot, or None if no slots available.
+        """
+        try:
+            # Get all events on that day
+            events = self.get_events_on_date(target_date)
+            
+            # Build list of busy periods
+            busy_periods = []
+            for event in events:
+                start = event['start'].get('dateTime')
+                end = event['end'].get('dateTime')
+                if start and end:
+                    # Parse ISO format datetime
+                    start_dt = datetime.fromisoformat(start.replace('Z', '+00:00'))
+                    end_dt = datetime.fromisoformat(end.replace('Z', '+00:00'))
+                    # Convert to naive datetime for comparison
+                    busy_periods.append((
+                        start_dt.replace(tzinfo=None),
+                        end_dt.replace(tzinfo=None)
+                    ))
+            
+            # Sort by start time
+            busy_periods.sort(key=lambda x: x[0])
+            
+            # Try each hour slot from start_hour to end_hour
+            current_date = target_date.date()
+            for hour in range(start_hour, end_hour):
+                for minute in [0, 30]:  # Try on the hour and half hour
+                    slot_start = datetime.combine(current_date, datetime.min.time().replace(hour=hour, minute=minute))
+                    slot_end = slot_start + timedelta(minutes=duration_minutes)
+                    
+                    # Check if slot_end goes past end_hour
+                    if slot_end.hour > end_hour or (slot_end.hour == end_hour and slot_end.minute > 0):
+                        continue
+                    
+                    # Check if this slot conflicts with any busy period
+                    is_free = True
+                    for busy_start, busy_end in busy_periods:
+                        # Check for overlap
+                        if not (slot_end <= busy_start or slot_start >= busy_end):
+                            is_free = False
+                            break
+                    
+                    if is_free:
+                        return slot_start
+            
+            return None  # No free slot found
+            
+        except Exception as e:
+            print(f"Error finding free slot: {e}")
+            return None
+    
+    def create_calendar_event_smart(
+        self,
+        summary: str,
+        description: str = "",
+        preferred_time: datetime = None,
+        duration_minutes: int = 60,
+        attendees: List[str] = None
+    ) -> Optional[Dict]:
+        """
+        Create a calendar event with smart conflict resolution.
+        If the preferred time has a conflict, finds an alternative slot on the same day.
+        """
+        if preferred_time is None:
+            preferred_time = datetime.now() + timedelta(days=1)
+        
+        # Check for conflict at preferred time
+        if self.check_conflict(preferred_time, duration_minutes):
+            print(f"⚠ Conflict detected at {preferred_time.strftime('%Y-%m-%d %H:%M')}, finding alternative...")
+            
+            # Find alternative slot on the same day
+            alternative_time = self.find_free_slot(
+                preferred_time,
+                duration_minutes,
+                start_hour=9,
+                end_hour=18
+            )
+            
+            if alternative_time:
+                print(f"✓ Found free slot at {alternative_time.strftime('%H:%M')}")
+                preferred_time = alternative_time
+            else:
+                # Try the next day if no slot found
+                next_day = preferred_time + timedelta(days=1)
+                alternative_time = self.find_free_slot(
+                    next_day,
+                    duration_minutes,
+                    start_hour=9,
+                    end_hour=18
+                )
+                if alternative_time:
+                    print(f"✓ No slots today, scheduled for {alternative_time.strftime('%Y-%m-%d %H:%M')}")
+                    preferred_time = alternative_time
+                else:
+                    print("⚠ Could not find free slot, scheduling anyway (may conflict)")
+        
+        # Create the event
+        return self.create_calendar_event(
+            summary=summary,
+            description=description,
+            start_time=preferred_time,
+            duration_minutes=duration_minutes,
+            attendees=attendees
+        )
+    
+    def delete_task(self, task_id: str, task_list_id: str = '@default') -> bool:
+        """Delete a task by ID."""
+        try:
+            self.tasks_service.tasks().delete(
+                tasklist=task_list_id,
+                task=task_id
+            ).execute()
+            return True
+        except HttpError as e:
+            if e.resp.status == 404:
+                # Task already deleted
+                return True
+            print(f"Error deleting task {task_id}: {e}")
+            return False
+    
+    def delete_calendar_event(self, event_id: str) -> bool:
+        """Delete a calendar event by ID."""
+        try:
+            self.calendar_service.events().delete(
+                calendarId='primary',
+                eventId=event_id
+            ).execute()
+            return True
+        except HttpError as e:
+            if e.resp.status in [404, 410]:
+                # Event already deleted or gone
+                return True
+            print(f"Error deleting event {event_id}: {e}")
+            return False
+    
+    def delete_multiple_tasks(self, task_ids: List[str], task_list_id: str = '@default') -> int:
+        """Delete multiple tasks. Returns count of successfully deleted."""
+        deleted = 0
+        for task_id in task_ids:
+            if self.delete_task(task_id, task_list_id):
+                deleted += 1
+        return deleted
+    
+    def delete_multiple_events(self, event_ids: List[str]) -> int:
+        """Delete multiple calendar events. Returns count of successfully deleted."""
+        deleted = 0
+        for event_id in event_ids:
+            if self.delete_calendar_event(event_id):
+                deleted += 1
+        return deleted
 
