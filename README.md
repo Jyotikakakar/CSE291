@@ -1,103 +1,545 @@
 # Meeting Summarizer Agent
 
-A Python application that uses Google's Gemini AI to analyze meeting transcripts and extract key information like decisions, action items, and risks. 
+A Python application that uses Google's Gemini AI to analyze meeting transcripts and automatically sync extracted information to Google Calendar and Tasks.
 
-**Phase 1**: Baseline agent with user and session management, deployed on EC2 with Docker for evaluation.
+---
+
+## 🚀 Steps to Run
+
+```bash
+# 1. Clone and setup
+git clone https://github.com/Jyotikakakar/CSE291.git
+cd CSE291
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# 2. Set Gemini API Key
+export GEMINI_API_KEY="your-api-key-here"
+
+# 3. Place Google OAuth credentials.json in project root
+# (Download from Google Cloud Console)
+
+# 4. Run the agent
+python run.py              # Extract + Sync to Google
+python run.py --extract    # Extract only (saves to JSON)
+python run.py --sync       # Sync saved data to Google
+```
+
+---
 
 ## Features
 
-- ✅ Meeting transcript summarization using Gemini AI
-- ✅ Extracts decisions, action items, risks, and key points
-- ✅ **Google Calendar integration** - Create and manage meeting events
-- ✅ **Google Tasks integration** - Create and track action items
-- ✅ Multi-user support with isolated containers
-- ✅ Session management within user contexts
-- ✅ REST API for programmatic access
-- ✅ EC2 deployment ready
-- ✅ Evaluation framework with visualization
+- ✅ **AI-Powered Summarization** - Uses Gemini 2.0 Flash to extract decisions, action items, risks, and key points
+- ✅ **Google Calendar Integration** - Automatically creates calendar events for scheduled meetings
+- ✅ **Google Tasks Integration** - Creates tasks for action items with owners and due dates
+- ✅ **Smart Scheduling** - Detects conflicts and finds free time slots automatically
+- ✅ **Context-Aware** - Maintains context across multiple meetings for better summaries
+- ✅ **Local Storage** - SQLite database stores all meeting data locally
+- ✅ **Flexible Modes** - Run extraction only, sync only, or both together
+- ✅ **Cleanup Support** - Automatically removes previously synced items before re-syncing
 
-## Quick Start with Docker (Recommended)
+---
 
-### Prerequisites
-- Docker and Docker Compose installed
-- Google Gemini API key
-- (Optional) Google OAuth credentials for Calendar/Tasks integration
+## Phase 2: Context & Memory Implementation
 
-### Quick Test
+This section documents the context and memory architecture that enables the Meeting Summarizer Agent to maintain state across sessions and provide intelligent, context-aware processing.
 
-Test the integration locally:
+### Overview
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+The agent implements a **multi-layer memory system** that captures, stores, and retrieves context from:
+- Individual meeting transcripts (intra-session)
+- Historical meeting data across sessions (inter-session)
+- Active action items and decisions (persistent memory)
 
-# Set Gemini API key
-export GEMINI_API_KEY="your_key_here"
+### 1. Context Extraction from Conversations and Tool Outputs
 
-# Run test suite
-python test_tools.py
+#### What Context Matters
 
-# Or test the agent directly
-python agent.py
+For a meeting summarization agent, the following context is critical:
+
+| Context Type | Description | Extraction Method |
+|--------------|-------------|-------------------|
+| **Meeting Summaries (TL;DR)** | High-level overview of past meetings | LLM-based extraction |
+| **Action Items** | Tasks with owners and due dates | Structured JSON extraction |
+| **Decisions** | Decisions made with ownership and context | Structured JSON extraction |
+| **Context Connections** | Links between current and past meetings | LLM inference with context injection |
+| **Risks & Blockers** | Identified issues that persist across meetings | Array extraction |
+
+#### Context Extraction Flow
+
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│   Transcript    │────▶│   Gemini LLM     │────▶│  Structured     │
+│   (Raw Text)    │     │   with Context   │     │  JSON Output    │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                               │
+                               ▼
+                    ┌──────────────────┐
+                    │  Previous        │
+                    │  Meeting Context │
+                    │  (from SQLite)   │
+                    └──────────────────┘
 ```
 
-### Get Your API Key
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key
-3. Copy the API key for the next step
+**Implementation Details:**
 
-### Run with Docker Compose
+1. **First Meeting**: Processed without context (baseline extraction)
+2. **Subsequent Meetings**: Previous meetings are injected into the prompt:
+
+```python
+# From meeting_agent.py - Context injection
+if use_context:
+    context_summary = self.get_context_from_db()
+    if "No previous" not in context_summary:
+        context_section = f"""
+PREVIOUS MEETING CONTEXT:
+{context_summary}
+
+IMPORTANT: Consider the context from previous meetings when analyzing this transcript.
+- Reference any ongoing action items or decisions from previous meetings
+- Identify connections between this meeting and previous discussions
+"""
+```
+
+3. **Extraction Prompt**: The LLM is instructed to identify `context_connections` that link the current meeting to prior discussions:
+
+```json
+{
+  "context_connections": [
+    {
+      "connection": "Mobile app development discussed in Q4 planning",
+      "reference": "Meeting 1 - Priority set for Q4"
+    }
+  ]
+}
+```
+
+### 2. Storage System Architecture
+
+The agent uses a **hybrid storage approach** combining:
+
+| Storage Type | Technology | Purpose | Persistence |
+|--------------|------------|---------|-------------|
+| **Relational DB** | SQLite | Structured meeting data, relationships | Persistent (file) |
+| **JSON Files** | File System | Extracted data snapshots, sync state | Persistent (file) |
+| **In-Memory** | Python objects | Thread context, session metrics | Session-only |
+
+#### SQLite Database Schema
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         meetings.db                              │
+├─────────────────────────────────────────────────────────────────┤
+│  meetings                                                        │
+│  ├── id (PK)           INTEGER                                   │
+│  ├── thread_id         TEXT          -- User/session grouping    │
+│  ├── timestamp         TEXT          -- Meeting date             │
+│  ├── tldr              TEXT          -- Quick summary            │
+│  ├── summary_json      TEXT          -- Full extracted data      │
+│  └── created_at        DATETIME                                  │
+│                                                                  │
+│  action_items                                                    │
+│  ├── id (PK)           INTEGER                                   │
+│  ├── meeting_id (FK)   INTEGER       -- Links to meetings        │
+│  ├── task              TEXT                                      │
+│  ├── owner             TEXT                                      │
+│  ├── due_date          TEXT                                      │
+│  ├── google_task_id    TEXT          -- Sync tracking            │
+│  └── created_at        DATETIME                                  │
+│                                                                  │
+│  decisions                                                       │
+│  ├── id (PK)           INTEGER                                   │
+│  ├── meeting_id (FK)   INTEGER                                   │
+│  ├── decision          TEXT                                      │
+│  ├── owner             TEXT                                      │
+│  ├── context           TEXT          -- Why decision was made    │
+│  └── created_at        DATETIME                                  │
+│                                                                  │
+│  calendar_events                                                 │
+│  ├── id (PK)           INTEGER                                   │
+│  ├── meeting_id (FK)   INTEGER                                   │
+│  ├── google_event_id   TEXT          -- Sync tracking            │
+│  ├── summary           TEXT                                      │
+│  ├── start_time        TEXT                                      │
+│  └── created_at        DATETIME                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+#### JSON File Storage
+
+| File | Purpose |
+|------|---------|
+| `data/extracted_data.json` | Snapshot of all extracted meeting data for sync-only mode |
+| `data/sync_state.json` | Tracks Google Task/Event IDs for cleanup on re-sync |
+
+#### Thread-Based Session Management
+
+The agent uses `thread_id` to isolate user sessions:
+
+```python
+# Each agent instance has its own thread
+agent = MCPMeetingAgent(thread_id="meetings", enable_google=True)
+
+# Context retrieval is scoped to the thread
+cursor.execute("""
+    SELECT id, timestamp, tldr, summary_json
+    FROM meetings
+    WHERE thread_id = ?
+    ORDER BY created_at DESC
+    LIMIT ?
+""", (self.thread_id, max_meetings))
+```
+
+This enables:
+- **Intra-session memory**: Context within a single run
+- **Inter-session memory**: Context persists across runs (same thread_id)
+- **User isolation**: Different thread_ids maintain separate contexts
+
+### 3. Tool Call Optimization Based on Context
+
+The agent optimizes external tool calls (Google API) using stored context:
+
+#### Smart Calendar Scheduling
+
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│   Preferred     │────▶│  Check Conflict  │────▶│  Create Event   │
+│   Time Slot     │     │  (API Call)      │     │  (Final Slot)   │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                               │
+                    ┌──────────┴──────────┐
+                    ▼                     ▼
+            No Conflict              Conflict Detected
+                    │                     │
+                    ▼                     ▼
+            Use Preferred         Find Free Slot
+                                  (Same Day → Next Day)
+```
+
+**Implementation:**
+
+```python
+def create_calendar_event_smart(self, summary, description, preferred_time, duration_minutes):
+    # Check for conflict at preferred time
+    if self.check_conflict(preferred_time, duration_minutes):
+        # Find alternative slot on the same day
+        alternative_time = self.find_free_slot(preferred_time, duration_minutes)
+        
+        if not alternative_time:
+            # Try the next day if no slot found
+            alternative_time = self.find_free_slot(preferred_time + timedelta(days=1), duration_minutes)
+    
+    return self.create_calendar_event(summary, description, preferred_time, duration_minutes)
+```
+
+#### Sync State Tracking
+
+The agent tracks all created Google resources to enable:
+- **Idempotent re-syncs**: Delete previous items before creating new ones
+- **Resource cleanup**: No orphaned tasks/events on re-run
+
+```python
+# Sync state structure
+{
+    "task_ids": ["task_abc123", "task_def456"],
+    "event_ids": ["event_xyz789"]
+}
+```
+
+### 4. Error Handling and Resource Management
+
+#### Database Connection Management
+
+```python
+class MCPMeetingAgent:
+    def __init__(self, ...):
+        self.conn = None
+        self._init_database()
+    
+    def _init_database(self):
+        try:
+            self.conn = sqlite3.connect(self.db_path)
+            self.conn.row_factory = sqlite3.Row  # Dict-like access
+            # ... table creation ...
+        except Exception as e:
+            print(f"Warning: Database initialization error: {e}")
+    
+    def cleanup(self):
+        """Close database connection."""
+        if self.conn:
+            self.conn.close()
+```
+
+#### Google API Error Handling
+
+| Error Type | Handling Strategy |
+|------------|-------------------|
+| `HttpError 404/410` | Resource already deleted → Return success |
+| `Token Expired` | Automatic refresh using refresh_token |
+| `Credentials Missing` | Descriptive error with setup instructions |
+| `API Quota Exceeded` | Graceful degradation (skip sync) |
+
+```python
+def delete_calendar_event(self, event_id):
+    try:
+        self.calendar_service.events().delete(...).execute()
+        return True
+    except HttpError as e:
+        if e.resp.status in [404, 410]:
+            return True  # Already deleted
+        print(f"Error deleting event: {e}")
+        return False
+```
+
+#### Instance Constraints
+
+The agent operates within the following constraints:
+
+| Resource | Constraint | Handling |
+|----------|------------|----------|
+| SQLite connections | 1 per agent instance | Cleanup on exit |
+| Google API tokens | Single token.json | Automatic refresh |
+| Memory (context) | Last 3 meetings + 5 action items | Configurable limits |
+| Gemini API | Rate limited | No retry (fast-fail) |
+
+### Context Flow Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           Meeting Summarizer Agent                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌───────────┐        ┌─────────────┐        ┌───────────────────┐         │
+│   │ Transcript│───────▶│   Gemini    │───────▶│ Structured Output │         │
+│   │  Input    │        │   + Context │        │ (JSON Summary)    │         │
+│   └───────────┘        └──────▲──────┘        └────────┬──────────┘         │
+│                               │                        │                     │
+│                    ┌──────────┴──────────┐             │                     │
+│                    │                     │             ▼                     │
+│          ┌─────────┴─────────┐  ┌────────┴────────┐  ┌───────────────┐      │
+│          │   SQLite DB       │  │  Previous       │  │  Store in DB  │      │
+│          │   (Persistent)    │◀─│  Meeting TL;DRs │  │  + JSON File  │      │
+│          │                   │  │  + Action Items │  │               │      │
+│          └─────────┬─────────┘  └─────────────────┘  └───────┬───────┘      │
+│                    │                                          │              │
+│                    ▼                                          ▼              │
+│          ┌─────────────────────────────────────────────────────────┐        │
+│          │                    Google Sync                           │        │
+│          │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │        │
+│          │  │ Tasks API   │  │ Calendar API│  │ Conflict Check  │  │        │
+│          │  │ (Actions)   │  │ (Meetings)  │  │ + Smart Schedule│  │        │
+│          │  └─────────────┘  └─────────────┘  └─────────────────┘  │        │
+│          └─────────────────────────────────────────────────────────┘        │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Summary: Memory Types Implemented
+
+| Memory Type | Scope | Storage | Retrieval |
+|-------------|-------|---------|-----------|
+| **Intra-session** | Single run | In-memory + DB | Automatic per meeting |
+| **Inter-session** | Across runs | SQLite DB | By thread_id lookup |
+| **Cross-user** (Future) | Multiple users | Would require distributed DB | Not implemented |
+
+### Future Enhancements (Cross-User Memory)
+
+For cross-user context sharing, the architecture would need:
+
+1. **Distributed Storage**: PostgreSQL or MongoDB cluster
+2. **User Authentication**: OAuth for user identification
+3. **Permission Model**: Define what context is shareable
+4. **Conflict Resolution**: Handle concurrent updates
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Python 3.10+
+- Google Gemini API key
+- Google OAuth credentials (for Calendar/Tasks integration)
+
+### Installation
 
 ```bash
-# Clone and navigate to the project
+# Clone the repository
 git clone https://github.com/Jyotikakakar/CSE291.git
 cd CSE291
 
-# Set your Gemini API key
-export GEMINI_API_KEY="your-api-key-here"
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
 
-# Start the application
-docker-compose up
-
-# The application will:
-# 1. Connect to Gemini API
-# 2. Load meeting transcripts
-# 3. Run the meeting summarizer evaluation
-```
-
-### Manual Setup (Alternative)
-
-### Step 1: Get Gemini API Key
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key
-3. Copy the API key
-
-### Step 2: Install Python Dependencies
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### Step 3: Set Environment Variable
+### Configuration
+
+#### 1. Set up Gemini API Key
+
+Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey):
 
 ```bash
-# Set your API key
+# Option 1: Environment variable
 export GEMINI_API_KEY="your-api-key-here"
 
-# Or create a .env file
+# Option 2: .env file
 echo "GEMINI_API_KEY=your-api-key-here" > .env
 ```
 
-### Step 4: Run Everything!
+#### 2. Set up Google OAuth (for Calendar/Tasks)
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+2. Create a new project or select an existing one
+3. Enable the **Google Calendar API** and **Google Tasks API**
+4. Create OAuth 2.0 credentials (Desktop application)
+5. Download the credentials and save as `credentials.json` in the project root
+
+On first run, a browser window will open for authentication. The token is saved to `token.json` for future use.
+
+## Usage
+
+### Run All (Extract + Sync)
+
+Process transcripts with Gemini AI and sync results to Google:
 
 ```bash
-python3 run.py
+python run.py
 ```
 
-## Docker Commands
+### Extract Only (No Google Sync)
+
+Extract data from transcripts and save to JSON (requires Gemini API):
 
 ```bash
-# Build and run with Docker Compose
+python run.py --extract
+```
+
+### Sync Only (No Gemini Required)
+
+Sync previously extracted data to Google Calendar/Tasks:
+
+```bash
+python run.py --sync
+```
+
+This mode:
+- Uses saved data from `data/extracted_data.json`
+- Automatically deletes items from the previous sync
+- Does not require Gemini API key
+
+## What Gets Extracted
+
+The agent analyzes meeting transcripts and extracts:
+
+| Field | Description |
+|-------|-------------|
+| **TL;DR** | 2-3 sentence summary of the meeting |
+| **Decisions** | Decisions made with owners and context |
+| **Action Items** | Tasks with owners and due dates → synced to Google Tasks |
+| **Meetings to Schedule** | Follow-up meetings → synced to Google Calendar |
+| **Risks** | Identified blockers and risks |
+| **Key Points** | Main discussion points |
+| **Context Connections** | Links to previous meetings (when context is enabled) |
+
+## Example Output
+
+After running the agent on sample transcripts:
+
+```
+================================================================================
+MEETING 1: sample_001.txt
+================================================================================
+Transcript length: 217 words
+
+✓ Summarized in 2847ms
+  Meeting ID: 1
+
+TL;DR:
+  The Q4 planning meeting prioritized mobile app development and SSO implementation...
+
+Decisions (8):
+  - Mobile app development is the top priority for Q4. (Owner: Speaker A)
+  - Speaker B will lead the mobile app project. (Owner: Speaker A)
+  ...
+
+Action Items (5):
+  - Lead the mobile app development project. (Owner: Speaker B, Due: N/A)
+  - Own the SSO implementation. (Owner: Speaker C, Due: 2025-11-30)
+  ...
+
+📅 Meetings Scheduled (1):
+  - Q4 Mobile App & SSO Progress Review: 2025-12-10 at 14:00 (60 min)
+
+Risks (1):
+  - Our current authentication service is outdated.
+
+✓ Created task: Lead the mobile app development project.
+✓ Created task: Own the SSO implementation.
+✓ Created calendar event: Q4 Mobile App & SSO Progress Review
+✓ Synced 6 items to Google
+```
+
+## Data Files
+
+| File | Description |
+|------|-------------|
+| `data/transcripts/*.txt` | Input meeting transcript files |
+| `data/extracted_data.json` | Extracted meeting data (JSON) |
+| `data/sync_state.json` | Tracks synced items for cleanup |
+| `meetings.db` | SQLite database with all meeting data |
+
+## Project Structure
+
+```
+CSE291/
+├── run.py                  # Main entry point (3 modes)
+├── meeting_agent.py        # Core agent with Gemini + Google integration
+├── google_integration.py   # Google Calendar/Tasks API wrapper
+├── config.py               # Configuration and environment setup
+├── requirements.txt        # Python dependencies
+├── credentials.json        # Google OAuth credentials (not in git)
+├── token.json              # Google OAuth token (not in git)
+├── meetings.db             # SQLite database
+├── data/
+│   ├── transcripts/        # Input transcript files
+│   ├── extracted_data.json # Extracted meeting data
+│   └── sync_state.json     # Sync tracking state
+└── README.md
+```
+
+## Smart Scheduling
+
+The Google integration includes intelligent conflict handling:
+
+1. **Conflict Detection** - Checks if preferred time slot is busy
+2. **Free Slot Finder** - Searches for available 30-minute slots (9 AM - 6 PM)
+3. **Fallback** - Tries the next day if no slots available today
+4. **Calendar Event Creation** - Creates events with attendees and descriptions
+
+Example:
+```
+⚠ Conflict detected at 2025-12-10 14:00, finding alternative...
+✓ Found free slot at 15:00
+✓ Created calendar event: Q4 Mobile App & SSO Progress Review
+```
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GEMINI_API_KEY` | Yes* | Google Gemini API key |
+| `GEMINI_MODEL` | No | Model name (default: `gemini-2.0-flash-exp`) |
+
+*Not required for `--sync` mode
+
+## Docker Support
+
+```bash
+# Build and run
 docker-compose up
 
 # Run in background
@@ -106,146 +548,23 @@ docker-compose up -d
 # View logs
 docker-compose logs -f
 
-# Stop services
+# Stop
 docker-compose down
 
-# Rebuild after code changes
+# Rebuild after changes
 docker-compose up --build
-
-# Clean up (removes volumes)
-docker-compose down -v
 ```
 
-## Configuration
+## Sample Transcripts
 
-### Environment Variables
-- `GEMINI_API_KEY`: Your Google Gemini API key (required)
-- `GOOGLE_CREDENTIALS_PATH`: Path to Google OAuth credentials JSON (optional, for Calendar/Tasks)
-- `GOOGLE_TOKEN_PATH`: Path to store Google OAuth token (optional)
-- AWS credentials (optional, for S3 URL support):
-  - `AWS_ACCESS_KEY_ID`: AWS access key
-  - `AWS_SECRET_ACCESS_KEY`: AWS secret key
-  - `AWS_DEFAULT_REGION`: AWS region (default: us-east-1)
-  - Or configure via `~/.aws/credentials`
+The project includes 5 sample meeting transcripts in `data/transcripts/`:
 
-### Setting up API Key
+- `sample_001.txt` - Q4 Planning Meeting
+- `sample_002.txt` - Sprint Retrospective
+- `sample_003.txt` - Daily Standup
+- `sample_004.txt` - Roadmap Planning
+- `sample_005.txt` - Design Review
 
-**Option 1: Environment Variable**
-```bash
-export GEMINI_API_KEY="your-api-key-here"
-```
+## License
 
-**Option 2: .env File**
-```bash
-echo "GEMINI_API_KEY=your-api-key-here" > .env
-```
-
-**Option 3: Docker Compose**
-```bash
-GEMINI_API_KEY="your-api-key-here" docker-compose up
-```
-
-## Results
-
-The application generates:
-- `results/evaluation.json`: Detailed evaluation results
-- `results/latency_cdf.png`: Latency distribution chart
-- `results/extraction_counts.png`: Items extracted per meeting
-- `results/success_rate.png`: Success vs failure rate
-
-## EC2 Deployment
-
-For deploying on AWS EC2 with Docker and multi-user support, see:
-
-**📖 [DEPLOYMENT.md](DEPLOYMENT.md)** - Complete manual deployment guide
-
-Quick overview:
-- Deploy on EC2 with Docker (no IAM roles needed)
-- Each user gets isolated container (ports 5001-5004)
-- Multiple sessions per user in same container
-- REST API for evaluation
-- Manual steps provided (no scripts required)
-
-### Local API Testing
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Test API connection (replace with your EC2 IP)
-python3 client.py http://your-ec2-ip:5001
-
-# Run multi-user evaluation
-python3 evaluate_api.py http://your-ec2-ip:500
-```
-
-### API Endpoints
-
-**Main Endpoint (Simple API):**
-- `POST /analyze` - Analyze transcript (auto-creates session from transcript content)
-  - **Option 1 - Direct text**: `{"transcript": "..."}`
-  - **Option 2 - S3 URL**: `{"transcript_url": "s3://bucket/path/to/file.txt"}`
-  - Optional: Add `meeting_info` to create calendar events
-  - Returns: Summary, session info, tasks, and calendar events
-  - Session is automatically created with a meaningful name derived from transcript
-
-**Health & Metrics:**
-- `GET /health` - Health check
-- `GET /api/metrics` - Get agent metrics
-
-**Session Management (Advanced):**
-- `GET /api/sessions` - List all sessions
-- `GET /api/session/<id>` - Get session details
-- `GET /api/session/<id>/history` - Get session history
-- `POST /api/session/create` - Create new session manually (optional)
-
-### S3 URL Support
-
-Store meeting transcripts in S3 and pass URLs instead of text:
-
-**Supported URL formats:**
-- `s3://bucket-name/path/to/file.txt`
-- `https://bucket.s3.region.amazonaws.com/path/to/file.txt`
-- `https://s3.region.amazonaws.com/bucket/path/to/file.txt`
-
-**Example usage:**
-```python
-from client import MeetingSummarizerClient
-
-client = MeetingSummarizerClient("http://localhost:5000")
-
-# Use S3 URL instead of transcript text
-result = client.analyze(
-    transcript_url="s3://my-bucket/transcripts/meeting.txt",
-    meeting_info={
-        "title": "Follow-up Meeting",
-        "date": "2025-10-30",
-        "time": "2:00 PM"
-    }
-)
-```
-
-**See also:**
-- `curl_examples.txt` - cURL examples with S3 URLs
-
-## Project Structure
-
-```
-CSE291/
-├── agent.py              # Core meeting summarizer agent
-├── api.py                # Flask REST API with user/session mgmt
-├── client.py             # API client for testing
-├── evaluate.py           # Local evaluation script
-├── evaluate_api.py       # Multi-user API evaluation
-├── load_data.py          # Data loading utilities
-├── run.py                # Local execution script
-├── curl_examples.txt     # cURL examples including S3 URLs
-├── Dockerfile            # Container configuration
-├── docker-compose.yml    # Local Docker setup
-├── manage_containers.sh  # Container management helper
-├── requirements.txt      # Python dependencies (includes boto3)
-├── DEPLOYMENT.md         # EC2 deployment guide
-├── data/                 # Meeting transcripts
-└── results/              # Evaluation results
-```
-
+MIT License
