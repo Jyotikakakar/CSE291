@@ -82,72 +82,87 @@ def print_summary(summary, filename):
             print(f"  - {risk}")
 
 
-def run_extract(sync_to_google=True):
+def discover_users(transcript_dir="data/transcripts"):
+    """Discover user folders in transcript directory."""
+    users = [d for d in os.listdir(transcript_dir) 
+             if os.path.isdir(os.path.join(transcript_dir, d))]
+    return sorted(users)
+
+
+def run_extract(sync_to_google=True, user_filter=None):
     """Extract data from transcripts using Gemini and save to JSON."""
     print("\n" + "=" * 80)
-    print("MEETING AGENT - Extract Mode")
+    print("MEETING AGENT - Extract Mode (Cross-User Context)")
     print("=" * 80)
     
-    # Initialize agent
-    agent = MCPMeetingAgent(thread_id="meetings", enable_google=sync_to_google)
-    
-    # Find all transcript files
     transcript_dir = "data/transcripts"
-    transcript_files = sorted(glob.glob(os.path.join(transcript_dir, "*.txt")))
+    users = discover_users(transcript_dir)
     
-    if not transcript_files:
-        print(f"\n⚠ No transcript files found in {transcript_dir}/")
+    if not users:
+        print(f"\n⚠ No user folders found in {transcript_dir}/")
         return
     
-    print(f"\nFound {len(transcript_files)} transcript(s)")
+    if user_filter:
+        users = [u for u in users if u == user_filter]
+        if not users:
+            print(f"\n⚠ User '{user_filter}' not found")
+            return
     
-    # Load existing extracted data (to append/update)
+    print(f"\nFound {len(users)} user(s): {users}")
+    
     extracted_data = load_extracted_data()
+    total_meetings = 0
     
-    for i, file_path in enumerate(transcript_files, 1):
-        filename = os.path.basename(file_path)
+    for user in users:
         print(f"\n{'='*80}")
-        print(f"MEETING {i}: {filename}")
+        print(f"PROCESSING USER: {user}")
         print(f"{'='*80}")
         
-        with open(file_path, 'r') as f:
-            transcript = f.read()
-        
-        print(f"Transcript length: {len(transcript.split())} words")
-        
-        # Summarize with context (use context only after first meeting)
-        result = agent.summarize(
-            transcript,
-            use_context=(i > 1),
-            sync_google=sync_to_google,
-            create_followup=False  # Don't create generic follow-ups, use meetings_to_schedule
+        agent = MCPMeetingAgent(
+            thread_id=user,
+            global_thread_id="global",
+            enable_google=sync_to_google
         )
         
-        if result["success"]:
-            summary = result['summary']
-            print(f"\n✓ Summarized in {result['latency_ms']:.0f}ms")
-            print(f"  Meeting ID: {result['meeting_id']}")
+        user_path = os.path.join(transcript_dir, user)
+        transcript_files = sorted(glob.glob(os.path.join(user_path, "*.txt")))
+        
+        if not transcript_files:
+            print(f"  No transcripts found for {user}")
+            agent.cleanup()
+            continue
+        
+        for i, file_path in enumerate(transcript_files, 1):
+            filename = os.path.basename(file_path)
+            print(f"\n  Meeting {i}: {filename}")
             
-            # Save to extracted data
-            extracted_data[filename] = summary
+            with open(file_path, 'r') as f:
+                transcript = f.read()
             
-            print_summary(summary, filename)
-        else:
-            print(f"\n✗ Error: {result['error']}")
+            result = agent.summarize(
+                transcript,
+                use_context=True,
+                sync_google=sync_to_google,
+                create_followup=False
+            )
+            
+            if result["success"]:
+                summary = result['summary']
+                print(f"  ✓ Summarized in {result['latency_ms']:.0f}ms")
+                extracted_data[f"{user}/{filename}"] = summary
+                total_meetings += 1
+            else:
+                print(f"  ✗ Error: {result['error']}")
+        
+        agent.cleanup()
     
-    # Save all extracted data to JSON
     save_extracted_data(extracted_data)
     
-    # Summary
     print(f"\n{'='*80}")
     print("COMPLETE")
     print(f"{'='*80}")
-    print(f"Processed: {agent.metrics['total_requests']} meetings")
-    if agent.metrics['total_requests'] > 0:
-        avg_latency = agent.metrics['total_latency_ms'] / agent.metrics['total_requests']
-        print(f"Avg latency: {avg_latency:.0f}ms")
-    
-    agent.cleanup()
+    print(f"Users processed: {len(users)}")
+    print(f"Total meetings: {total_meetings}")
 
 
 def delete_previous_sync(agent):
@@ -254,21 +269,31 @@ def run_sync():
 
 def main():
     """Main entry point with argument handling."""
+    user_filter = None
+    
+    # Parse --user argument
+    if '--user' in sys.argv:
+        idx = sys.argv.index('--user')
+        if idx + 1 < len(sys.argv):
+            user_filter = sys.argv[idx + 1]
+    
     if len(sys.argv) > 1:
         arg = sys.argv[1].lower()
         
         if arg == '--sync':
             run_sync()
         elif arg == '--extract':
-            run_extract(sync_to_google=False)
+            run_extract(sync_to_google=False, user_filter=user_filter)
+        elif arg == '--user':
+            run_extract(sync_to_google=True, user_filter=user_filter)
         elif arg == '--help' or arg == '-h':
             print(__doc__)
         else:
             print(f"Unknown argument: {arg}")
             print(__doc__)
     else:
-        # Default: extract + sync
-        run_extract(sync_to_google=True)
+        # Default: extract + sync all users
+        run_extract(sync_to_google=True, user_filter=user_filter)
 
 
 if __name__ == "__main__":

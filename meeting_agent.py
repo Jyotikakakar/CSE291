@@ -17,7 +17,7 @@ from google_integration import GoogleIntegration
 class MCPMeetingAgent:
     """Meeting agent with context-aware summarization, local storage, and Google integration."""
     
-    def __init__(self, thread_id: str = "default", enable_google: bool = True, require_gemini: bool = True):
+    def __init__(self, thread_id: str = "default", global_thread_id: str = None, enable_google: bool = True, require_gemini: bool = True):
         # Gemini is optional for sync-only mode
         self.model = None
         if require_gemini:
@@ -27,6 +27,7 @@ class MCPMeetingAgent:
             self.model = genai.GenerativeModel(GEMINI_MODEL)
         
         self.thread_id = thread_id
+        self.global_thread_id = global_thread_id
         self.db_path = "./meetings.db"
         self.conn = None
         
@@ -152,6 +153,27 @@ class MCPMeetingAgent:
                     decision.get('owner'),
                     decision.get('context')
                 ))
+            
+            # Share condensed summary to global thread for cross-user context
+            if self.global_thread_id:
+                key_decisions = [d.get('decision') for d in summary.get('decisions', [])[:3]]
+                key_actions = [a.get('task') for a in summary.get('action_items', [])[:3]]
+                shared_summary = {
+                    "tldr": summary.get('tldr'),
+                    "key_decisions": key_decisions,
+                    "key_actions": key_actions,
+                    "source_user": self.thread_id
+                }
+                cursor.execute("""
+                    INSERT INTO meetings (thread_id, timestamp, tldr, summary_json)
+                    VALUES (?, ?, ?, ?)
+                """, (
+                    self.global_thread_id,
+                    datetime.now().isoformat(),
+                    f"[{self.thread_id}] {summary.get('tldr', '')}",
+                    json.dumps(shared_summary)
+                ))
+                print(f"✓ Shared to global thread")
             
             self.conn.commit()
             print(f"✓ Stored meeting in database (ID: {meeting_id})")
@@ -290,6 +312,23 @@ class MCPMeetingAgent:
                     owner = action['owner'] or 'N/A'
                     context_parts.append(f"  - {action['task']} (Owner: {owner})")
             
+            # Get cross-user context from global thread
+            if self.global_thread_id:
+                cursor.execute("""
+                    SELECT tldr, summary_json
+                    FROM meetings
+                    WHERE thread_id = ?
+                      AND tldr NOT LIKE ?
+                    ORDER BY created_at DESC
+                    LIMIT 5
+                """, (self.global_thread_id, f"[{self.thread_id}]%"))
+                
+                global_meetings = cursor.fetchall()
+                if global_meetings:
+                    context_parts.append(f"\n\nTEAM CONTEXT (from other users):")
+                    for meeting in global_meetings:
+                        context_parts.append(f"  • {meeting['tldr']}")
+            
             return "\n".join(context_parts)
             
         except Exception as e:
@@ -323,9 +362,10 @@ class MCPMeetingAgent:
 PREVIOUS MEETING CONTEXT:
 {context_summary}
 
-IMPORTANT: Consider the context from previous meetings when analyzing this transcript.
-- Reference any ongoing action items or decisions from previous meetings
-- Identify connections between this meeting and previous discussions
+IMPORTANT: You MUST identify connections to the context above.
+- If TEAM CONTEXT exists, reference those items using the [username] tag shown
+- Reference any ongoing action items or decisions
+- Include the source (e.g., "[sarah_pm] Q4 priorities") in your context_connections
 """
         
         prompt = f"""{context_section}
