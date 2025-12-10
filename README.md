@@ -1,5 +1,6 @@
 # Meeting Summarizer Agent
 
+
 A Python application that uses Google's Gemini AI to analyze meeting transcripts and automatically sync extracted information to Google Calendar and Tasks.
 
 ---
@@ -24,17 +25,19 @@ export GEMINI_API_KEY="your-api-key-here"
 python run.py
 ```
 
+> **Note:** The context-free meeting agent is available on the `main` branch.
+
 ---
 
 ## Features
 
-- ✅ **AI-Powered Summarization** - Uses Gemini 2.0 Flash to extract decisions, action items, risks, and key points
-- ✅ **Google Calendar Integration** - Automatically creates calendar events for scheduled meetings
-- ✅ **Google Tasks Integration** - Creates tasks for action items with owners and due dates
-- ✅ **Smart Scheduling** - Detects conflicts and finds free time slots automatically
-- ✅ **Context-Aware** - Maintains context across multiple meetings for better summaries
-- ✅ **Local Storage** - SQLite database stores all meeting data locally
-- ✅ **Cleanup Support** - Automatically removes previously synced items before re-syncing
+- **AI-Powered Summarization** - Uses Gemini 2.0 Flash to extract decisions, action items, risks, and key points
+- **Google Calendar Integration** - Automatically creates calendar events for scheduled meetings
+- **Google Tasks Integration** - Creates tasks for action items with owners and due dates
+- **Smart Scheduling** - Detects conflicts and finds free time slots automatically
+- **Context-Aware** - Maintains context across multiple meetings for better summaries
+- **Local Storage** - SQLite database stores all meeting data locally
+- **Cleanup Support** - Automatically removes previously synced items before re-syncing
 
 ---
 
