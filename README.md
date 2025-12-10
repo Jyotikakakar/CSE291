@@ -21,9 +21,7 @@ export GEMINI_API_KEY="your-api-key-here"
 # (Download from Google Cloud Console)
 
 # 4. Run the agent
-python run.py              # Extract + Sync to Google
-python run.py --extract    # Extract only (saves to JSON)
-python run.py --sync       # Sync saved data to Google
+python run.py
 ```
 
 ---
@@ -36,7 +34,6 @@ python run.py --sync       # Sync saved data to Google
 - ✅ **Smart Scheduling** - Detects conflicts and finds free time slots automatically
 - ✅ **Context-Aware** - Maintains context across multiple meetings for better summaries
 - ✅ **Local Storage** - SQLite database stores all meeting data locally
-- ✅ **Flexible Modes** - Run extraction only, sync only, or both together
 - ✅ **Cleanup Support** - Automatically removes previously synced items before re-syncing
 
 ---
@@ -402,34 +399,11 @@ On first run, a browser window will open for authentication. The token is saved 
 
 ## Usage
 
-### Run All (Extract + Sync)
-
 Process transcripts with Gemini AI and sync results to Google:
 
 ```bash
 python run.py
 ```
-
-### Extract Only (No Google Sync)
-
-Extract data from transcripts and save to JSON (requires Gemini API):
-
-```bash
-python run.py --extract
-```
-
-### Sync Only (No Gemini Required)
-
-Sync previously extracted data to Google Calendar/Tasks:
-
-```bash
-python run.py --sync
-```
-
-This mode:
-- Uses saved data from `data/extracted_data.json`
-- Automatically deletes items from the previous sync
-- Does not require Gemini API key
 
 ## What Gets Extracted
 
@@ -487,7 +461,7 @@ Risks (1):
 
 | File | Description |
 |------|-------------|
-| `data/transcripts/*.txt` | Input meeting transcript files |
+| `data/transcripts/<user>/` | User-specific transcript folders (e.g., `sarah_pm/`, `mike_eng/`) |
 | `data/extracted_data.json` | Extracted meeting data (JSON) |
 | `data/sync_state.json` | Tracks synced items for cleanup |
 | `meetings.db` | SQLite database with all meeting data |
@@ -505,7 +479,15 @@ CSE291/
 ├── token.json              # Google OAuth token (not in git)
 ├── meetings.db             # SQLite database
 ├── data/
-│   ├── transcripts/        # Input transcript files
+│   ├── transcripts/        # User-organized transcript folders
+│   │   ├── sarah_pm/       # Each user has their own folder
+│   │   │   ├── q4_planning.txt
+│   │   │   └── roadmap_planning.txt
+│   │   ├── mike_eng/
+│   │   │   ├── daily_standup.txt
+│   │   │   └── sprint_retro.txt
+│   │   └── priya_design/
+│   │       └── ux_review.txt
 │   ├── extracted_data.json # Extracted meeting data
 │   └── sync_state.json     # Sync tracking state
 └── README.md
@@ -531,10 +513,8 @@ Example:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes* | Google Gemini API key |
+| `GEMINI_API_KEY` | Yes | Google Gemini API key |
 | `GEMINI_MODEL` | No | Model name (default: `gemini-2.0-flash-exp`) |
-
-*Not required for `--sync` mode
 
 ## Docker Support
 
@@ -555,15 +535,100 @@ docker-compose down
 docker-compose up --build
 ```
 
-## Sample Transcripts
+## Deployment Architecture
 
-The project includes 5 sample meeting transcripts in `data/transcripts/`:
+The application supports a **multi-container deployment** model where data is shared across instances via volume mapping.
 
-- `sample_001.txt` - Q4 Planning Meeting
-- `sample_002.txt` - Sprint Retrospective
-- `sample_003.txt` - Daily Standup
-- `sample_004.txt` - Roadmap Planning
-- `sample_005.txt` - Design Review
+### Volume-Mapped Data Sharing
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Host File System                              │
+│                                                                  │
+│   /path/to/shared/data/transcripts/                             │
+│   ├── sarah_pm/                                                  │
+│   │   ├── q4_planning.txt                                        │
+│   │   └── roadmap_planning.txt                                   │
+│   ├── mike_eng/                                                  │
+│   │   └── daily_standup.txt                                      │
+│   └── <new_user>/                                                │
+│       └── <uploaded_transcript>.txt                              │
+│                                                                  │
+└─────────────────────┬───────────────────────────────────────────┘
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+        ▼             ▼             ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│  Container 1 │ │  Container 2 │ │  Container N │
+│  (Instance)  │ │  (Instance)  │ │  (Instance)  │
+│              │ │              │ │              │
+│  /app/data/  │ │  /app/data/  │ │  /app/data/  │
+│  transcripts │ │  transcripts │ │  transcripts │
+└──────────────┘ └──────────────┘ └──────────────┘
+```
+
+### How It Works
+
+1. **Shared Volume**: The `data/transcripts` directory is volume-mapped into each container instance
+2. **User Upload**: Users upload transcript files directly to the shared folder on the host
+3. **Automatic Context**: Each container instance automatically detects and processes new files
+4. **Context Awareness**: The SQLite database and context injection ensure each instance has access to meeting history
+
+### Docker Compose Configuration
+
+```yaml
+services:
+  app:
+    build: .
+    container_name: meeting-summarizer
+    volumes:
+      - ./data:/app/data
+      - ./meetings.db:/app/meetings.db
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+```
+
+### Cross-User Context Sharing
+
+The agent supports **cross-user context** via a global thread. When processing meetings, each user's key decisions and action items are shared to a global context, enabling team-wide awareness:
+
+```python
+# Each user agent shares condensed summaries to the global thread
+agent = MCPMeetingAgent(
+    thread_id="sarah_pm",           # User-specific context
+    global_thread_id="global",      # Shared team context
+    enable_google=True
+)
+```
+
+This enables:
+- **Team Context Injection**: When summarizing, the agent includes relevant context from other users' meetings
+- **Cross-Functional Awareness**: Decisions made by `sarah_pm` are visible when processing `mike_eng`'s meetings
+- **Source Attribution**: Cross-user context is tagged with `[username]` for traceability
+
+### Scaling Considerations
+
+| Aspect | Handling |
+|--------|----------|
+| **Transcript Access** | All containers read from same volume-mapped directory |
+| **Database Locking** | SQLite handles concurrent reads; write operations are serialized |
+| **Context Sharing** | Each instance queries the same `meetings.db` for historical context |
+| **User Isolation** | Each user folder creates a separate `thread_id` for isolated context |
+| **Cross-User Context** | Global thread aggregates key insights across all users |
+
+### Usage
+
+```bash
+# Start the container
+docker-compose up -d
+
+# Upload a transcript for a specific user (on host machine)
+mkdir -p ./data/transcripts/john_dev
+cp new_meeting.txt ./data/transcripts/john_dev/
+
+# Each container instance will automatically detect new user folders and process their transcripts
+```
 
 ## License
 
