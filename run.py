@@ -3,10 +3,8 @@
 Run Meeting Agent on stored transcripts.
 
 Usage:
-  python run.py              # Extract with Gemini + save to JSON + sync to Google
-  python run.py --extract    # Extract with Gemini + save to JSON (no Google sync)
-  python run.py --sync       # Sync from saved JSON to Google (no Gemini needed)
-                             # Automatically deletes previous sync items first
+  python run.py              # Extract with Gemini + sync to Google
+  python run.py --user NAME  # Process specific user only
 """
 import os
 import sys
@@ -182,17 +180,14 @@ def delete_previous_sync(agent):
     deleted_tasks = 0
     deleted_events = 0
     
-    # Delete tasks
     if task_ids and agent.google:
         deleted_tasks = agent.google.delete_multiple_tasks(task_ids)
         print(f"   ✓ Deleted {deleted_tasks}/{len(task_ids)} tasks")
     
-    # Delete calendar events
     if event_ids and agent.google:
         deleted_events = agent.google.delete_multiple_events(event_ids)
         print(f"   ✓ Deleted {deleted_events}/{len(event_ids)} calendar events")
     
-    # Clear sync state
     save_sync_state({"task_ids": [], "event_ids": []})
     print(f"   ✓ Cleared sync state")
     
@@ -205,7 +200,6 @@ def run_sync():
     print("MEETING AGENT - Sync Mode (No Gemini API)")
     print("=" * 80)
     
-    # Load extracted data
     extracted_data = load_extracted_data()
     
     if not extracted_data:
@@ -215,13 +209,9 @@ def run_sync():
     
     print(f"\nLoaded {len(extracted_data)} meeting(s) from {EXTRACTED_DATA_FILE}")
     
-    # Initialize agent with Google only (no Gemini needed for sync)
     agent = MCPMeetingAgent(thread_id="meetings_sync", enable_google=True, require_gemini=False)
-    
-    # Delete previous sync items first
     delete_previous_sync(agent)
     
-    # Track all created IDs
     all_task_ids = []
     all_event_ids = []
     total_synced = 0
@@ -233,13 +223,10 @@ def run_sync():
         
         print_summary(summary, filename)
         
-        # Sync to Google
         if agent.google:
             result = agent.sync_from_extracted(summary)
             synced = result["synced_count"]
             total_synced += synced
-            
-            # Collect IDs for tracking
             all_task_ids.extend(result["task_ids"])
             all_event_ids.extend(result["event_ids"])
             
@@ -247,13 +234,11 @@ def run_sync():
         else:
             print("\n⚠ Google integration not available")
     
-    # Save sync state for future cleanup
     save_sync_state({
         "task_ids": all_task_ids,
         "event_ids": all_event_ids
     })
     
-    # Summary
     print(f"\n{'='*80}")
     print("SYNC COMPLETE")
     print(f"{'='*80}")
@@ -271,7 +256,6 @@ def main():
     """Main entry point with argument handling."""
     user_filter = None
     
-    # Parse --user argument
     if '--user' in sys.argv:
         idx = sys.argv.index('--user')
         if idx + 1 < len(sys.argv):
@@ -292,7 +276,6 @@ def main():
             print(f"Unknown argument: {arg}")
             print(__doc__)
     else:
-        # Default: extract + sync all users
         run_extract(sync_to_google=True, user_filter=user_filter)
 
 

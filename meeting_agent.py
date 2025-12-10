@@ -18,7 +18,6 @@ class MCPMeetingAgent:
     """Meeting agent with context-aware summarization, local storage, and Google integration."""
     
     def __init__(self, thread_id: str = "default", global_thread_id: str = None, enable_google: bool = True, require_gemini: bool = True):
-        # Gemini is optional for sync-only mode
         self.model = None
         if require_gemini:
             if not GEMINI_API_KEY:
@@ -30,8 +29,6 @@ class MCPMeetingAgent:
         self.global_thread_id = global_thread_id
         self.db_path = "./meetings.db"
         self.conn = None
-        
-        # Google integration
         self.google = None
         if enable_google:
             try:
@@ -54,7 +51,6 @@ class MCPMeetingAgent:
             self.conn.row_factory = sqlite3.Row
             cursor = self.conn.cursor()
             
-            # Create tables
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS meetings (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -116,8 +112,6 @@ class MCPMeetingAgent:
         
         try:
             cursor = self.conn.cursor()
-            
-            # Insert meeting
             cursor.execute("""
                 INSERT INTO meetings (thread_id, timestamp, tldr, summary_json)
                 VALUES (?, ?, ?, ?)
@@ -130,7 +124,6 @@ class MCPMeetingAgent:
             
             meeting_id = cursor.lastrowid
             
-            # Store action items
             for action in summary.get('action_items', []):
                 cursor.execute("""
                     INSERT INTO action_items (meeting_id, task, owner, due_date)
@@ -142,7 +135,6 @@ class MCPMeetingAgent:
                     action.get('due_date')
                 ))
             
-            # Store decisions
             for decision in summary.get('decisions', []):
                 cursor.execute("""
                     INSERT INTO decisions (meeting_id, decision, owner, context)
@@ -154,7 +146,6 @@ class MCPMeetingAgent:
                     decision.get('context')
                 ))
             
-            # Share condensed summary to global thread for cross-user context
             if self.global_thread_id:
                 key_decisions = [d.get('decision') for d in summary.get('decisions', [])[:3]]
                 key_actions = [a.get('task') for a in summary.get('action_items', [])[:3]]
@@ -191,17 +182,14 @@ class MCPMeetingAgent:
         
         synced_count = 0
         
-        # Create tasks for action items
         for action in summary.get('action_items', []):
             task_title = action.get('task', '')
             owner = action.get('owner', '')
             due_date_str = action.get('due_date')
             
-            # Parse due date
             due_date = None
             if due_date_str:
                 try:
-                    # Try to parse common date formats
                     for fmt in ['%Y-%m-%d', '%m/%d/%Y', '%B %d', '%b %d']:
                         try:
                             due_date = datetime.strptime(due_date_str, fmt)
@@ -220,7 +208,6 @@ class MCPMeetingAgent:
             )
             
             if task:
-                # Update database with Google task ID
                 try:
                     cursor = self.conn.cursor()
                     cursor.execute("""
@@ -233,17 +220,13 @@ class MCPMeetingAgent:
                 except Exception as e:
                     print(f"Error updating task ID: {e}")
         
-        # Create follow-up meeting if requested (with smart conflict resolution)
         if create_followup and summary.get('action_items'):
             followup_time = datetime.now() + timedelta(days=7)
-            
-            # Build description with action items
             description_parts = [summary.get('tldr', ''), "\n\nAction Items to Review:"]
             for action in summary.get('action_items', []):
                 owner = action.get('owner', 'N/A')
                 description_parts.append(f"• {action.get('task')} (Owner: {owner})")
             
-            # Use smart scheduling to avoid conflicts
             event = self.google.create_calendar_event_smart(
                 summary=f"Follow-up: {summary.get('tldr', 'Meeting')[:50]}",
                 description="\n".join(description_parts),
@@ -252,7 +235,6 @@ class MCPMeetingAgent:
             )
             
             if event:
-                # Store in database
                 try:
                     cursor = self.conn.cursor()
                     cursor.execute("""
@@ -273,8 +255,6 @@ class MCPMeetingAgent:
         
         try:
             cursor = self.conn.cursor()
-            
-            # Get recent meetings
             cursor.execute("""
                 SELECT id, timestamp, tldr, summary_json
                 FROM meetings
@@ -294,7 +274,6 @@ class MCPMeetingAgent:
                 context_parts.append(f"\nMeeting {i} ({meeting['timestamp'][:10]}):")
                 context_parts.append(f"  Summary: {meeting['tldr']}")
             
-            # Get recent action items
             cursor.execute("""
                 SELECT task, owner, due_date
                 FROM action_items
@@ -312,7 +291,6 @@ class MCPMeetingAgent:
                     owner = action['owner'] or 'N/A'
                     context_parts.append(f"  - {action['task']} (Owner: {owner})")
             
-            # Get cross-user context from global thread
             if self.global_thread_id:
                 cursor.execute("""
                     SELECT tldr, summary_json
@@ -352,8 +330,6 @@ class MCPMeetingAgent:
     ) -> Dict[str, Any]:
         """Summarize meeting with context from previous meetings and Google sync."""
         start_time = time.time()
-        
-        # Get context from database
         context_section = ""
         if use_context:
             context_summary = self.get_context_from_db()
@@ -398,7 +374,6 @@ Return ONLY the JSON object, no other text.
         try:
             response_text = self._call_gemini(prompt)
             
-            # Parse response
             if "```json" in response_text:
                 json_start = response_text.find("```json") + 7
                 json_end = response_text.find("```", json_start)
@@ -428,10 +403,8 @@ Return ONLY the JSON object, no other text.
             summary.setdefault('risks', [])
             summary.setdefault('key_points', [])
             
-            # Store in database
             meeting_id = self.store_meeting_in_db(summary, transcript)
             
-            # Sync to Google if enabled
             if sync_google and meeting_id and self.google:
                 self.sync_to_google(meeting_id, summary, create_followup)
             
@@ -460,24 +433,19 @@ Return ONLY the JSON object, no other text.
     def _parse_meeting_datetime(self, date_str: str, time_str: str) -> datetime:
         """Parse date and time strings into a datetime object."""
         try:
-            # Parse date (expected YYYY-MM-DD format)
             if date_str:
                 date_part = datetime.strptime(date_str, '%Y-%m-%d').date()
             else:
-                # Default to tomorrow if no date
                 date_part = (datetime.now() + timedelta(days=1)).date()
             
-            # Parse time (expected HH:MM format)
             if time_str:
                 time_part = datetime.strptime(time_str, '%H:%M').time()
             else:
-                # Default to 10:00 AM if no time
                 time_part = datetime.strptime('10:00', '%H:%M').time()
             
             return datetime.combine(date_part, time_part)
         except Exception as e:
             print(f"Warning: Could not parse datetime ({date_str}, {time_str}): {e}")
-            # Fallback to tomorrow at 10 AM
             return datetime.now().replace(hour=10, minute=0, second=0, microsecond=0) + timedelta(days=1)
     
     def sync_from_extracted(self, summary: Dict[str, Any]) -> Dict[str, Any]:
@@ -496,13 +464,11 @@ Return ONLY the JSON object, no other text.
             print("⚠ Google integration not available")
             return result
         
-        # Create tasks for action items
         for action in summary.get('action_items', []):
             task_title = action.get('task', '')
             owner = action.get('owner', '')
             due_date_str = action.get('due_date')
             
-            # Parse due date
             due_date = None
             if due_date_str:
                 try:
@@ -515,7 +481,6 @@ Return ONLY the JSON object, no other text.
                 except Exception:
                     pass
             
-            # Create task
             notes = f"Owner: {owner}\nFrom meeting: {summary.get('tldr', '')}"
             task = self.google.create_task(
                 title=task_title,
@@ -527,7 +492,6 @@ Return ONLY the JSON object, no other text.
                 result["synced_count"] += 1
                 result["task_ids"].append(task.get('id'))
         
-        # Create calendar events for scheduled meetings
         for meeting in summary.get('meetings_to_schedule', []):
             title = meeting.get('title', 'Scheduled Meeting')
             description = meeting.get('description', '')
@@ -536,15 +500,11 @@ Return ONLY the JSON object, no other text.
             duration = meeting.get('duration_minutes', 60)
             attendees = meeting.get('attendees', [])
             
-            # Parse the meeting datetime
             meeting_time = self._parse_meeting_datetime(date_str, time_str)
-            
-            # Build description with context
             full_description = f"{description}\n\nFrom meeting: {summary.get('tldr', '')}"
             if attendees:
                 full_description += f"\n\nAttendees: {', '.join(attendees)}"
             
-            # Use smart scheduling to avoid conflicts
             event = self.google.create_calendar_event_smart(
                 summary=title,
                 description=full_description,
